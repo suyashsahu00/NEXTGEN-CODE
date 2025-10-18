@@ -1,0 +1,62 @@
+# --- Workspace root .gitignore (generated)
+
+# Node dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+out/
+.next/
+
+# Vite / bundler outputs
+/.vite/
+
+# TypeScript
+*.tsbuildinfo
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Environment variables (do NOT commit)
+.env
+.env.*
+
+# IDEs and editors
+.vscode/
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Caches
+/.cache/
+/.parcel-cache/
+
+# Coverage
+coverage/
+
+# Misc
+*.tgz
+reports/
+
+# Lockfiles (uncomment to ignore lockfiles globally):
+# package-lock.json
+# pnpm-lock.yaml
+# yarn.lock
+
+# Per-project ignores live in subfolders' .gitignore files
+.vscode/
