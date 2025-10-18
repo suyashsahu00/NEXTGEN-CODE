@@ -18,3 +18,7 @@ modern portfolio  website
 
 # 17-10-2025
 queue
+
+# 18-10-2025
+https://youtube.com/playlist?list=PL8p2I9GklV471sLqkGuf0eKAu9sVNmKFV&si=SI1fpHA-uzATnl5k
+Tailwind CSS practice upto 8 videos
