@@ -51,3 +51,5 @@ revision old concept and deploying small personal website
 # 15-11-2025
 
 Revising old CSS concepts.
+
+making a project *The Daily Dribble Newsletter*
