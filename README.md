@@ -54,5 +54,7 @@ Revising old CSS concepts.
 
 making a project *The Daily Dribble Newsletter*
 
+Building a Digital Business Card
+
 # 16-11-2025
 making some project with vibe coding, using devdock
