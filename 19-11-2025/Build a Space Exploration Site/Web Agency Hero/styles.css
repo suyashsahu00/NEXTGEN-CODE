@@ -1,0 +1,40 @@
+.web-agency-body{
+    background-image: url("./img/faded-office.png");
+    background-size: cover;
+    font-family: 'Open Sans', Arial, sans-serif;
+    color: #020202; 
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
+}
+.hero-section{
+    text-align: left;
+    max-width: 350px;
+    
+}
+.hero-title{
+    font-weight: 700;
+    color: #020202;
+    font-size: 50px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.hero-subtitle{
+    text-align: left;
+    font-weight:500;
+    margin-top: 10px;
+    margin-left: 10px;
+    font-size: 24px;
+}
+.underline{
+    border-bottom: 4px solid #0ea5e9;
+}
+.hero-button{
+    padding: 15px 20px;
+    background-color: #0ea5e9;
+    color:#fff;
+    font-weight: 900; 
+    border: none;
+    margin-left: 10px;
+}
