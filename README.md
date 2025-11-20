@@ -59,3 +59,7 @@ https://suyashbusinesscard.netlify.app/
 
 # 16-11-2025
 making some project with vibe coding, using devdock
+
+# 19-11-2025
+
+Building a Space Exploration Site
