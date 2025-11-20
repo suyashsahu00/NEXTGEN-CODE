@@ -1,0 +1,85 @@
+body {
+    margin: 20px;
+    /*
+    Challenge:
+    Find a web safe font you like, and add it 
+    to your card.
+    */
+    /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+    
+    
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.avatar {
+    width: 160px;
+    height: 160px;
+    border-radius: 30px;
+    object-fit: cover;
+        border: 3px solid #003566;
+    box-shadow: 0 4px 16px rgba(27, 38, 59, 0.25);
+    margin-right: 24px;
+}
+.avatar:hover {
+    box-shadow: 0 0 20px #1b263b;
+    transform: scale(1.05); 
+    transition: all 0.3s ease;
+}
+
+.user-info:hover{
+    box-shadow: 0 0 20px #1b263b;
+    transform: scale(1.05); 
+    transition: all 0.3s ease;
+}
+
+.user-info{
+    text-shadow: 2px 2px 4px #1b263b;
+}
+a.github{
+    color: #ffc300;
+    text-decoration: none;
+    font-weight: bold;
+}
+a.linkedin{
+    color: #00b4d8;
+    text-decoration: none;
+    font-weight: bold;
+}
+a.github:hover,a.linkedin:hover{
+    color: #ffd60a;
+    text-decoration: underline;
+}
+.card {
+    width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    background: #003566;
+    color: #ffc300;
+    border-bottom: 6px solid #ffd60a;
+        
+    /*
+    Challenge:
+    Find a color palette you like on Coolors.co
+    and use it in your business card.
+     */
+}
+
+.border-blue {
+    border: 1px dotted blue;
+}
+
+/*
+Stretch goals:
+Find other ways you can personalize 
+the design of your business card, e.g.:
+- change the border(s)
+- add border radius
+- shuffle the layout
+- shadows        🤯
+- hover effects  🤯🤯
+- animations     🤯🤯🤯
+*/
+

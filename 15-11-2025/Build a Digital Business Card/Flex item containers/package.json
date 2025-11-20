@@ -1,0 +1,14 @@
+{
+  "name": "Scrim-s01qkij",
+  "description": "https://scrimba.com/learn-html-and-css-c0p/~01k",
+  "scripts": {
+    "start": "vite",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "vite": "latest"
+  },
+  "devDependencies": {}
+}
