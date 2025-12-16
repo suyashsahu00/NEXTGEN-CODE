@@ -71,4 +71,4 @@ Learn JavaScript
 
 # 16-12-2025
 Learning JavaScript and Building a simple BlackJack Game
-[text](https://suyashsahu00.github.io/Build_a_BlackJack_Game/)
+[link](https://suyashsahu00.github.io/Build_a_BlackJack_Game/)
