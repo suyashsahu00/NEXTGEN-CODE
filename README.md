@@ -63,3 +63,12 @@ making some project with vibe coding, using devdock
 # 19-11-2025
 
 Building a Space Exploration Site
+[text](https://sprightly-duckanoo-8b0f25.netlify.app/)
+
+# 04-12-2025
+
+Learn JavaScript
+
+# 16-12-2025
+Learning JavaScript and Building a simple BlackJack Game
+[text](https://suyashsahu00.github.io/Build_a_BlackJack_Game/)
