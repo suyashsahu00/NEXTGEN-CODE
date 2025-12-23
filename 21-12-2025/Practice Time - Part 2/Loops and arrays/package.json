@@ -1,0 +1,17 @@
+{
+  "name": "Scrim-s01riel",
+  "description": "https://scrimba.com/learn-javascript-c0v/~039/s00hii4h44/head",
+  "scripts": {
+    "watch": "webpack -w",
+    "build": "webpack"
+  },
+  "dependencies": {
+    "webpack": "^2.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.0",
+    "babel-loader": "^7.0",
+    "babel-preset-env": "*",
+    "babel-preset-react": "*"
+  }
+}

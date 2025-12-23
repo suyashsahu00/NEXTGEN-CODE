@@ -72,3 +72,13 @@ Learn JavaScript
 # 16-12-2025
 Learning JavaScript and Building a simple BlackJack Game
 [Deployment](https://suyashsahu00.github.io/Build_a_BlackJack_Game/)
+
+# 21-12-2025
+Practiced JavaScript fundamentals and built small projects (Practice Time - Part 2):
+
+- **Password Generator:** set up with Vite, installed dependencies, and tested running the app (`npm install` / `npm start`).
+- **Control flow:** exercises with `if/else` and logical operators.
+- **Data structures & loops:** worked with arrays, loops, and array methods (`push`, `pop`, `unshift`, `shift`).
+- **Objects & functions:** created reusable functions and object-based examples.
+- **Mini-projects & challenges:** EmojiFighter, Sorting Fruits, DOM manipulation tasks, and other small practice exercises.
+Deployment: https://suyashsahu00.github.io/password_generator/

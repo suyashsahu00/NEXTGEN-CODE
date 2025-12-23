@@ -1,0 +1,17 @@
+{
+  "name": "Scrim-s01rias",
+  "description": "https://scrimba.com/learn-javascript-c0v/~037/s0s6n0uho2/head",
+  "scripts": {
+    "watch": "webpack -w",
+    "build": "webpack"
+  },
+  "dependencies": {
+    "webpack": "^2.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.0",
+    "babel-loader": "^7.0",
+    "babel-preset-env": "*",
+    "babel-preset-react": "*"
+  }
+}
