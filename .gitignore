@@ -60,3 +60,5 @@ reports/
 
 # Per-project ignores live in subfolders' .gitignore files
 .vscode/
+
+*.zip
