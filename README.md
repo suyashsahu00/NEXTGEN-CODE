@@ -82,3 +82,6 @@ Practiced JavaScript fundamentals and built small projects (Practice Time - Part
 - **Objects & functions:** created reusable functions and object-based examples.
 - **Mini-projects & challenges:** EmojiFighter, Sorting Fruits, DOM manipulation tasks, and other small practice exercises.
 Deployment: https://suyashsahu00.github.io/password_generator/
+
+# 24-12-2025
+Building a Chrome extension 
