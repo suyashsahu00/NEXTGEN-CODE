@@ -84,4 +84,16 @@ Practiced JavaScript fundamentals and built small projects (Practice Time - Part
 Deployment: https://suyashsahu00.github.io/password_generator/
 
 # 24-12-2025
-Building a Chrome extension 
+Building a Chrome extension - **Leads Tracker**
+
+A productivity Chrome extension for saving and managing website URLs/leads with the following features:
+- **Save Input:** Manually save URLs by typing them into an input field
+- **Save Tab:** Quickly save the current active tab's URL with one click using Chrome API
+- **LocalStorage Persistence:** All leads are stored in browser's localStorage and persist across sessions
+- **Delete All:** Double-click to clear all saved leads
+- **Clickable Links:** Each saved lead is rendered as a clickable link that opens in a new tab
+- **Template Strings & DOM Manipulation:** Used modern JavaScript features for dynamic rendering
+
+Built with Vite, vanilla JavaScript, and Chrome Extension Manifest V3.
+
+[Deployment](https://suyashsahu00.github.io/lead_tracker/)
