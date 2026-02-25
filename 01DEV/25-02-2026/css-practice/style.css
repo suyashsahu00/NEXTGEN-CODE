@@ -1,10 +1,10 @@
 /* CSS Practice - Your code goes here */
 
-body{
+body {
     background-color: #4d4545;
 }
 
-h1{
+h1 {
     color: #ff6b6b;
     text-align: center;
     text-transform: uppercase;
@@ -12,14 +12,18 @@ h1{
 
 }
 
-p{
+p {
     font-size: 20px;
     color: white;
 }
-.box{
+
+.box {
     background-color: #ff6b6b;
     width: 300px;
     padding: 20px;
     border: 3px solid white;
     margin-top: 30px;
+    border-radius: 15px;
+    color: white;
+    box-sizing: border-box;
 }
