@@ -97,3 +97,20 @@ A productivity Chrome extension for saving and managing website URLs/leads with 
 Built with Vite, vanilla JavaScript, and Chrome Extension Manifest V3.
 
 [Deployment](https://suyashsahu00.github.io/lead_tracker/)
+
+# 24-02-2026
+
+Setting up HTML, CSS, and JS boilerplate for upcoming practice sessions.
+
+# 25-02-2026
+
+CSS Practice — Learning CSS properties from basic to advanced through hands-on tasks:
+
+- **Text Styling:** `color`, `font-size`, `text-align`, `text-transform`, `letter-spacing`
+- **Box Model:** `padding`, `margin`, `border`, `width`, `border-radius`, `box-sizing`
+- **Flexbox:** `display: flex`, `gap`, `justify-content`, `align-items`
+- **Hover & Transitions:** `:hover`, `transition`, `transform: scale()`, `transform: translateY()`
+- **Shadows & Cursor:** `box-shadow`, `cursor: pointer`
+- **Gradients & Fonts:** `linear-gradient`, Google Fonts (`Poppins`), `min-height: 100vh`
+- **Positioning:** `position: relative`, `position: absolute`, `top`, `right`
+- **Selectors:** element selectors, class selectors (`.box`), nested selectors (`.card h3`)
