@@ -26,6 +26,7 @@ p {
     border-radius: 15px;
     color: white;
     box-sizing: border-box;
+    transition: all 0.3s ease;
 }
 
 .container {
@@ -39,4 +40,9 @@ p {
     height: 300px;
     border: 2px dashed white;
     align-items: center;
+}
+
+.box:hover{
+    background-color: #4d96ff;
+    transform: scale(1.1);
 }
