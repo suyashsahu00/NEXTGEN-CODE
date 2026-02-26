@@ -1,5 +1,12 @@
 /* CSS Practice - Your code goes here */
 
+:root{
+    --primary: #4d96ff;
+    --accent: #ff6b6b;
+    --dark: #1a1a2e;
+    --light: #f0f0f0;
+    --radius: 12px;
+}
 body {
     background: linear-gradient(135deg,#0f0c29,#302b63, #24243e);
     font-family: 'Poppins',sans-serif;
@@ -21,12 +28,12 @@ p {
 
 .box {
     /* background-color: #ff6b6b; */
-    background: linear-gradient(135deg, #ff6b6b, #ff8e53);
+    background: linear-gradient(135deg,var(--accent), #ff8e53);
     width: 300px;
     padding: 20px;
     border: 3px solid white;
     /* margin-top: 30px; */
-    border-radius: 15px;
+    border-radius: var(--radius);
     color: white;
     box-sizing: border-box;
     transition: all 0.3s ease;
@@ -88,9 +95,9 @@ h2{
     gap: 15px;
 }
 .grid-item {
-    background: #4d96ff;
+    background: var(--primary);
     padding: 30px;
-    border-radius: 10px;
+    border-radius: var(--radius);
     flex: 1;
     text-align: center;
 }
@@ -132,7 +139,7 @@ h2{
     color: #1a1a2e;
 }
 body.light{
-    background: #f0f0f0;
+    background: var(--light);
     color: #333;
 }
 body.light .theme-btn{
@@ -152,7 +159,7 @@ body.light .theme-btn:hover{
     width: 50px;
     height: 50px;
     border: 5px solid #333;
-    border-top-color: #4d96ff;
+    border-top-color: var(--primary);
     border-radius: 50%;
     animation: spin 1s linear infinite;
 }
