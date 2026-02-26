@@ -112,6 +112,38 @@ h2{
     font-size: 24px;
     font-weight: 700;
 }
+.theme-btn{
+    position:fixed;
+    top: 15px;
+    right: 15px;
+    padding: 10px 20px;
+    border: 2px solid white;
+    background-color: transparent;
+    color: white;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    z-index: 100;
+    transition: all 0.3s ease;
+}
+.theme-btn:hover{
+    background: white;
+    color: #1a1a2e;
+}
+body.light{
+    background: #f0f0f0;
+    color: #333;
+}
+body.light .theme-btn{
+    border-color: #333;
+    color: #333;
+}
+
+body.light .theme-btn:hover{
+    background: #333;
+    color: white;
+}
 @media (max-width: 600px){
     .grid{
         flex-direction: column;
