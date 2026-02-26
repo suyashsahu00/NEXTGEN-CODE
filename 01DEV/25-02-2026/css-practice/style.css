@@ -78,3 +78,25 @@ p {
     color: #ffd93d;
     margin: 0 0 10px;
 }
+
+h2{
+    color: #ffd93d;
+    margin-top: 40px;
+}
+.grid{
+    display: flex;
+    gap: 15px;
+}
+.grid-item {
+    background: #4d96ff;
+    padding: 30px;
+    border-radius: 10px;
+    flex: 1;
+    text-align: center;
+}
+
+@media (max-width: 600px){
+    .grid{
+        flex-direction: column;
+    }
+}
