@@ -64,6 +64,6 @@ g++ -o output filename.cpp
 
 ### 🌟 *Keep solving, keep growing!*
 
-Made with ❤️ by **Suyash**
+Made with 💙 by **Suyash**
 
 </div>
