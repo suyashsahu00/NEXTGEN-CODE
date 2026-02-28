@@ -3,6 +3,7 @@ using namespace std;
 int main(){
     int prev =0;
     int num = 0;
+    cout<<"enter a number: ";
     cin>>num;
     while(num!=0){
         int lastDigit = num % 10;
