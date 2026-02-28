@@ -1,0 +1,25 @@
+.bd {
+    border-style: dotted;
+    /* padding: 20px; */
+    /* border-width: 2px; */
+    color: rgb(147, 94, 24);
+
+}
+
+h2 {
+    background-color: coral;
+    width: 200px;
+    height: 100px;
+    border: 1px solid black;
+    overflow-x: scroll;
+    white-space: nowrap;
+}
+
+.x {
+    background-color: aquamarine;
+    width: 90px;
+    height: 40px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
