@@ -1,0 +1,48 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    /* Set the new image as a fixed, covered background */
+    background-image: url('./deep-dusk-018.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-color: #000; /* Fallback color */
+    
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Container for content */
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 10;
+}
+
+/* Content styling */
+.content {
+    text-align: center;
+    color: white;
+    text-shadow: 0 4px 15px rgba(0,0,0,0.6);
+}
+
+.content h1 {
+    font-size: 5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    letter-spacing: -2px;
+}
+
+.content p {
+    font-size: 1.2rem;
+    opacity: 0.8;
+}

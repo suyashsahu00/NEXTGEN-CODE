@@ -1,10 +1,12 @@
 .scroll-box{
-    width: 30rem;
+    width: 23rem;
     height: 2rem;
     border: 5px solid rgb(122, 34, 34);
     white-space: nowrap;
     overflow-x: scroll;
     margin: 20px;
+    font-weight: 900;
+    padding: 2px;
 }
 
 .scroll-box-2{
@@ -13,4 +15,48 @@
     margin: 20px;
     border: 5px solid rgb(108, 70, 21);
     overflow-y: scroll;
+    font-weight: 800;
+    padding: 2px;
 }
+
+/* Argon */
+body{
+    background: #03001e;
+    background: -webkit-linear-gradient(to right, #fdeff9, #ec38bc, #7303c0, #03001e);
+    background: linear-gradient(to right, #fdeff9, #ec38bc, #7303c0, #03001e);
+}
+/* body{
+    background-image: url('./deep-dusk-018.jpg');
+    background-size: cover;
+} */
+
+/* body {
+    
+    background-image: repeating-linear-gradient(45deg, #d2e0fb, #79ac78 45px);
+    margin: 0;
+    min-height: 100vh;
+} */
+/* Love and Liberty */
+/* body{
+    background: #200122;  
+background: -webkit-linear-gradient(to left, #6f0000, #200122);  
+background: linear-gradient(to left, #6f0000, #200122); 
+
+} */
+
+
+/* Under the Lake */
+/* body {
+    background: #093028;
+    background: -webkit-linear-gradient(to right, #237A57, #093028);
+    background: linear-gradient(to right, #237A57, #093028);
+} */
+
+
+
+/* 50 Shades of Grey */
+/* body{
+    background: #bdc3c7;
+    background: -webkit-linear-gradient(to right, #2c3e50, #bdc3c7);
+    background: linear-gradient(to right, #2c3e50, #bdc3c7);
+} */
