@@ -1,6 +1,6 @@
 .scroll-box{
     width: 30rem;
-    border: 2px solid black;
+    border: 2px solid rgb(122, 34, 34);
     white-space: nowrap;
     overflow-x: scroll;
 }
