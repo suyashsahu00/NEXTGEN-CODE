@@ -28,6 +28,7 @@
     text-align: center;
     line-height: 60px;
     color: white;
+    border-radius: 20px;    
 }
 
 
@@ -39,9 +40,10 @@
     white-space: nowrap; 
     overflow-x: scroll;
     padding: 5px;
+    border-radius: px;
 }
 
-/* Vertical Scroll Container */
+
 .square-col {
     width: 90px;
     height: 150px; 
