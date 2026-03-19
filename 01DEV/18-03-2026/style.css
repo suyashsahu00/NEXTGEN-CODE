@@ -1,0 +1,156 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar{
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background-color: #333;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.navbar a{
+    display: block;
+    color: white;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.nav-right{
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+.navbar a:hover{
+    background-color: #ddd;
+    color: black;
+}
+.content{
+    margin-top: 50px;
+    padding: 20px;
+
+}
+.hamburger{
+    display: none;
+    font-size: 24px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+@media screen and (max-width: 600px) {
+    .nav-right{
+        display: none;
+        width: 100%;
+    }
+    .hamburger{
+        display: block;
+        margin-left: auto;
+        padding: 14px;
+    }
+    .navbar{
+        flex-wrap: wrap;
+    }
+    
+}
+.active {
+    display: flex;
+    flex-direction: column;
+}
+footer{
+    display: flex;
+    justify-content: space-around;
+    background-color: #333;
+    color: white;
+    padding: 20px;
+}
+.footer-col{
+    flex: 1;
+}
+footer a{
+    color: #ddd;
+    text-decoration: none;
+}
+.main-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.content{
+    flex:1;
+}
+
+.p{
+    width: 20rem;
+    height: 90px;
+    background-color: rgba(250, 235, 215, 0.3);
+    border: 3px solid black;
+    padding: 5px;
+    overflow-x: scroll;
+    display: flex;
+    margin: 10px 0;
+    overflow-y: hidden;
+}   
+.c{
+    border: 2px solid black;
+    background-color: #7303c0;
+    color: white; 
+    height: 60px;
+    width: 60px;
+    margin: 10px;
+    border-radius: 5px;
+    flex-shrink: 0;
+}
+.p2{
+    width: 20rem;
+    height: 90px;
+    background-color: rgba(250, 235, 215, 0.3);
+    border: 3px solid black;
+    padding: 5px;
+    overflow-y: scroll;
+    display: block;
+    margin: 10px 0;
+}   
+.c2{
+    border: 2px solid black;
+    background-color: #7303c0;
+    color: white; 
+    height: 60px;
+    width: 120px;
+    margin: 10px;
+    border-radius: 5px;
+}
+.scroll-box{
+    width: 23rem;
+    height: 3rem;
+    border: 5px solid rgb(122, 34, 34);
+    white-space: nowrap;
+    overflow-x: scroll;
+    margin: 20px 0;
+    font-weight: 900;
+    padding: 4px;
+    background-color: rgba(250, 235, 215, 0.3);
+}
+
+.scroll-box-2{
+    width: 30rem;
+    height: 8rem;
+    margin: 20px 0;
+    border: 5px solid rgb(108, 70, 21);
+    overflow-y: scroll;
+    font-weight: 800;
+    padding: 10px;
+    background-color: rgba(250, 235, 215, 0.3);
+}
+
+body {
+    background: #03001e;
+    background: -webkit-linear-gradient(to right, #fdeff9, #ec38bc, #7303c0, #03001e);
+    background: linear-gradient(to right, #fdeff9, #ec38bc, #7303c0, #03001e);
+}
