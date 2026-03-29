@@ -4,7 +4,9 @@
 
 [![C++](https://img.shields.io/badge/Language-C++-00599C?style=for-the-badge&logo=cplusplus&logoColor=white)](https://isocpp.org/)
 [![GeeksforGeeks](https://img.shields.io/badge/Platform-GeeksforGeeks-2F8D46?style=for-the-badge&logo=geeksforgeeks&logoColor=white)](https://www.geeksforgeeks.org/)
-[![Problems Solved](https://img.shields.io/badge/Problems_Solved-6-gold?style=for-the-badge)]()
+[![LeetCode](https://img.shields.io/badge/Platform-LeetCode-FFA116?style=for-the-badge&logo=leetcode&logoColor=white)](https://leetcode.com/)
+[![Problems Solved](https://img.shields.io/badge/Problems_Solved-9-gold?style=for-the-badge)]()
+
 
 > *My DSA journey — one problem at a time.* 🚀
 
@@ -20,9 +22,13 @@
 ├── 📁 lecture_notes_ssipmt/   # College lecture notes & code
 └── 📁 my_dsa_code/            # Problem solutions
     ├── 🧩 check_kth_bit.cpp
+    ├── 🧩 Concatenation_of_Array.cpp
     ├── 🧩 Equilibrium_Point.cpp
+    ├── 🧩 reverse.cpp
     ├── 🧩 Rotate_Array_by_One.cpp
-    └── 🧩 reverse.cpp
+    ├── 🧩 Running_Sum_of_1d_Array.cpp
+    ├── 🧩 Single_Number.cpp
+    └── 🧩 with_function_with_parameter.cpp
 ```
 
 ---
@@ -37,6 +43,9 @@
 | 4 | [Cyclically rotate an array by one](https://www.geeksforgeeks.org/problems/cyclically-rotate-an-array-by-one2614/1) | Arrays | 🟢 Easy | GFG | ✅ |
 | 5 | [Check whether K-th bit is set or not](https://www.geeksforgeeks.org/problems/check-whether-k-th-bit-is-set-or-not-1587115620/1) | Bit Manipulation | 🟢 Easy | GFG | ✅ |
 | 6 | [Equilibrium Point](https://www.geeksforgeeks.org/problems/equilibrium-point-1587115620/1) | Arrays / Prefix Sum | 🟢 Easy | GFG | ✅ |
+| 7 | [Running Sum of 1d Array](https://leetcode.com/problems/running-sum-of-1d-array/) | Arrays / Prefix Sum | 🟢 Easy | LeetCode | ✅ |
+| 8 | [Concatenation of Array](https://leetcode.com/problems/concatenation-of-array/) | Arrays | 🟢 Easy | LeetCode | ✅ |
+| 9 | [Single Number](https://leetcode.com/problems/single-number/) | Bit Manipulation | 🟢 Easy | LeetCode | ✅ |
 
 ---
 
@@ -46,8 +55,8 @@
 |-------|:--------:|
 | 🔢 Math / Number Theory | 2 |
 | 🔤 Strings | 1 |
-| 📊 Arrays | 2 |
-| 💻 Bit Manipulation | 1 |
+| 📊 Arrays | 4 |
+| 💻 Bit Manipulation | 2 |
 
 ---
 
