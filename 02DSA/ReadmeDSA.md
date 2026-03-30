@@ -5,7 +5,7 @@
 [![C++](https://img.shields.io/badge/Language-C++-00599C?style=for-the-badge&logo=cplusplus&logoColor=white)](https://isocpp.org/)
 [![GeeksforGeeks](https://img.shields.io/badge/Platform-GeeksforGeeks-2F8D46?style=for-the-badge&logo=geeksforgeeks&logoColor=white)](https://www.geeksforgeeks.org/)
 [![LeetCode](https://img.shields.io/badge/Platform-LeetCode-FFA116?style=for-the-badge&logo=leetcode&logoColor=white)](https://leetcode.com/)
-[![Problems Solved](https://img.shields.io/badge/Problems_Solved-9-gold?style=for-the-badge)]()
+[![Problems Solved](https://img.shields.io/badge/Problems_Solved-12-gold?style=for-the-badge)]()
 
 
 > *My DSA journey — one problem at a time.* 🚀
@@ -23,11 +23,14 @@
 └── 📁 my_dsa_code/            # Problem solutions
     ├── 🧩 check_kth_bit.cpp
     ├── 🧩 Concatenation_of_Array.cpp
+    ├── 🧩 Contains_Duplicate.cpp
     ├── 🧩 Equilibrium_Point.cpp
     ├── 🧩 reverse.cpp
     ├── 🧩 Rotate_Array_by_One.cpp
     ├── 🧩 Running_Sum_of_1d_Array.cpp
     ├── 🧩 Single_Number.cpp
+    ├── 🧩 Two_Sum.cpp
+    ├── 🧩 Valid_Anagram.cpp
     └── 🧩 with_function_with_parameter.cpp
 ```
 
@@ -46,6 +49,9 @@
 | 7 | [Running Sum of 1d Array](https://leetcode.com/problems/running-sum-of-1d-array/) | Arrays / Prefix Sum | 🟢 Easy | LeetCode | ✅ |
 | 8 | [Concatenation of Array](https://leetcode.com/problems/concatenation-of-array/) | Arrays | 🟢 Easy | LeetCode | ✅ |
 | 9 | [Single Number](https://leetcode.com/problems/single-number/) | Bit Manipulation | 🟢 Easy | LeetCode | ✅ |
+| 10 | [Contains Duplicate](https://leetcode.com/problems/contains-duplicate/) | Arrays / Hash Table | 🟢 Easy | LeetCode | ✅ |
+| 11 | [Valid Anagram](https://leetcode.com/problems/valid-anagram/) | Strings / Hash Table | 🟢 Easy | LeetCode | ✅ |
+| 12 | [Two Sum](https://leetcode.com/problems/two-sum/) | Arrays / Hash Table | 🟢 Easy | LeetCode | ✅ |
 
 ---
 
@@ -54,8 +60,8 @@
 | Topic | Problems |
 |-------|:--------:|
 | 🔢 Math / Number Theory | 2 |
-| 🔤 Strings | 1 |
-| 📊 Arrays | 4 |
+| 🔤 Strings | 2 |
+| 📊 Arrays | 6 |
 | 💻 Bit Manipulation | 2 |
 
 ---
