@@ -5,7 +5,7 @@
 [![C++](https://img.shields.io/badge/Language-C++-00599C?style=for-the-badge&logo=cplusplus&logoColor=white)](https://isocpp.org/)
 [![GeeksforGeeks](https://img.shields.io/badge/Platform-GeeksforGeeks-2F8D46?style=for-the-badge&logo=geeksforgeeks&logoColor=white)](https://www.geeksforgeeks.org/)
 [![LeetCode](https://img.shields.io/badge/Platform-LeetCode-FFA116?style=for-the-badge&logo=leetcode&logoColor=white)](https://leetcode.com/)
-[![Problems Solved](https://img.shields.io/badge/Problems_Solved-12-gold?style=for-the-badge)]()
+[![Problems Solved](https://img.shields.io/badge/Problems_Solved-15-gold?style=for-the-badge)]()
 
 
 > *My DSA journey — one problem at a time.* 🚀
@@ -22,12 +22,15 @@
 ├── 📁 lecture_notes_ssipmt/   # College lecture notes & code
 └── 📁 my_dsa_code/            # Problem solutions
     ├── 🧩 check_kth_bit.cpp
+    ├── 🧩 Check_set_bits.cpp
     ├── 🧩 Concatenation_of_Array.cpp
     ├── 🧩 Contains_Duplicate.cpp
     ├── 🧩 Equilibrium_Point.cpp
+    ├── 🧩 First_Set_Bit.cpp
     ├── 🧩 reverse.cpp
     ├── 🧩 Rotate_Array_by_One.cpp
     ├── 🧩 Running_Sum_of_1d_Array.cpp
+    ├── 🧩 Set_kth_bit.cpp
     ├── 🧩 Single_Number.cpp
     ├── 🧩 Two_Sum.cpp
     ├── 🧩 Valid_Anagram.cpp
@@ -52,6 +55,9 @@
 | 10 | [Contains Duplicate](https://leetcode.com/problems/contains-duplicate/) | Arrays / Hash Table | 🟢 Easy | LeetCode | ✅ |
 | 11 | [Valid Anagram](https://leetcode.com/problems/valid-anagram/) | Strings / Hash Table | 🟢 Easy | LeetCode | ✅ |
 | 12 | [Two Sum](https://leetcode.com/problems/two-sum/) | Arrays / Hash Table | 🟢 Easy | LeetCode | ✅ |
+| 13 | [Set Kth Bit](https://www.geeksforgeeks.org/problems/set-kth-bit3724/1) | Bit Manipulation | 🟢 Easy | GFG | ✅ |
+| 14 | [Check Set Bits](https://www.geeksforgeeks.org/problems/check-set-bits5408/1) | Bit Manipulation | 🟢 Easy | GFG | ✅ |
+| 15 | [First Set Bit](https://www.geeksforgeeks.org/problems/find-position-of-set-bit3706/1) | Bit Manipulation | 🟢 Easy | GFG | ✅ |
 
 ---
 
@@ -62,7 +68,7 @@
 | 🔢 Math / Number Theory | 2 |
 | 🔤 Strings | 2 |
 | 📊 Arrays | 6 |
-| 💻 Bit Manipulation | 2 |
+| 💻 Bit Manipulation | 5 |
 
 ---
 

@@ -15,6 +15,7 @@
 | **Single Number**           | To Review     | **ASAP**       | 1 Day            | XOR logic                                                |
 | **Set Kth Bit**             | 04-04-2026    | **05-04-2026** | 1 Day            | Bitwise OR `(n \| (1 << k))`                             |
 | **Check Set Bits**          | 04-04-2026    | **05-04-2026** | 1 Day            | `(N & (N + 1)) == 0` trick                               |
+| **First Set Bit**           | 04-04-2026    | **05-04-2026** | 1 Day            | Loop + shift `(n & 1)`                                   |
 
 1. How this works:
 
