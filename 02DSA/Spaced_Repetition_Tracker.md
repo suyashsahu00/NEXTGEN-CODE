@@ -4,19 +4,20 @@
 
 | Problem Name                      | Last Reviewed | Next Review Date     | Current Interval | Status / Notes                                           |
 | :-------------------------------- | :------------ | :------------------- | :--------------- | :------------------------------------------------------- |
-| **Concatenation of Array**  | 03-04-2026    | **04-04-2026** | 1 Day            | ⭐ Concept mastered (O(n) time/space)                    |
-| **Valid Anagram**           | 01-04-2026    | **04-04-2026** | 3 Days           | Array as Hash Map (`c - 'a'`)                          |
-| **Check K-th Bit**          | 01-04-2026    | **04-04-2026** | 3 Days           | Right Shift `(n >> k) & 1`                             |
-| **Two Sum**                 | 03-04-2026    | **06-04-2026** | 3 Days           | Map makes it O(n)                                        |
-| **Contains Duplicate**      | 03-04-2026    | **06-04-2026** | 3 Days           | Map/Set gives O(1) lookups!                              |
-| **Running Sum of 1d Array** | 03-04-2026    | **04-04-2026** | 1 Day            | ⚠️ Keeps coding Total Sum instead of Prefix Sum Array! |
-| **Rotate Array by One**     | To Review     | **ASAP**       | 1 Day            |                                                          |
-| **Equilibrium Point**       | To Review     | **ASAP**       | 1 Day            |                                                          |
-| **Single Number**           | To Review     | **ASAP**       | 1 Day            | XOR logic                                                |
-| **Set Kth Bit**             | 04-04-2026    | **05-04-2026** | 1 Day            | Bitwise OR `(n \| (1 << k))`                             |
-| **Check Set Bits**          | 04-04-2026    | **05-04-2026** | 1 Day            | `(N & (N + 1)) == 0` trick                               |
-| **First Set Bit**           | 04-04-2026    | **05-04-2026** | 1 Day            | Loop + shift `(n & 1)`                                   |
-| **Power of 2**              | 04-04-2026    | **05-04-2026** | 1 Day            | `n > 0 && (n & (n - 1)) == 0`                            |
+| **Concatenation of Array**        | 03-04-2026    | **04-04-2026**       | 1 Day            | ⭐ Concept mastered (O(n) time/space)                    |
+| **Valid Anagram**                 | 01-04-2026    | **04-04-2026**       | 3 Days           | Array as Hash Map (`c - 'a'`)                          |
+| **Check K-th Bit**                | 06-04-2026    | **07-04-2026**       | 1 Day            | ⚠️ Reset: Distinction between Check and Set?            |
+| **Two Sum**                       | 06-04-2026    | **07-04-2026**       | 1 Day            | ⚠️ Reset: Need to implement unordered_map code         |
+| **Contains Duplicate**            | 03-04-2026    | **06-04-2026**       | 3 Days           | Map/Set gives O(1) lookups!                              |
+| **Running Sum of 1d Array**       | 06-04-2026    | **09-04-2026**       | 3 Days           | ✅ Nailed the i=1 loop and formula!                      |
+| **Rotate Array by One**           | To Review     | **ASAP**             | 1 Day            |                                                          |
+| **Equilibrium Point**             | 06-04-2026    | **09-04-2026**       | 3 Days           | ✅ Mastered TotalSum - LeftSum logic!                   |
+| **Single Number**                 | To Review     | **ASAP**             | 1 Day            | XOR logic                                                |
+| **Set Kth Bit**                   | 06-04-2026    | **07-04-2026**       | 1 Day            | ⚠️ Understanding OR (|) operator for setting bits      |
+| **Check Set Bits**                | 04-04-2026    | **05-04-2026**       | 1 Day            | `(N & (N + 1)) == 0` trick                               |
+| **First Set Bit**                 | 04-04-2026    | **05-04-2026**       | 1 Day            | Loop + shift `(n & 1)`                                   |
+| **Power of 2**                    | 06-04-2026    | **09-04-2026**       | 3 Days           | ✅ Nailed the n & (n-1) binary trick!                   |
+
 
 1. How this works:
 
