@@ -1,3 +1,1 @@
-function changeText() {
-    document.getElementById("demo").innerHTML = "hellojs,,,,,"
-}
+document.getElementById("demo").innerHTML = "<h2>Hello this is h2 tag</h2>"
