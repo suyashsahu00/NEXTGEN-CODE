@@ -1,1 +1,1 @@
-document.getElementById("demo").innerHTML = "<h2>Hello this is h2 tag</h2>"
+document.getElementById("demo").innerText = "<h2>inner text don't contain tags support,</h2>"
