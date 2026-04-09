@@ -1,5 +1,6 @@
 # DSA Spaced Repetition Tracker 🧠
 
+**Mastery Strategy:** [Hermann Ebbinghaus Forgetfulness Curve](https://en.wikipedia.org/wiki/Forgetting_curve) 📉
 **Algorithm Intervals:** 1 Day -> 3 Days -> 7 Days -> 14 Days -> 30 Days
 
 | Problem Name                      | Last Reviewed | Next Review Date     | Current Interval | Status / Notes                                           |
