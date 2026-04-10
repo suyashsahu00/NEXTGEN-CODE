@@ -6,11 +6,11 @@ using namespace std;
 
 class Myclass {
 public:
-  Myclass() {
-    cout<<"Hello World";
-  }
+  Myclass() ;
 };
-
+Myclass::Myclass() {
+  cout<<"hello world1"<<endl;
+}
 int main() {
   Myclass myobj1;
   return 0;
