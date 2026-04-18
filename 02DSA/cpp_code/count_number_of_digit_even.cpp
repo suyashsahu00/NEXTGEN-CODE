@@ -1,22 +1,26 @@
 #include <iostream>
 using namespace std;
-int main(){
+int main()
+{
     int num = 0;
-    
-    cout<<"Enter a num: ";
-    cin>>num;
+
+    cout << "Enter a num: ";
+    cin >> num;
     int count = 0;
-    while (num!=0)//1234 //123//12
+    if (num == 0)
     {
-        int lastDigit = num % 10;// lastDigit<= 1234 % 10 = 4 // lastDigit<= 123 % 10 = 3 // lastDigit<= 12 % 10 = 2 // 
-        if (lastDigit % 2 ==0)// 4%2==0 // 3%2==0?no//2 % 2==0//
-        {
-            count++;//count = 1//2
-        }
-        num = num /10; // num<= 1234 / 10 = 123 // num<= 123 / 10 = 12 // num<= 12 / 10 = 1
-        
+        count = 1;
     }
-    cout<<"Number of even count: "<<count;
-    
+    while (num != 0) // example: 1234 -> 123 -> 12 -> 1
+    {
+        int lastDigit = num % 10; // lastDigit = last digit (e.g. 1234 % 10 = 4)
+        if (lastDigit % 2 == 0)   // check if lastDigit is even (4%2==0 true, 3%2!=0 false)
+        {
+            count++; // increment count of even digits
+        }
+        num = num / 10; // remove the last digit (1234 / 10 = 123)
+    }
+    cout << "Number of even count: " << count << endl;
+
     return 0;
 }
