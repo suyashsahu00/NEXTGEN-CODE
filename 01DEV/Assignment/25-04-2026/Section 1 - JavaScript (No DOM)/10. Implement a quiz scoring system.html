@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+</head>
+<body>
+    <h1>--------------Quiz-------------</h1>
+    <h3>Open console to see results</h3>
+    <script>
+        let questions = [
+{
+    ques: "Q1. What does CSS stand for?",
+    options: ["1. Cascading Style Sheets", "2. Computer Style Sheets", "3. Creative Style Sheets", "4. Colorful Style Sheets"],
+    answer: 1
+},
+
+{
+    ques: "Q2. Which HTML element is used to specify a footer for a document or section?",
+    options: ["1. <bottom>", "2. <footer>", "3. <section>", "4. <down>"],
+    answer: 2
+},
+
+{
+    ques: "Q3. How do you write \"Hello World\" in an alert box?",
+    options: ["1. msgBox(\"Hello World\");", "2. alert(\"Hello World\");", "3. msg(\"Hello World\");", "4. alertBox(\"Hello World\");"],
+    answer: 2
+},
+
+{
+    ques: "Q4. How do you create a function in JavaScript?",
+    options: ["1. function myFunction()", "2. function:myFunction()", "3. function = myFunction()", "4. create myFunction()"],
+    answer: 1
+},
+
+{
+    ques: "Q5. Which property is used to change the background color?",
+    options: ["1. color", "2. bgcolor", "3. background-color", "4. bcolor"],
+    answer: 3
+}
+];
+
+let userAnswers = [];
+let count = 0;
+
+for (let i = 0; i < questions.length; i++){
+
+    let text = questions[i].ques + "\n";
+
+    for (let j = 0; j < questions[i].options.length; j++) {
+        text += questions[i].options[j] + "\n";        
+    }
+
+    let ans = Number(prompt(text));
+    userAnswers.push(ans);
+}
+
+for(let i = 0; i <questions.length; i++){
+    if(userAnswers[i] === questions[i].answer){
+        count++;
+    }
+}
+
+console.log("You gave "+ count + "correct.answer.");
+console.log("Correct Answers: " + count );
+console.log("Wrong Answers: "+ (questions.length - count));
+
+for (let i = 0; i < questions.length; i++) {
+    if (userAnswers[i] === questions[i].answer) {
+        console.log((i + 1) + " : Correct");
+    }
+    else {
+        console.log((i +1)+": Wrong");
+    }
+    console.log("Your Answer: "+questions[i].options[userAnswers[i] - 1]);
+    console.log("Correct Answer: "+questions[i].options[questions[i].answer - 1]);
+    console.log("---------------------------------------");
+}
+    </script>
+</body>
+</html>
