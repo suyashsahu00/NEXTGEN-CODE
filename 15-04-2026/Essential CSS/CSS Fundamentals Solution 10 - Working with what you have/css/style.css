@@ -17,12 +17,12 @@ h2 {
 }
 
 h1 {
-    font-size: 60px;
+    font-size: 80px;
     margin-top: 0;
 }
 
 h2 {
-    font-size: 42px;
+    font-size: 60px;
     margin-top: 0;
     border-top: solid 1px #c4c4c4;
     border-bottom: solid 1px #c4c4c4;
@@ -39,14 +39,6 @@ h3 {
 
 .accent-text {
     display: block;
-}
-
-h1 .accent-text {
-    font-size: 80px;
-}
-
-h2 .accent-text {
-    font-size: 60px;
 }
 
 .accent-text,
@@ -85,12 +77,6 @@ section {
     background: #252525;
 }
 
-.inverse .btn:hover,
-.inverse .btn:focus {
-    background: #fff;
-    color: #252525;
-}
-
 .btn {
     display: inline-block;
     color: #252525;
@@ -102,6 +88,6 @@ section {
 
 .btn:hover,
 .btn:focus {
-    background: #252525;
-    color: #fff;
+    background: #fff;
+    color: #252525;
 }
