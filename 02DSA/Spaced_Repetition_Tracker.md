@@ -18,6 +18,7 @@
 | **Check Set Bits**                | 04-04-2026    | **05-04-2026**       | 1 Day            | `(N & (N + 1)) == 0` trick                               |
 | **First Set Bit**                 | 04-04-2026    | **05-04-2026**       | 1 Day            | Loop + shift `(n & 1)`                                   |
 | **Power of 2**                    | 06-04-2026    | **09-04-2026**       | 3 Days           | ✅ Nailed the n & (n-1) binary trick!                   |
+| **Value Equal to Index**          | 05-05-2026    | **06-05-2026**       | 1 Day            | 1-based index matching `arr[i] == i + 1`               |
 
 
 1. How this works:

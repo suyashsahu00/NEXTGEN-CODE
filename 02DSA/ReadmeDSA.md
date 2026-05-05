@@ -5,7 +5,7 @@
 [![C++](https://img.shields.io/badge/Language-C++-00599C?style=for-the-badge&logo=cplusplus&logoColor=white)](https://isocpp.org/)
 [![GeeksforGeeks](https://img.shields.io/badge/Platform-GeeksforGeeks-2F8D46?style=for-the-badge&logo=geeksforgeeks&logoColor=white)](https://www.geeksforgeeks.org/)
 [![LeetCode](https://img.shields.io/badge/Platform-LeetCode-FFA116?style=for-the-badge&logo=leetcode&logoColor=white)](https://leetcode.com/)
-[![Problems Solved](https://img.shields.io/badge/Problems_Solved-16-gold?style=for-the-badge)]()
+[![Problems Solved](https://img.shields.io/badge/Problems_Solved-17-gold?style=for-the-badge)]()
 
 
 > *My DSA journey — one problem at a time.* 🚀
@@ -35,6 +35,7 @@
     ├── 🧩 Single_Number.cpp
     ├── 🧩 Two_Sum.cpp
     ├── 🧩 Valid_Anagram.cpp
+    ├── 🧩 Value_equal_to_index_value.cpp
     └── 🧩 with_function_with_parameter.cpp
 ```
 
@@ -60,6 +61,7 @@
 | 14 | [Check Set Bits](https://www.geeksforgeeks.org/problems/check-set-bits5408/1) | Bit Manipulation | 🟢 Easy | GFG | ✅ |
 | 15 | [First Set Bit](https://www.geeksforgeeks.org/problems/find-position-of-set-bit3706/1) | Bit Manipulation | 🟢 Easy | GFG | ✅ |
 | 16 | [Power of 2](https://www.geeksforgeeks.org/problems/power-of-2-1587115620/1) | Bit Manipulation | 🟢 Easy | GFG | ✅ |
+| 17 | [Value equal to index value](https://www.geeksforgeeks.org/problems/value-equal-to-index-value1330/1) | Arrays | 🟢 Easy | GFG | ✅ |
 
 ---
 
@@ -69,7 +71,7 @@
 |-------|:--------:|
 | 🔢 Math / Number Theory | 2 |
 | 🔤 Strings | 2 |
-| 📊 Arrays | 6 |
+| 📊 Arrays | 7 |
 | 💻 Bit Manipulation | 6 |
 
 ---
