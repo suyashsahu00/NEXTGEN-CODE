@@ -5,7 +5,7 @@
 [![C++](https://img.shields.io/badge/Language-C++-00599C?style=for-the-badge&logo=cplusplus&logoColor=white)](https://isocpp.org/)
 [![GeeksforGeeks](https://img.shields.io/badge/Platform-GeeksforGeeks-2F8D46?style=for-the-badge&logo=geeksforgeeks&logoColor=white)](https://www.geeksforgeeks.org/)
 [![LeetCode](https://img.shields.io/badge/Platform-LeetCode-FFA116?style=for-the-badge&logo=leetcode&logoColor=white)](https://leetcode.com/)
-[![Problems Solved](https://img.shields.io/badge/Problems_Solved-18-gold?style=for-the-badge)]()
+[![Problems Solved](https://img.shields.io/badge/Problems_Solved-19-gold?style=for-the-badge)]()
 
 
 > *My DSA journey — one problem at a time.* 🚀
@@ -21,6 +21,7 @@
 ├── 📄 ReadmeDSA.md            # You are here!
 ├── 📁 lecture_notes_ssipmt/   # College lecture notes & code
 └── 📁 my_dsa_code/            # Problem solutions
+    ├── 🧩 Binary_Palindrome.cpp
     ├── 🧩 check_kth_bit.cpp
     ├── 🧩 Check_set_bits.cpp
     ├── 🧩 Concatenation_of_Array.cpp
@@ -64,6 +65,7 @@
 | 16 | [Power of 2](https://www.geeksforgeeks.org/problems/power-of-2-1587115620/1) | Bit Manipulation | 🟢 Easy | GFG | ✅ |
 | 17 | [Value equal to index value](https://www.geeksforgeeks.org/problems/value-equal-to-index-value1330/1) | Arrays | 🟢 Easy | GFG | ✅ |
 | 18 | [Last Index of One](https://www.geeksforgeeks.org/problems/last-index-of-15847/1) | Strings | 🟢 Easy | GFG | ✅ |
+| 19 | [Palindrome Numbers](https://www.geeksforgeeks.org/problems/palindrome-numbers0942/1) | Bit Manipulation | 🟢 Easy | GFG | ✅ |
 
 ---
 
@@ -74,7 +76,7 @@
 | 🔢 Math / Number Theory | 2 |
 | 🔤 Strings | 3 |
 | 📊 Arrays | 7 |
-| 💻 Bit Manipulation | 6 |
+| 💻 Bit Manipulation | 7 |
 
 ---
 
