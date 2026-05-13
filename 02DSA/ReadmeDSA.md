@@ -28,6 +28,7 @@
     ├── 🧩 Contains_Duplicate.cpp
     ├── 🧩 Equilibrium_Point.cpp
     ├── 🧩 First_Set_Bit.cpp
+    ├── 🧩 First_Set_Bit_Optimized.cpp
     ├── 🧩 Last_Index_of_One.cpp
     ├── 🧩 Power_of_2.cpp
     ├── 🧩 reverse.cpp
