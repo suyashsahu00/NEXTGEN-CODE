@@ -21,6 +21,7 @@
 | **Value Equal to Index**          | 05-05-2026    | **06-05-2026**       | 1 Day            | 1-based index matching `arr[i] == i + 1`               |
 | **Binary Palindrome**             | 08-05-2026    | **09-05-2026**       | 1 Day            | Reversing bits `(rev << 1) \| (temp & 1)`              |
 | **Last Index of One**             | 05-05-2026    | **06-05-2026**       | 1 Day            | Backwards loop over string `s[i] == '1'`               |
+| **Maximum Subarray**              | 13-05-2026    | **14-05-2026**       | 1 Day            | Kadane's logic: reset sum when `< 0`                   |
 
 
 1. How this works:
