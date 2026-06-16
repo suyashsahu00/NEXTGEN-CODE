@@ -5,7 +5,7 @@
 [![C++](https://img.shields.io/badge/Language-C++-00599C?style=for-the-badge&logo=cplusplus&logoColor=white)](https://isocpp.org/)
 [![GeeksforGeeks](https://img.shields.io/badge/Platform-GeeksforGeeks-2F8D46?style=for-the-badge&logo=geeksforgeeks&logoColor=white)](https://www.geeksforgeeks.org/)
 [![LeetCode](https://img.shields.io/badge/Platform-LeetCode-FFA116?style=for-the-badge&logo=leetcode&logoColor=white)](https://leetcode.com/)
-[![Problems Solved](https://img.shields.io/badge/Problems_Solved-20-gold?style=for-the-badge)]()
+[![Problems Solved](https://img.shields.io/badge/Problems_Solved-21-gold?style=for-the-badge)]()
 
 
 > *My DSA journey — one problem at a time.* 🚀
@@ -33,6 +33,7 @@
     ├── 🧩 Maximum_Subarray.cpp
     ├── 🧩 Power_of_2.cpp
     ├── 🧩 reverse.cpp
+    ├── 🧩 Right_Angle_Triangle_2.cpp
     ├── 🧩 Rotate_Array_by_One.cpp
     ├── 🧩 Running_Sum_of_1d_Array.cpp
     ├── 🧩 Set_kth_bit.cpp
@@ -69,6 +70,7 @@
 | 18 | [Last Index of One](https://www.geeksforgeeks.org/problems/last-index-of-15847/1) | Strings | 🟢 Easy | GFG | ✅ |
 | 19 | [Palindrome Numbers](https://www.geeksforgeeks.org/problems/palindrome-numbers0942/1) | Bit Manipulation | 🟢 Easy | GFG | ✅ |
 | 20 | [Maximum Subarray](https://leetcode.com/problems/maximum-subarray/) | Arrays | 🟡 Medium | LeetCode | ✅ |
+| 21 | [Right Angle Triangle 2](https://www.geeksforgeeks.org/problems/right-angle-triangle-2-1605689820--102106/1) | Pattern Printing | 🟢 Easy | GFG | ✅ |
 
 ---
 
@@ -80,6 +82,7 @@
 | 🔤 Strings | 3 |
 | 📊 Arrays | 8 |
 | 💻 Bit Manipulation | 7 |
+| 🎨 Pattern Printing | 1 |
 
 ---
 

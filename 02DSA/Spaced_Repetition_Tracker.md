@@ -22,6 +22,7 @@
 | **Binary Palindrome**             | 08-05-2026    | **09-05-2026**       | 1 Day            | Reversing bits `(rev << 1) \| (temp & 1)`              |
 | **Last Index of One**             | 05-05-2026    | **06-05-2026**       | 1 Day            | Backwards loop over string `s[i] == '1'`               |
 | **Maximum Subarray**              | 13-05-2026    | **14-05-2026**       | 1 Day            | Kadane's logic: reset sum when `< 0`                   |
+| **Right Angle Triangle 2**        | 16-06-2026    | **17-06-2026**       | 1 Day            | Hollow pattern printing loop logic                     |
 
 
 1. How this works:
