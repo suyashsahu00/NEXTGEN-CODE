@@ -158,3 +158,41 @@ You can explore the source files for BoredBot below:
 ### 🔗 Chapter 4 Resources
 * 📄 **MDN Web Docs:** [Using the Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) - Overview and guides on using `fetch()`.
 * 📄 **API Endpoint:** [BoredAPI Activity Endpoint](https://www.boredapi.com/api/activity)
+
+---
+
+## 📄 Chapter 5: JSON Review
+
+### Core Concept
+**JSON (JavaScript Object Notation)** is a lightweight text-based data-interchange format that is language-independent. It is widely used to transmit data in web applications (e.g., sending data from a server to a client so it can be parsed and rendered).
+
+Key syntax rules of JSON compared to standard JS Objects:
+* **Double Quotes Required:** All property names (keys) and string values must be enclosed in double quotes (e.g., `"name": "Sarah"`). Single quotes are invalid.
+* **No Trailing Commas:** The last element in an array or object must not end with a trailing comma.
+* **Supported Data Types:** Strings, Numbers, JSON Objects, Arrays, Booleans (`true`/`false`), and `null`. (Functions, dates, and `undefined` are not supported).
+* **No Comments:** JSON files do not support code comments.
+
+### 💡 Visualizations
+<details>
+  <summary><b>📷 Expand to View JSON Concepts & Validation Diagrams</b></summary>
+  <br>
+
+  ### 1. JSON Format & Structure
+  ![JSON Format & Structure](image/Readme/1783248858433.png)
+
+  ### 2. JSON Syntax Rules
+  ![JSON Syntax Rules](image/Readme/1783248961936.png)
+
+  ### 3. Validating JSON Data
+  ![Validating JSON Data](image/Readme/1783249323821.png)
+
+</details>
+
+### 💻 Code Examples
+You can review the sample JSON files below:
+* [person.json](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/JSON%20Review/person.json) - Simple single object representation.
+* [people.json](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/JSON%20Review/people.json) - Array containing multiple JSON objects.
+
+### 🔗 Chapter 5 Resources
+* 🛠️ **JSON Validator:** [JSONLint](https://jsonlint.com/) - The free online validator and reformatting tool for JSON.
+* 📄 **MDN Web Docs:** [Working with JSON](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON) - Guide to parsing, generating, and manipulating JSON in JS.
