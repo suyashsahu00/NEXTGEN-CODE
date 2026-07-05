@@ -135,3 +135,26 @@ In the web communication flow, a **Request** is initiated by the client to obtai
 
 ### 🔗 Chapter 3 Resources
 * 📄 **MDN Docs:** [HTTP Response Status Codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status) - Details on all standard status codes.
+
+---
+
+## 🤖 Chapter 4: BoredBot Intro
+
+### Core Concept
+**BoredBot** (also styled as **HappyBot**) is a simple interactive web application that helps users find activities when they are bored. This project demonstrates how to make network requests to a third-party API and use the received data to dynamically update the web page.
+
+Key technical implementation details:
+* **The Fetch API:** Initiating an asynchronous request to BoredAPI: `fetch("https://www.boredapi.com/api/activity")`.
+* **Promise Chaining:** Handling the response stream using `.then(res => res.json())` to parse the payload as JSON, and a subsequent `.then(data => ...)` to access the activity data.
+* **DOM Modification:** Dynamically inserting `data.activity` into the page, changing text headings, and updating CSS classes on body click.
+
+### 💻 Code Implementation
+
+You can explore the source files for BoredBot below:
+* [index.html](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/BoredBot%20Intro/index.html) - Structural markup containing the bot trigger button and placeholder text.
+* [index.js](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/BoredBot%20Intro/index.js) - JavaScript logic handling event listeners, API fetch promises, and DOM updates.
+* [index.css](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/BoredBot%20Intro/index.css) - Styling sheet containing the visual themes (including the `.fun` body class theme).
+
+### 🔗 Chapter 4 Resources
+* 📄 **MDN Web Docs:** [Using the Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) - Overview and guides on using `fetch()`.
+* 📄 **API Endpoint:** [BoredAPI Activity Endpoint](https://www.boredapi.com/api/activity)
