@@ -27,6 +27,89 @@ This project simulates a ridiculously persistent, data-hungry, and annoying cook
 
 ---
 
+## 📖 Concepts Studied
+
+During this project, we have studied and implemented the following key front-end development concepts:
+
+### 1. 🕒 `setTimeout`
+Used to run a function asynchronously after a specified delay in milliseconds.
+* **Modal Delay:** Shows the modal 1.5 seconds after page load.
+* **Loading Sequence:** Sequences text changes and actions.
+```javascript
+// Display the modal after 1.5s
+setTimeout(function(){
+    modal.style.display = 'inline'
+}, 1500)
+
+// Update loading text after 1.5s
+setTimeout(function(){
+    document.getElementById('upload-text').innerText = `Making the sale...`
+}, 1500)
+```
+
+### 2. 🎨 `element.style`
+Used to get or set the inline styles of an element dynamically.
+```javascript
+// Displaying the modal
+modal.style.display = 'inline'
+
+// Closing/hiding the modal
+modal.style.display = 'none'
+```
+
+### 3. 📝 Forms
+Handling user input submission. We listen to the `submit` event of the `<form>` rather than a button click to ensure all required fields are validated.
+```javascript
+consentForm.addEventListener('submit', function(e){
+    // Form submission actions happen here
+})
+```
+
+### 4. 🗃️ `FormData` & `.get()`
+`FormData` lets us compile form values into key-value pairs easily. `.get(name)` retrieves the value of the input matching the `name` attribute.
+```javascript
+const consentFormData = new FormData(consentForm)
+const fullName = consentFormData.get('fullName') // Extracts value from <input name="fullName">
+```
+
+### 5. 🛑 `event.preventDefault()`
+Prevents the browser's default behavior for an event. In forms, this stops the browser from reloading the page upon submission, enabling custom asynchronous operations.
+```javascript
+consentForm.addEventListener('submit', function(e){
+    e.preventDefault() // Prevents page reload
+    // Custom logic
+})
+```
+
+### 6. ↔️ CSS `row-reverse`
+Uses CSS Flexbox to reverse the visual order of items. The Accept and Decline buttons are swapped when this class is applied.
+```css
+.modal-btns-reverse {
+    flex-direction: row-reverse;
+}
+```
+
+### 7. 🔄 Toggling Classes
+Adding or removing a class name dynamically using `classList.toggle()`. Used here on `mouseenter` to swap the buttons' order when the user tries to click "Decline".
+```javascript
+declineBtn.addEventListener('mouseenter', function(){
+    modalChoiceBtns.classList.toggle('modal-btns-reverse')
+})
+```
+
+### 8. 🔒 `disabled` Attribute
+HTML attribute to prevent user interaction with buttons.
+* **HTML Setup (Initially Disabled):**
+  ```html
+  <button class="modal-close-btn" id="modal-close-btn" disabled>X</button>
+  ```
+* **JavaScript Toggle (Enabling it):**
+  ```javascript
+  modalCloseBtn.disabled = false // Enables the close button once the sequence completes
+  ```
+
+---
+
 ## 🚀 Getting Started
 
 ### Prerequisites
