@@ -4,16 +4,15 @@ APIs (Application Programming Interfaces) and the Client-Server model are the ba
 
 ---
 
-## 📖 Module 1: What is an API?
+## 📖 Chapter 1: What is an API?
 
 ### Core Concept
-An **API (Application Programming Interface)** is a software intermediary that allows two applications to talk to each other. In other words, it is a tool that allows your code to communicate with and leverage the features/data of someone else's code or service.
+An **API (Application Programming Interface)** is a software intermediary that allows two applications to talk to each other. It allows your code to communicate with and leverage the features/data of someone else's code or service.
 
-There are two main types of APIs we work with in front-end development:
-1. **Browser/Web APIs:** Built-in tools provided directly by the web browser (e.g., `localStorage`, `fetch()`, Geolocation, DOM Manipulation).
-2. **Third-Party APIs:** External services run by other providers that you access over the web (e.g., BoredAPI, OpenWeatherMap, GitHub API).
+* **Browser/Web APIs:** Built-in tools provided directly by the web browser (e.g., `localStorage`, `fetch()`, Geolocation, DOM Manipulation).
+* **Third-Party APIs:** External services run by other providers that you access over the web (e.g., BoredAPI, OpenWeatherMap, GitHub API).
 
-### 💡 Visualizations (What is an API)
+### 💡 Visualizations
 <details>
   <summary><b>📷 Expand to View API Visualizations & Slides</b></summary>
   <br>
@@ -29,8 +28,8 @@ There are two main types of APIs we work with in front-end development:
 
 </details>
 
-### 📝 Module 1 Quiz & Recap
-Here is a summary of the key takeaways from this module. (Original: [quiz.md](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/What%20is%20an%20API/quiz.md))
+### 📝 Quiz & Recap
+*(Original file: [quiz.md](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/What%20is%20an%20API/quiz.md))*
 
 > [!NOTE]
 > **What does API stand for?**
@@ -45,16 +44,19 @@ Here is a summary of the key takeaways from this module. (Original: [quiz.md](fi
 > - **BoredAPI** - A web service to fetch random activity suggestions.
 > - **Local Storage (localStorage)** - A built-in browser API to store data locally on the user's device.
 
+### 🔗 Chapter 1 Resources
+* 📄 **MDN Web Docs:** [MDN Web API Reference](https://developer.mozilla.org/en-US/docs/Web/API) - Learn about browser-provided Web APIs.
+
 ---
 
-## 🖥️ Module 2: Clients & Servers
+## 🖥️ Chapter 2: Clients & Servers
 
 ### Core Concept
 The **Client-Server model** describes how computers interact over a network:
-- **Client:** The device or application (like a web browser, phone, or laptop) that requests information or services.
-- **Server:** A powerful computer or software system that stores data/services, listens for requests from clients, and responds with the requested data.
+* **Client:** The device or application (like a web browser, phone, or laptop) that requests information or services.
+* **Server:** A powerful computer or software system that stores data/services, listens for requests from clients, and responds with the requested data.
 
-### 💡 Visualizations (Clients & Servers)
+### 💡 Visualizations
 <details>
   <summary><b>📷 Expand to View Clients & Servers Diagrams</b></summary>
   <br>
@@ -67,8 +69,8 @@ The **Client-Server model** describes how computers interact over a network:
 
 </details>
 
-### 📝 Module 2 Quiz & Recap
-Here is a summary of the key takeaways from this module. (Original: [quiz.md](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Clients%20&%20Servers/quiz.md))
+### 📝 Quiz & Recap
+*(Original file: [quiz.md](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Clients%20&%20Servers/quiz.md))*
 
 > [!NOTE]
 > **What are some examples of "clients" you've used today?**
@@ -82,8 +84,6 @@ Here is a summary of the key takeaways from this module. (Original: [quiz.md](fi
 > **In what way do clients and servers interact with each other?**
 > - **The Request-Response Cycle:** The client sends a **request** over the network saying what data or service it wants. The server receives the request, processes it (like searching a database or retrieving a file), and sends a **response** back.
 
----
-
-## 🔗 Useful Resources
-* 📄 **MDN Web Docs:** [MDN Web API Reference](https://developer.mozilla.org/en-US/docs/Web/API) - Learn about browser-provided Web APIs.
+### 🔗 Chapter 2 Resources
 * 📄 **Vite Documentation:** [Vite Config Guide](https://vitejs.dev/) - How to configure build tooling for modern JS apps.
+* 📄 **Scrimba Courses:** [Scrimba Course Portal](https://scrimba.com/courses) | [The Frontend Career Path](https://scrimba.com/fullstack-path-c0fullstack)
