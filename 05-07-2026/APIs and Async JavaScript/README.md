@@ -285,3 +285,23 @@ When we use `fetch()`, JavaScript doesn't stop and wait for the API response. In
 You can explore the source files for this practice below:
 * [index.html](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/.thenO%20and%20Asynchronous%20JavaScript/index.html) - Basic markup structure.
 * [index.js](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/.thenO%20and%20Asynchronous%20JavaScript/index.js) - JavaScript file demonstrating the non-blocking, asynchronous behavior of `fetch` compared to standard synchronous code like `console.log()` and `for` loops.
+
+---
+
+## 🐕 Chapter 8: Dog API Fetch and DOM Practice
+
+### Core Concept
+In this chapter, we combine the Fetch API with DOM manipulation. We make an API request to retrieve a random dog image URL and dynamically insert it into the webpage. 
+
+Key technical steps:
+* **Fetching Data:** Requesting data from the Dog API.
+* **Accessing the DOM:** Targeting an element (like a `<div>`) using `document.getElementById()`.
+* **Updating HTML:** Using `.innerHTML` to insert an `<img>` tag where the `src` attribute is dynamically set using template literals containing the fetched image URL (`${data.message}`).
+
+### 💻 Code Implementation
+You can explore the source files for this practice below:
+* [index.html](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Dog%20API%20Fetch%20and%20DOM%20Practice/index.html) - Markup containing the empty `#image-container` div.
+* [index.js](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Dog%20API%20Fetch%20and%20DOM%20Practice/index.js) - JavaScript logic fetching the image and appending it to the DOM.
+
+### 🔗 Chapter 8 Resources
+* 📄 **API Endpoint:** [Dog API Random Image](https://dog.ceo/api/breeds/image/random)
