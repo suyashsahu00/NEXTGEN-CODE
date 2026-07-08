@@ -239,6 +239,35 @@ You can review the sample JSON files below:
 
 * 🛠️ **JSON Validator:** [JSONLint](https://jsonlint.com/) - The free online validator and reformatting tool for JSON.
 * 📄 **MDN Web Docs:** [Working with JSON](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON) - Guide to parsing, generating, and manipulating JSON in JS.
+---
 
+## 🐶 Chapter 6: First Fetch
 
-![1783525337480](image/README/1783525337480.png)![1783525374316](image/README/1783525374316.png)
+### Core Concept
+In this chapter, we write our very first `fetch()` request from scratch to retrieve data from a public API. 
+
+Key technical steps:
+* **Fetching Data:** We initiate a request to the Dog API endpoint: `fetch("https://dog.ceo/api/breeds/image/random")`.
+* **Parsing the Response:** Since the response comes back as a stream, we parse it into a JavaScript object using `.then(response => response.json())`.
+* **Handling the Data:** Finally, we chain another `.then(data => console.log(data))` to access the actual JSON payload and print it to the console.
+
+### 💡 Visualizations
+<details>
+  <summary><b>📷 Expand to View Fetch & Promises Diagrams</b></summary>
+  <br>
+
+  ### 1. Understanding Fetch
+  ![Understanding Fetch](image/Readme/1783525337480.png)
+
+  ### 2. Fetch Response & JSON
+  ![Fetch Response & JSON](image/Readme/1783525374316.png)
+
+</details>
+
+### 💻 Code Implementation
+You can explore the source files for this practice below:
+* [index.html](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/First%20fetch/index.html) - Basic markup structure.
+* [index.js](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/First%20fetch/index.js) - The JavaScript file containing the fetch request logic.
+
+### 🔗 Chapter 6 Resources
+* 📄 **API Endpoint:** [Dog API Random Image](https://dog.ceo/api/breeds/image/random)
