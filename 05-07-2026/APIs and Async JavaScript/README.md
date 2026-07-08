@@ -188,6 +188,21 @@ You can explore the source files for BoredBot below:
 * [index.js](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/BoredBot%20Intro/index.js>) - JavaScript logic handling event listeners, API fetch promises, and DOM updates.
 * [index.css](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/BoredBot%20Intro/index.css>) - Styling sheet containing the visual themes (including the `.fun` body class theme).
 
+```javascript
+// BoredBot index.js snippet
+document.getElementById("bored-bot").addEventListener("click", getIdea)
+
+function getIdea() {
+    fetch("https://www.boredapi.com/api/activity")
+        .then(res => res.json())
+        .then(data => {
+            document.body.classList.add("fun")
+            document.getElementById("idea").textContent = data.activity
+            document.getElementById("title").textContent = "🦾 HappyBot🦿"
+        })
+}
+```
+
 ### 🔗 Chapter 4 Resources
 
 * 📄 **MDN Web Docs:** [Using the Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) - Overview and guides on using `fetch()`.
@@ -269,6 +284,13 @@ You can explore the source files for this practice below:
 * [index.html](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/First%20fetch/index.html) - Basic markup structure.
 * [index.js](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/First%20fetch/index.js) - The JavaScript file containing the fetch request logic.
 
+```javascript
+// First Fetch snippet
+fetch("https://dog.ceo/api/breeds/image/random")
+    .then(response => response.json())
+    .then(data => console.log(data)) 
+```
+
 ### 🔗 Chapter 6 Resources
 * 📄 **API Endpoint:** [Dog API Random Image](https://dog.ceo/api/breeds/image/random)
 
@@ -286,6 +308,21 @@ You can explore the source files for this practice below:
 * [index.html](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/.thenO%20and%20Asynchronous%20JavaScript/index.html) - Basic markup structure.
 * [index.js](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/.thenO%20and%20Asynchronous%20JavaScript/index.js) - JavaScript file demonstrating the non-blocking, asynchronous behavior of `fetch` compared to standard synchronous code like `console.log()` and `for` loops.
 
+```javascript
+// Asynchronous behavior demonstration
+console.log("The first console log")
+
+fetch("https://dog.ceo/api/breeds/image/random")
+    .then(response => response.json())
+    .then(data => console.log(data))
+
+console.log("The second console log")
+
+for (let i = 0; i < 100; i++) {
+    console.log("I'm inside the for loop")
+}
+```
+
 ---
 
 ## 🐕 Chapter 8: Dog API Fetch and DOM Practice
@@ -302,6 +339,18 @@ Key technical steps:
 You can explore the source files for this practice below:
 * [index.html](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Dog%20API%20Fetch%20and%20DOM%20Practice/index.html) - Markup containing the empty `#image-container` div.
 * [index.js](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Dog%20API%20Fetch%20and%20DOM%20Practice/index.js) - JavaScript logic fetching the image and appending it to the DOM.
+
+```javascript
+// Fetch and DOM Manipulation
+fetch("https://dog.ceo/api/breeds/image/random")
+    .then(response => response.json())
+    .then(data => {
+        console.log(data)
+        document.getElementById("image-container").innerHTML = `
+            <img src="${data.message}" />
+        `
+    })
+```
 
 ### 🔗 Chapter 8 Resources
 * 📄 **API Endpoint:** [Dog API Random Image](https://dog.ceo/api/breeds/image/random)
