@@ -15,3 +15,6 @@ When formatting or updating chapter-based README files in this repository (e.g.,
 3. **Visuals and Recap Layout:**
    - Put diagrams and slides in a collapsible `<details>` disclosure panel so they don't clutter the layout.
    - Use clean callouts (Note, Tip, Important) for recap questions and quiz summaries.
+
+4. **Code Snippets:**
+   - Always include a small snippet of the most important code parts for each chapter in its respective section.
