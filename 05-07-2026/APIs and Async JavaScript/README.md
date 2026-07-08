@@ -271,3 +271,17 @@ You can explore the source files for this practice below:
 
 ### 🔗 Chapter 6 Resources
 * 📄 **API Endpoint:** [Dog API Random Image](https://dog.ceo/api/breeds/image/random)
+
+---
+
+## ⏱️ Chapter 7: `.then()` & Asynchronous JavaScript
+
+### Core Concept
+In this chapter, we explore how **Asynchronous JavaScript** works in practice. 
+
+When we use `fetch()`, JavaScript doesn't stop and wait for the API response. Instead, it moves on to execute the rest of the synchronous code (like `console.log()` statements and `for` loops). It handles the API response asynchronously once the data actually arrives via the `.then()` method. This non-blocking behavior is what keeps web applications fast and responsive.
+
+### 💻 Code Implementation
+You can explore the source files for this practice below:
+* [index.html](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/.thenO%20and%20Asynchronous%20JavaScript/index.html) - Basic markup structure.
+* [index.js](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/.thenO%20and%20Asynchronous%20JavaScript/index.js) - JavaScript file demonstrating the non-blocking, asynchronous behavior of `fetch` compared to standard synchronous code like `console.log()` and `for` loops.
