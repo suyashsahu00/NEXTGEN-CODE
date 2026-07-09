@@ -10,8 +10,8 @@ APIs (Application Programming Interfaces) and the Client-Server model are the ba
 
 An **API (Application Programming Interface)** is a software intermediary that allows two applications to talk to each other. It allows your code to communicate with and leverage the features/data of someone else's code or service.
 
-* **Browser/Web APIs:** Built-in tools provided directly by the web browser (e.g., `localStorage`, `fetch()`, Geolocation, DOM Manipulation).
-* **Third-Party APIs:** External services run by other providers that you access over the web (e.g., BoredAPI, OpenWeatherMap, GitHub API).
+- **Browser/Web APIs:** Built-in tools provided directly by the web browser (e.g., `localStorage`, `fetch()`, Geolocation, DOM Manipulation).
+- **Third-Party APIs:** External services run by other providers that you access over the web (e.g., BoredAPI, OpenWeatherMap, GitHub API).
 
 ### 💡 Visualizations
 
@@ -21,21 +21,21 @@ An **API (Application Programming Interface)** is a software intermediary that a
 
 ### 1. What is an API?
 
-  ![What is an API](image/Readme/1783244465025.png)
+![What is an API](image/Readme/1783244465025.png)
 
 ### 2. How APIs Connect Systems
 
-  ![How APIs Connect Systems](image/Readme/1783244559530.png)
+![How APIs Connect Systems](image/Readme/1783244559530.png)
 
 ### 3. Web APIs on MDN
 
-  ![Web APIs on MDN](image/Readme/1783244868077.png)
+![Web APIs on MDN](image/Readme/1783244868077.png)
 
 </details>
 
 ### 📝 Quiz & Recap
 
-*(Original file: [quiz.md](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/What%20is%20an%20API/quiz.md>))*
+_(Original file: [quiz.md](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/What%20is%20an%20API/quiz.md))_
 
 > [!NOTE]
 > **What does API stand for?**
@@ -55,7 +55,7 @@ An **API (Application Programming Interface)** is a software intermediary that a
 
 ### 🔗 Chapter 1 Resources
 
-* 📄 **MDN Web Docs:** [MDN Web API Reference](https://developer.mozilla.org/en-US/docs/Web/API) - Learn about browser-provided Web APIs.
+- 📄 **MDN Web Docs:** [MDN Web API Reference](https://developer.mozilla.org/en-US/docs/Web/API) - Learn about browser-provided Web APIs.
 
 ---
 
@@ -65,8 +65,8 @@ An **API (Application Programming Interface)** is a software intermediary that a
 
 The **Client-Server model** describes how computers interact over a network:
 
-* **Client:** The device or application (like a web browser, phone, or laptop) that requests information or services.
-* **Server:** A powerful computer or software system that stores data/services, listens for requests from clients, and responds with the requested data.
+- **Client:** The device or application (like a web browser, phone, or laptop) that requests information or services.
+- **Server:** A powerful computer or software system that stores data/services, listens for requests from clients, and responds with the requested data.
 
 ### 💡 Visualizations
 
@@ -76,17 +76,17 @@ The **Client-Server model** describes how computers interact over a network:
 
 ### 1. Clients & Servers Overview
 
-  ![Clients & Servers Overview](image/Readme/1783245629403.png)
+![Clients & Servers Overview](image/Readme/1783245629403.png)
 
 ### 2. Client-Server Communication Flow
 
-  ![Client-Server Communication Flow](image/Readme/1783245648395.png)
+![Client-Server Communication Flow](image/Readme/1783245648395.png)
 
 </details>
 
 ### 📝 Quiz & Recap
 
-*(Original file: [quiz.md](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Clients%20&%20Servers/quiz.md>))*
+_(Original file: [quiz.md](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Clients%20&%20Servers/quiz.md))_
 
 > [!NOTE]
 > **What are some examples of "clients" you've used today?**
@@ -96,7 +96,7 @@ The **Client-Server model** describes how computers interact over a network:
 > [!TIP]
 > **How would you explain what a "server" is to a 5-year-old?**
 >
-> - **Answer:** Imagine a big toy box in your friend’s house that has all the toys you like. When you visit, you ask, *"Can I have the car toy?"* and your friend takes it from the box and gives it to you. The toy box is like the server: it keeps all the toys safe and gives the right toy when someone asks.
+> - **Answer:** Imagine a big toy box in your friend’s house that has all the toys you like. When you visit, you ask, _"Can I have the car toy?"_ and your friend takes it from the box and gives it to you. The toy box is like the server: it keeps all the toys safe and gives the right toy when someone asks.
 
 > [!IMPORTANT]
 > **In what way do clients and servers interact with each other?**
@@ -105,8 +105,8 @@ The **Client-Server model** describes how computers interact over a network:
 
 ### 🔗 Chapter 2 Resources
 
-* 📄 **Vite Documentation:** [Vite Config Guide](https://vitejs.dev/) - How to configure build tooling for modern JS apps.
-* 📄 **Scrimba Courses:** [Scrimba Course Portal](https://scrimba.com/courses) | [The Frontend Career Path](https://scrimba.com/fullstack-path-c0fullstack)
+- 📄 **Vite Documentation:** [Vite Config Guide](https://vitejs.dev/) - How to configure build tooling for modern JS apps.
+- 📄 **Scrimba Courses:** [Scrimba Course Portal](https://scrimba.com/courses) | [The Frontend Career Path](https://scrimba.com/fullstack-path-c0fullstack)
 
 ---
 
@@ -116,8 +116,8 @@ The **Client-Server model** describes how computers interact over a network:
 
 In the web communication flow, a **Request** is initiated by the client to obtain files or data from a server, and the server returns a **Response** indicating success, redirection, client error, or server error using standardized status codes.
 
-* **Client Requests:** A client can request code files (`index.html`, `style.css`, `script.js`) or data payloads (like a `JSON` file or API payload).
-* **Server Responses:** The server's main job is to listen for requests, process them, and send back a response containing the status code and matching headers/body.
+- **Client Requests:** A client can request code files (`index.html`, `style.css`, `script.js`) or data payloads (like a `JSON` file or API payload).
+- **Server Responses:** The server's main job is to listen for requests, process them, and send back a response containing the status code and matching headers/body.
 
 ### 💡 Visualizations
 
@@ -127,21 +127,21 @@ In the web communication flow, a **Request** is initiated by the client to obtai
 
 ### 1. Requesting Files
 
-  ![Requesting Files](image/Readme/1783246603229.png)
+![Requesting Files](image/Readme/1783246603229.png)
 
 ### 2. Request and Response Anatomy
 
-  ![Request and Response Anatomy](image/Readme/1783246649275.png)
+![Request and Response Anatomy](image/Readme/1783246649275.png)
 
 ### 3. Server Response Processing
 
-  ![Server Response Processing](image/Readme/1783246733927.png)
+![Server Response Processing](image/Readme/1783246733927.png)
 
 </details>
 
 ### 📝 Quiz & Recap
 
-*(Original file: [quiz.md](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Requests%20&%20Responses/quiz.md>))*
+_(Original file: [quiz.md](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Requests%20&%20Responses/quiz.md))_
 
 > [!NOTE]
 > **What are 3 things your computer (client) might request from a server?**
@@ -164,7 +164,7 @@ In the web communication flow, a **Request** is initiated by the client to obtai
 
 ### 🔗 Chapter 3 Resources
 
-* 📄 **MDN Docs:** [HTTP Response Status Codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status) - Details on all standard status codes.
+- 📄 **MDN Docs:** [HTTP Response Status Codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status) - Details on all standard status codes.
 
 ---
 
@@ -176,37 +176,37 @@ In the web communication flow, a **Request** is initiated by the client to obtai
 
 Key technical implementation details:
 
-* **The Fetch API:** Initiating an asynchronous request to BoredAPI: `fetch("https://www.boredapi.com/api/activity")`.
-* **Promise Chaining:** Handling the response stream using `.then(res => res.json())` to parse the payload as JSON, and a subsequent `.then(data => ...)` to access the activity data.
-* **DOM Modification:** Dynamically inserting `data.activity` into the page, changing text headings, and updating CSS classes on body click.
+- **The Fetch API:** Initiating an asynchronous request to BoredAPI: `fetch("https://www.boredapi.com/api/activity")`.
+- **Promise Chaining:** Handling the response stream using `.then(res => res.json())` to parse the payload as JSON, and a subsequent `.then(data => ...)` to access the activity data.
+- **DOM Modification:** Dynamically inserting `data.activity` into the page, changing text headings, and updating CSS classes on body click.
 
 ### 💻 Code Implementation
 
 You can explore the source files for BoredBot below:
 
-* [index.html](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/BoredBot%20Intro/index.html>) - Structural markup containing the bot trigger button and placeholder text.
-* [index.js](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/BoredBot%20Intro/index.js>) - JavaScript logic handling event listeners, API fetch promises, and DOM updates.
-* [index.css](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/BoredBot%20Intro/index.css>) - Styling sheet containing the visual themes (including the `.fun` body class theme).
+- [index.html](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/BoredBot%20Intro/index.html) - Structural markup containing the bot trigger button and placeholder text.
+- [index.js](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/BoredBot%20Intro/index.js) - JavaScript logic handling event listeners, API fetch promises, and DOM updates.
+- [index.css](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/BoredBot%20Intro/index.css) - Styling sheet containing the visual themes (including the `.fun` body class theme).
 
 ```javascript
 // BoredBot index.js snippet
-document.getElementById("bored-bot").addEventListener("click", getIdea)
+document.getElementById("bored-bot").addEventListener("click", getIdea);
 
 function getIdea() {
-    fetch("https://www.boredapi.com/api/activity")
-        .then(res => res.json())
-        .then(data => {
-            document.body.classList.add("fun")
-            document.getElementById("idea").textContent = data.activity
-            document.getElementById("title").textContent = "🦾 HappyBot🦿"
-        })
+  fetch("https://www.boredapi.com/api/activity")
+    .then((res) => res.json())
+    .then((data) => {
+      document.body.classList.add("fun");
+      document.getElementById("idea").textContent = data.activity;
+      document.getElementById("title").textContent = "🦾 HappyBot🦿";
+    });
 }
 ```
 
 ### 🔗 Chapter 4 Resources
 
-* 📄 **MDN Web Docs:** [Using the Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) - Overview and guides on using `fetch()`.
-* 📄 **API Endpoint:** [BoredAPI Activity Endpoint](https://www.boredapi.com/api/activity)
+- 📄 **MDN Web Docs:** [Using the Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) - Overview and guides on using `fetch()`.
+- 📄 **API Endpoint:** [BoredAPI Activity Endpoint](https://www.boredapi.com/api/activity)
 
 ---
 
@@ -218,10 +218,10 @@ function getIdea() {
 
 Key syntax rules of JSON compared to standard JS Objects:
 
-* **Double Quotes Required:** All property names (keys) and string values must be enclosed in double quotes (e.g., `"name": "Sarah"`). Single quotes are invalid.
-* **No Trailing Commas:** The last element in an array or object must not end with a trailing comma.
-* **Supported Data Types:** Strings, Numbers, JSON Objects, Arrays, Booleans (`true`/`false`), and `null`. (Functions, dates, and `undefined` are not supported).
-* **No Comments:** JSON files do not support code comments.
+- **Double Quotes Required:** All property names (keys) and string values must be enclosed in double quotes (e.g., `"name": "Sarah"`). Single quotes are invalid.
+- **No Trailing Commas:** The last element in an array or object must not end with a trailing comma.
+- **Supported Data Types:** Strings, Numbers, JSON Objects, Arrays, Booleans (`true`/`false`), and `null`. (Functions, dates, and `undefined` are not supported).
+- **No Comments:** JSON files do not support code comments.
 
 ### 💡 Visualizations
 
@@ -231,15 +231,15 @@ Key syntax rules of JSON compared to standard JS Objects:
 
 ### 1. JSON Format & Structure
 
-  ![JSON Format & Structure](image/Readme/1783248858433.png)
+![JSON Format & Structure](image/Readme/1783248858433.png)
 
 ### 2. JSON Syntax Rules
 
-  ![JSON Syntax Rules](image/Readme/1783248961936.png)
+![JSON Syntax Rules](image/Readme/1783248961936.png)
 
 ### 3. Validating JSON Data
 
-  ![Validating JSON Data](image/Readme/1783249323821.png)
+![Validating JSON Data](image/Readme/1783249323821.png)
 
 </details>
 
@@ -247,13 +247,13 @@ Key syntax rules of JSON compared to standard JS Objects:
 
 You can review the sample JSON files below:
 
-* [person.json](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/JSON%20Review/person.json>) - Simple single object representation.
-* [people.json](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/JSON%20Review/people.json>) - Array containing multiple JSON objects.
+- [person.json](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/JSON%20Review/person.json) - Simple single object representation.
+- [people.json](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/JSON%20Review/people.json) - Array containing multiple JSON objects.
 
 ### 🔗 Chapter 5 Resources
 
-* 🛠️ **JSON Validator:** [JSONLint](https://jsonlint.com/) - The free online validator and reformatting tool for JSON.
-* 📄 **MDN Web Docs:** [Working with JSON](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON) - Guide to parsing, generating, and manipulating JSON in JS.
+- 🛠️ **JSON Validator:** [JSONLint](https://jsonlint.com/) - The free online validator and reformatting tool for JSON.
+- 📄 **MDN Web Docs:** [Working with JSON](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON) - Guide to parsing, generating, and manipulating JSON in JS.
 
 ---
 
@@ -265,9 +265,9 @@ In this chapter, we write our very first `fetch()` request from scratch to retri
 
 Key technical steps:
 
-* **Fetching Data:** We initiate a request to the Dog API endpoint: `fetch("https://dog.ceo/api/breeds/image/random")`.
-* **Parsing the Response:** Since the response comes back as a stream, we parse it into a JavaScript object using `.then(response => response.json())`.
-* **Handling the Data:** Finally, we chain another `.then(data => console.log(data))` to access the actual JSON payload and print it to the console.
+- **Fetching Data:** We initiate a request to the Dog API endpoint: `fetch("https://dog.ceo/api/breeds/image/random")`.
+- **Parsing the Response:** Since the response comes back as a stream, we parse it into a JavaScript object using `.then(response => response.json())`.
+- **Handling the Data:** Finally, we chain another `.then(data => console.log(data))` to access the actual JSON payload and print it to the console.
 
 ### 💡 Visualizations
 
@@ -277,11 +277,11 @@ Key technical steps:
 
 ### 1. Understanding Fetch
 
-  ![Understanding Fetch](image/Readme/1783525337480.png)
+![Understanding Fetch](image/Readme/1783525337480.png)
 
 ### 2. Fetch Response & JSON
 
-  ![Fetch Response & JSON](image/Readme/1783525374316.png)
+![Fetch Response & JSON](image/Readme/1783525374316.png)
 
 </details>
 
@@ -289,19 +289,19 @@ Key technical steps:
 
 You can explore the source files for this practice below:
 
-* [index.html](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/First%20fetch/index.html>) - Basic markup structure.
-* [index.js](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/First%20fetch/index.js>) - The JavaScript file containing the fetch request logic.
+- [index.html](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/First%20fetch/index.html) - Basic markup structure.
+- [index.js](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/First%20fetch/index.js) - The JavaScript file containing the fetch request logic.
 
 ```javascript
 // First Fetch snippet
 fetch("https://dog.ceo/api/breeds/image/random")
-    .then(response => response.json())
-    .then(data => console.log(data))
+  .then((response) => response.json())
+  .then((data) => console.log(data));
 ```
 
 ### 🔗 Chapter 6 Resources
 
-* 📄 **API Endpoint:** [Dog API Random Image](https://dog.ceo/api/breeds/image/random)
+- 📄 **API Endpoint:** [Dog API Random Image](https://dog.ceo/api/breeds/image/random)
 
 ---
 
@@ -317,21 +317,21 @@ When we use `fetch()`, JavaScript doesn't stop and wait for the API response. In
 
 You can explore the source files for this practice below:
 
-* [index.html](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/.thenO%20and%20Asynchronous%20JavaScript/index.html>) - Basic markup structure.
-* [index.js](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/.thenO%20and%20Asynchronous%20JavaScript/index.js>) - JavaScript file demonstrating the non-blocking, asynchronous behavior of `fetch` compared to standard synchronous code like `console.log()` and `for` loops.
+- [index.html](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/.thenO%20and%20Asynchronous%20JavaScript/index.html) - Basic markup structure.
+- [index.js](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/.thenO%20and%20Asynchronous%20JavaScript/index.js) - JavaScript file demonstrating the non-blocking, asynchronous behavior of `fetch` compared to standard synchronous code like `console.log()` and `for` loops.
 
 ```javascript
 // Asynchronous behavior demonstration
-console.log("The first console log")
+console.log("The first console log");
 
 fetch("https://dog.ceo/api/breeds/image/random")
-    .then(response => response.json())
-    .then(data => console.log(data))
+  .then((response) => response.json())
+  .then((data) => console.log(data));
 
-console.log("The second console log")
+console.log("The second console log");
 
 for (let i = 0; i < 100; i++) {
-    console.log("I'm inside the for loop")
+  console.log("I'm inside the for loop");
 }
 ```
 
@@ -345,32 +345,32 @@ In this chapter, we combine the Fetch API with DOM manipulation. We make an API 
 
 Key technical steps:
 
-* **Fetching Data:** Requesting data from the Dog API.
-* **Accessing the DOM:** Targeting an element (like a `<div>`) using `document.getElementById()`.
-* **Updating HTML:** Using `.innerHTML` to insert an `<img>` tag where the `src` attribute is dynamically set using template literals containing the fetched image URL (`${data.message}`).
+- **Fetching Data:** Requesting data from the Dog API.
+- **Accessing the DOM:** Targeting an element (like a `<div>`) using `document.getElementById()`.
+- **Updating HTML:** Using `.innerHTML` to insert an `<img>` tag where the `src` attribute is dynamically set using template literals containing the fetched image URL (`${data.message}`).
 
 ### 💻 Code Implementation
 
 You can explore the source files for this practice below:
 
-* [index.html](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Dog%20API%20Fetch%20and%20DOM%20Practice/index.html>) - Markup containing the empty `#image-container` div.
-* [index.js](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Dog%20API%20Fetch%20and%20DOM%20Practice/index.js>) - JavaScript logic fetching the image and appending it to the DOM.
+- [index.html](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Dog%20API%20Fetch%20and%20DOM%20Practice/index.html) - Markup containing the empty `#image-container` div.
+- [index.js](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Dog%20API%20Fetch%20and%20DOM%20Practice/index.js) - JavaScript logic fetching the image and appending it to the DOM.
 
 ```javascript
 // Fetch and DOM Manipulation
 fetch("https://dog.ceo/api/breeds/image/random")
-    .then(response => response.json())
-    .then(data => {
-        console.log(data)
-        document.getElementById("image-container").innerHTML = `
+  .then((response) => response.json())
+  .then((data) => {
+    console.log(data);
+    document.getElementById("image-container").innerHTML = `
             <img src="${data.message}" />
-        `
-    })
+        `;
+  });
 ```
 
 ### 🔗 Chapter 8 Resources
 
-* 📄 **API Endpoint:** [Dog API Random Image](https://dog.ceo/api/breeds/image/random)
+- 📄 **API Endpoint:** [Dog API Random Image](https://dog.ceo/api/breeds/image/random)
 
 ---
 
@@ -382,27 +382,58 @@ In this chapter, we reinforce our knowledge of the Fetch API by connecting to th
 
 Key technical steps:
 
-* **Fetching Data:** Requesting data from the Bored API (`https://apis.scrimba.com/bored/api/activity`).
-* **Handling JSON:** Converting the response stream into JSON format.
-* **Updating Text Content:** Extracting the `activity` property from the returned JSON object and setting it as the `.textContent` of our `#activity-name` element in the DOM.
+- **Fetching Data:** Requesting data from the Bored API (`https://apis.scrimba.com/bored/api/activity`).
+- **Handling JSON:** Converting the response stream into JSON format.
+- **Updating Text Content:** Extracting the `activity` property from the returned JSON object and setting it as the `.textContent` of our `#activity-name` element in the DOM.
 
 ### 💻 Code Implementation
 
 You can explore the source files for this practice below:
 
-* [index.html](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Fetch%20idea%20from%20Bored%20API/index.html>) - Markup containing the empty `#activity-name` heading.
-* [index.js](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Fetch%20idea%20from%20Bored%20API/index.js>) - JavaScript logic fetching the activity and injecting the text into the DOM.
+- [index.html](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Fetch%20idea%20from%20Bored%20API/index.html) - Markup containing the empty `#activity-name` heading.
+- [index.js](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Fetch%20idea%20from%20Bored%20API/index.js) - JavaScript logic fetching the activity and injecting the text into the DOM.
 
 ```javascript
 // Fetch activity from Bored API
 fetch("https://apis.scrimba.com/bored/api/activity")
-    .then(response => response.json())
-    .then(data => {
-        console.log(data)
-        document.getElementById("activity-name").textContent = data.activity
-    })
+  .then((response) => response.json())
+  .then((data) => {
+    console.log(data);
+    document.getElementById("activity-name").textContent = data.activity;
+  });
 ```
 
 ### 🔗 Chapter 9 Resources
 
-* 📄 **API Endpoint:** [Bored API (Scrimba Proxy)](https://apis.scrimba.com/bored/api/activity)
+- 📄 **API Endpoint:** [Bored API (Scrimba Proxy)](https://apis.scrimba.com/bored/api/activity)
+
+---
+
+## 🤖 Chapter 10: BoredBot - HTML
+
+### Core Concept
+
+In this chapter, we begin building out the skeleton for our BoredBot application by writing the initial HTML structure.
+
+Key technical steps:
+
+- **App Title:** Setting up a descriptive `<h1>` title ("BoredBot").
+- **Placeholder:** Providing a `<h4>` element that will later be populated dynamically with a random idea from the API.
+- **Button Setup:** Adding an empty `<button>` element that will be used to trigger the API request.
+
+### 💻 Code Implementation
+
+You can explore the source files for this practice below:
+
+- [index.html](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/BoredBot%20-%20HTML/index.html) - The HTML skeleton containing the title, placeholder, and button.
+- [index.js](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/BoredBot%20-%20HTML/index.js) - The JavaScript file (currently mostly containing comments and commented-out fetch logic).
+
+```html
+<!-- HTML Skeleton Snippet -->
+<body>
+  <h1>🤖 BoredBot 🤖</h1>
+  <h4>Find something to do</h4>
+  <button></button>
+  <script src="index.js"></script>
+</body>
+```
