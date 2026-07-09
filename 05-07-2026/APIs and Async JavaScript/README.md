@@ -582,3 +582,10 @@ You can explore the source files for this practice below:
   <button id="get-activity" aria-label="Find a new activity."></button>
 </main>
 ```
+
+<details>
+<summary>Click to view BoredBot Final Result</summary>
+
+![1783596614970](image/README/1783596614970.png)
+
+</details>
