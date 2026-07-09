@@ -18,3 +18,6 @@ When formatting or updating chapter-based README files in this repository (e.g.,
 
 4. **Code Snippets:**
    - Always include a small snippet of the most important code parts for each chapter in its respective section.
+
+5. **Pre-push Formatting:**
+   - Always verify and format the README file before staging, committing, and pushing changes to GitHub.
