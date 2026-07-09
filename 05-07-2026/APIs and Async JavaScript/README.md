@@ -517,3 +517,37 @@ activityButtton.addEventListener("click", function () {
     });
 });
 ```
+
+---
+
+## 🎨 Chapter 13: BoredBot - Extra Styling
+
+### Core Concept
+
+In this chapter, we dynamically update the UI styling and content via JavaScript immediately after fetching the data from the Bored API.
+
+Key technical steps:
+
+- **Dynamic Text Updates:** Modifying the `textContent` of the title element (`#title`) to dynamically change it to "🦾 HappyBot🦿" once data is received.
+- **Dynamic CSS Classes:** Manipulating the `classList` property of `document.body` to add a new class (`.fun`) that triggers a CSS state change (e.g., updating the background gradient and colors).
+
+### 💻 Code Implementation
+
+You can explore the source files for this practice below:
+
+- [index.html](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/BoredBot%20-%20Extra%20Styling/index.html) - The HTML structure.
+- [index.css](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/BoredBot%20-%20Extra%20Styling/index.css) - The CSS stylesheet including the `.fun` body class for dynamic background styling.
+- [index.js](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/BoredBot%20-%20Extra%20Styling/index.js) - The JavaScript logic managing event listeners and DOM class manipulation.
+
+```javascript
+// BoredBot Dynamic Styling Snippet
+document.getElementById("get-activity").addEventListener("click", function () {
+  fetch("https://apis.scrimba.com/bored/api/activity")
+    .then((response) => response.json())
+    .then((data) => {
+      document.getElementById("activity").textContent = data.activity;
+      document.getElementById("title").textContent = "🦾 HappyBot🦿";
+      document.body.classList.add("fun");
+    });
+});
+```
