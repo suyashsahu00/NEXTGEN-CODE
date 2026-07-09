@@ -481,3 +481,39 @@ You can explore the source files for this practice below:
   box-shadow: 0 10px 24px rgba(79, 70, 229, 0.45);
 }
 ```
+
+---
+
+## 🚀 Chapter 12: BoredBot - JavaScript
+
+### Core Concept
+
+In this chapter, we wire up the functionality of our BoredBot application using JavaScript. We listen for button clicks to trigger our asynchronous API request and then dynamically update the DOM with the received data.
+
+Key technical steps:
+
+- **Event Listeners:** Attaching an `addEventListener("click", ...)` to the main button so the bot only acts when requested.
+- **Fetching Data on Click:** Triggering the `fetch()` request to the Bored API inside the event listener callback function.
+- **Updating the UI:** Waiting for the response to resolve into JSON, extracting the `activity` string, and updating the text content of our placeholder element (`#activityBtn`).
+
+### 💻 Code Implementation
+
+You can explore the source files for this practice below:
+
+- [index.html](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/BoredBot%20-%20JavaScript/index.html) - The HTML structure.
+- [index.js](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/BoredBot%20-%20JavaScript/index.js) - The JavaScript logic bringing interactivity to the application.
+
+```javascript
+// BoredBot JavaScript Interactivity Snippet
+const activityButtton = document.getElementById("boredBtn");
+
+activityButtton.addEventListener("click", function () {
+  console.log("Button Clicked");
+  fetch("https://apis.scrimba.com/bored/api/activity")
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      document.getElementById("activityBtn").textContent = data.activity;
+    });
+});
+```
