@@ -254,44 +254,53 @@ You can review the sample JSON files below:
 
 * 🛠️ **JSON Validator:** [JSONLint](https://jsonlint.com/) - The free online validator and reformatting tool for JSON.
 * 📄 **MDN Web Docs:** [Working with JSON](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON) - Guide to parsing, generating, and manipulating JSON in JS.
+
 ---
 
 ## 🐶 Chapter 6: First Fetch
 
 ### Core Concept
-In this chapter, we write our very first `fetch()` request from scratch to retrieve data from a public API. 
+
+In this chapter, we write our very first `fetch()` request from scratch to retrieve data from a public API.
 
 Key technical steps:
+
 * **Fetching Data:** We initiate a request to the Dog API endpoint: `fetch("https://dog.ceo/api/breeds/image/random")`.
 * **Parsing the Response:** Since the response comes back as a stream, we parse it into a JavaScript object using `.then(response => response.json())`.
 * **Handling the Data:** Finally, we chain another `.then(data => console.log(data))` to access the actual JSON payload and print it to the console.
 
 ### 💡 Visualizations
+
 <details>
   <summary><b>📷 Expand to View Fetch & Promises Diagrams</b></summary>
   <br>
 
-  ### 1. Understanding Fetch
+### 1. Understanding Fetch
+
   ![Understanding Fetch](image/Readme/1783525337480.png)
 
-  ### 2. Fetch Response & JSON
+### 2. Fetch Response & JSON
+
   ![Fetch Response & JSON](image/Readme/1783525374316.png)
 
 </details>
 
 ### 💻 Code Implementation
+
 You can explore the source files for this practice below:
-* [index.html](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/First%20fetch/index.html) - Basic markup structure.
-* [index.js](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/First%20fetch/index.js) - The JavaScript file containing the fetch request logic.
+
+* [index.html](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/First%20fetch/index.html>) - Basic markup structure.
+* [index.js](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/First%20fetch/index.js>) - The JavaScript file containing the fetch request logic.
 
 ```javascript
 // First Fetch snippet
 fetch("https://dog.ceo/api/breeds/image/random")
     .then(response => response.json())
-    .then(data => console.log(data)) 
+    .then(data => console.log(data))
 ```
 
 ### 🔗 Chapter 6 Resources
+
 * 📄 **API Endpoint:** [Dog API Random Image](https://dog.ceo/api/breeds/image/random)
 
 ---
@@ -299,14 +308,17 @@ fetch("https://dog.ceo/api/breeds/image/random")
 ## ⏱️ Chapter 7: `.then()` & Asynchronous JavaScript
 
 ### Core Concept
-In this chapter, we explore how **Asynchronous JavaScript** works in practice. 
+
+In this chapter, we explore how **Asynchronous JavaScript** works in practice.
 
 When we use `fetch()`, JavaScript doesn't stop and wait for the API response. Instead, it moves on to execute the rest of the synchronous code (like `console.log()` statements and `for` loops). It handles the API response asynchronously once the data actually arrives via the `.then()` method. This non-blocking behavior is what keeps web applications fast and responsive.
 
 ### 💻 Code Implementation
+
 You can explore the source files for this practice below:
-* [index.html](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/.thenO%20and%20Asynchronous%20JavaScript/index.html) - Basic markup structure.
-* [index.js](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/.thenO%20and%20Asynchronous%20JavaScript/index.js) - JavaScript file demonstrating the non-blocking, asynchronous behavior of `fetch` compared to standard synchronous code like `console.log()` and `for` loops.
+
+* [index.html](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/.thenO%20and%20Asynchronous%20JavaScript/index.html>) - Basic markup structure.
+* [index.js](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/.thenO%20and%20Asynchronous%20JavaScript/index.js>) - JavaScript file demonstrating the non-blocking, asynchronous behavior of `fetch` compared to standard synchronous code like `console.log()` and `for` loops.
 
 ```javascript
 // Asynchronous behavior demonstration
@@ -328,17 +340,21 @@ for (let i = 0; i < 100; i++) {
 ## 🐕 Chapter 8: Dog API Fetch and DOM Practice
 
 ### Core Concept
-In this chapter, we combine the Fetch API with DOM manipulation. We make an API request to retrieve a random dog image URL and dynamically insert it into the webpage. 
+
+In this chapter, we combine the Fetch API with DOM manipulation. We make an API request to retrieve a random dog image URL and dynamically insert it into the webpage.
 
 Key technical steps:
+
 * **Fetching Data:** Requesting data from the Dog API.
 * **Accessing the DOM:** Targeting an element (like a `<div>`) using `document.getElementById()`.
 * **Updating HTML:** Using `.innerHTML` to insert an `<img>` tag where the `src` attribute is dynamically set using template literals containing the fetched image URL (`${data.message}`).
 
 ### 💻 Code Implementation
+
 You can explore the source files for this practice below:
-* [index.html](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Dog%20API%20Fetch%20and%20DOM%20Practice/index.html) - Markup containing the empty `#image-container` div.
-* [index.js](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Dog%20API%20Fetch%20and%20DOM%20Practice/index.js) - JavaScript logic fetching the image and appending it to the DOM.
+
+* [index.html](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Dog%20API%20Fetch%20and%20DOM%20Practice/index.html>) - Markup containing the empty `#image-container` div.
+* [index.js](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Dog%20API%20Fetch%20and%20DOM%20Practice/index.js>) - JavaScript logic fetching the image and appending it to the DOM.
 
 ```javascript
 // Fetch and DOM Manipulation
@@ -353,4 +369,40 @@ fetch("https://dog.ceo/api/breeds/image/random")
 ```
 
 ### 🔗 Chapter 8 Resources
+
 * 📄 **API Endpoint:** [Dog API Random Image](https://dog.ceo/api/breeds/image/random)
+
+---
+
+## 💡 Chapter 9: Fetch idea from Bored API
+
+### Core Concept
+
+In this chapter, we reinforce our knowledge of the Fetch API by connecting to the Bored API (via Scrimba's proxy). We request a random activity and update the text content of a DOM element to display the fetched idea.
+
+Key technical steps:
+
+* **Fetching Data:** Requesting data from the Bored API (`https://apis.scrimba.com/bored/api/activity`).
+* **Handling JSON:** Converting the response stream into JSON format.
+* **Updating Text Content:** Extracting the `activity` property from the returned JSON object and setting it as the `.textContent` of our `#activity-name` element in the DOM.
+
+### 💻 Code Implementation
+
+You can explore the source files for this practice below:
+
+* [index.html](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Fetch%20idea%20from%20Bored%20API/index.html>) - Markup containing the empty `#activity-name` heading.
+* [index.js](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Fetch%20idea%20from%20Bored%20API/index.js>) - JavaScript logic fetching the activity and injecting the text into the DOM.
+
+```javascript
+// Fetch activity from Bored API
+fetch("https://apis.scrimba.com/bored/api/activity")
+    .then(response => response.json())
+    .then(data => {
+        console.log(data)
+        document.getElementById("activity-name").textContent = data.activity
+    })
+```
+
+### 🔗 Chapter 9 Resources
+
+* 📄 **API Endpoint:** [Bored API (Scrimba Proxy)](https://apis.scrimba.com/bored/api/activity)
