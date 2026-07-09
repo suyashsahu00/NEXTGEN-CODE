@@ -437,3 +437,47 @@ You can explore the source files for this practice below:
   <script src="index.js"></script>
 </body>
 ```
+
+---
+
+## 🎨 Chapter 11: BoredBot - CSS
+
+### Core Concept
+
+In this chapter, we style the HTML skeleton of our BoredBot application using CSS. The styling is focused on making the UI clean, modern, and engaging.
+
+Key styling implementations:
+
+- **Flexbox Layout:** Using `display: flex` on the `body` to center the application perfectly on the screen.
+- **Container Styling:** Adding a white background, rounded corners (`border-radius`), padding, and a subtle box shadow (`box-shadow`) to create a card-like interface.
+- **Interactive Button:** Styling the primary call-to-action button with a circular shape, bright colors, drop shadow, and smooth transitions for a nice hover effect (`transform: translateY(-2px)`).
+
+### 💻 Code Implementation
+
+You can explore the source files for this practice below:
+
+- [index.html](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/BoredBot%20-%20CSS/index.html) - The HTML structure.
+- [index.css](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/BoredBot%20-%20CSS/index.css) - The CSS stylesheet that brings the app to life.
+
+```css
+/* Button Styling Snippet */
+#get-activity-btn {
+  border: none;
+  background-color: #4f46e5;
+  color: #ffffff;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(79, 70, 229, 0.35);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+#get-activity-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(79, 70, 229, 0.45);
+}
+```
