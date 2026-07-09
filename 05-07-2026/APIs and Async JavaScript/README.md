@@ -551,3 +551,34 @@ document.getElementById("get-activity").addEventListener("click", function () {
     });
 });
 ```
+
+---
+
+## ♿ Chapter 14: BoredBot - Improve Accessibility (A11y)
+
+### Core Concept
+
+In this chapter, we focus on improving the accessibility (A11y) of our application for users relying on assistive technologies like screen readers. Semantic HTML and ARIA attributes play a crucial role in creating an inclusive experience.
+
+Key technical steps:
+
+- **Semantic Tags:** Wrapping the core content in a `<main>` tag to indicate the primary content of the document.
+- **Appropriate Headers:** Changing the `<h4>` to a `<p>` tag because heading tags should represent document hierarchy, not visual styling.
+- **ARIA Labels:** Adding `aria-label="Find a new activity."` to the empty button so screen readers know its purpose.
+- **ARIA Live Regions:** Adding `aria-live="polite"` to the activity text container so screen readers automatically announce the new activity when the JavaScript updates the DOM.
+
+### 💻 Code Implementation
+
+You can explore the source files for this practice below:
+
+- [index.html](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/BoredBot%20-%20Improve%20A1%20ly/index.html) - The HTML structure updated with semantic elements and ARIA attributes.
+- [index.js](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/BoredBot%20-%20Improve%20A1%20ly/index.js) - The core application logic.
+
+```html
+<!-- Accessibility Improvements Snippet -->
+<main>
+  <h1 id="title">🤖 BoredBot 🤖</h1>
+  <p id="activity" aria-live="polite">Find something to do</p>
+  <button id="get-activity" aria-label="Find a new activity."></button>
+</main>
+```
