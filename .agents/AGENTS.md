@@ -2,7 +2,7 @@
 
 ## README Formatting Rules
 
-When formatting or updating chapter-based README files in this repository (e.g., `APIs and Async JavaScript`), follow these design guidelines:
+When formatting or updating ANY README files or creating READMEs for new or future folders in this repository, follow these design guidelines:
 
 1. **Chapter Ordering:** 
    - Group content into chapters corresponding to folders (e.g., Chapter 1, Chapter 2).
