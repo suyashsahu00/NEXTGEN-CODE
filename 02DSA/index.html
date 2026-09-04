@@ -1,0 +1,1549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sydney — AI/ML Stained Glass Companion</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #f7f6f5;
+    --ink-dim: rgba(247, 246, 245, 0.76);
+    --ink-faint: rgba(247, 246, 245, 0.48);
+    --gold: #dfb15b;
+    --gold-dim: rgba(223, 177, 91, 0.65);
+    --gold-glow: rgba(223, 177, 91, 0.25);
+    --glass-bg: rgba(14, 12, 19, 0.55);
+    --glass-border: rgba(223, 177, 91, 0.18);
+    --bg: #070509;
+
+    /* Stained glass voice state accent colors */
+    --c-ready: #ff4a8b;      /* Ruby/Rose Glass */
+    --c-connecting: #ffb700; /* Amber Glass */
+    --c-listening: #10b981;  /* Emerald Glass */
+    --c-speaking: #3b82f6;   /* Sapphire Glass */
+    --c-ended: #8b828f;      /* Dusk Amethyst Glass */
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; width: 100%; overflow: hidden; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: url('background.png') no-repeat center center fixed;
+    background-size: cover;
+    color: var(--ink);
+    position: relative;
+  }
+
+  .stage {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  canvas#field {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .vignette {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(ellipse at 50% 30%, transparent 20%, rgba(5, 4, 7, 0.8) 100%);
+    z-index: 2;
+  }
+
+  nav {
+    position: relative;
+    z-index: 5;
+    width: 100%;
+    max-width: 1400px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 40px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    letter-spacing: 1.5px;
+    color: var(--gold);
+    text-shadow: 0 0 15px rgba(223, 177, 91, 0.3);
+  }
+
+  .brand .mark {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    position: relative;
+    box-shadow: inset 0 0 8px var(--gold-glow), 0 0 10px var(--gold-glow);
+  }
+
+  .brand .mark::after {
+    content: '';
+    position: absolute;
+    inset: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    box-shadow: 0 0 6px var(--gold);
+  }
+
+  .navlinks {
+    display: flex;
+    gap: 34px;
+    font-size: 0.9rem;
+    color: var(--ink-dim);
+  }
+
+  .navlinks a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.3s, text-shadow 0.3s;
+    letter-spacing: 1px;
+    font-weight: 500;
+  }
+
+  .navlinks a:hover {
+    color: var(--gold);
+    text-shadow: 0 0 10px var(--gold-glow);
+  }
+
+  @media (max-width: 720px) {
+    .navlinks { display: none; }
+    nav { padding: 20px 24px; }
+  }
+
+  .navright {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 0.85rem;
+    color: var(--ink-dim);
+  }
+
+  .pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid var(--glass-border);
+    background: var(--glass-bg);
+    padding: 6px 16px;
+    border-radius: 999px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: border-color 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3), inset 0 1px 1px rgba(255,255,255,0.05);
+  }
+
+  .pill .led {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--state-color, var(--c-ready));
+    box-shadow: 0 0 12px var(--state-color, var(--c-ready));
+    transition: background-color 0.4s, box-shadow 0.4s;
+  }
+
+  main {
+    position: relative;
+    z-index: 5;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px 24px 60px;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.5px;
+    max-width: 22ch;
+    background: linear-gradient(135deg, #ffffff 30%, #f3e5c8 70%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    margin-bottom: 12px;
+  }
+
+  h1 em {
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  .sub {
+    margin-top: 10px;
+    color: var(--ink-dim);
+    font-size: 1rem;
+    line-height: 1.6;
+    max-width: 52ch;
+    font-weight: 300;
+  }
+
+  .sub strong {
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  .greet {
+    margin-top: 24px;
+  }
+
+  .greet .hi {
+    font-size: 1.25rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    color: var(--ink);
+  }
+
+  .greet .status-line {
+    color: var(--ink-faint);
+    font-size: 0.95rem;
+    margin-top: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--state-color, var(--c-ready));
+    box-shadow: 0 0 10px var(--state-color, var(--c-ready));
+    transition: background-color 0.4s, box-shadow 0.4s;
+  }
+
+  .status-dot.pulse {
+    animation: dotpulse 1.4s ease-in-out infinite;
+  }
+
+  @keyframes dotpulse {
+    0%, 100% { opacity: 0.4; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.35); }
+  }
+
+  /* ---- MIC MEDALLION / ORB ---- */
+  .orb-wrap {
+    margin-top: 28px;
+    position: relative;
+    width: 170px;
+    height: 170px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 2px solid color-mix(in srgb, var(--state-color, var(--c-ready)) 60%, transparent);
+    opacity: 0;
+    transform: scale(0.85);
+    pointer-events: none;
+    box-shadow: inset 0 0 15px color-mix(in srgb, var(--state-color, var(--c-ready)) 30%, transparent);
+  }
+
+  .orb-wrap.active-listening .ring, 
+  .orb-wrap.active-speaking .ring {
+    animation: ringpulse 2.2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  }
+
+  .ring:nth-child(2) { animation-delay: 0.7s !important; }
+  .ring:nth-child(3) { animation-delay: 1.4s !important; }
+
+  @keyframes ringpulse {
+    0% { opacity: 0.7; transform: scale(0.8); }
+    100% { opacity: 0; transform: scale(1.75); }
+  }
+
+  /* Miniature Rose Window Medallion design */
+  .mic {
+    position: relative;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    border: 2px solid var(--gold-dim);
+    background: radial-gradient(circle at 50% 50%, rgba(20, 16, 25, 0.7), rgba(8, 6, 10, 0.95));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 
+                inset 0 0 25px rgba(223, 177, 91, 0.1),
+                0 0 0px var(--state-color, var(--c-ready));
+  }
+
+  /* Rose Window Tracery Overlay inside Mic */
+  .mic::before {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    border-radius: 50%;
+    border: 1px dashed var(--gold-dim);
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
+  /* Decorative radial spokes */
+  .mic-spokes {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    pointer-events: none;
+    background: 
+      linear-gradient(0deg, transparent 49%, var(--gold-dim) 49.5%, var(--gold-dim) 50.5%, transparent 51%),
+      linear-gradient(45deg, transparent 49%, var(--gold-dim) 49.5%, var(--gold-dim) 50.5%, transparent 51%),
+      linear-gradient(90deg, transparent 49%, var(--gold-dim) 49.5%, var(--gold-dim) 50.5%, transparent 51%),
+      linear-gradient(135deg, transparent 49%, var(--gold-dim) 49.5%, var(--gold-dim) 50.5%, transparent 51%);
+    opacity: 0.15;
+    transition: opacity 0.3s;
+  }
+
+  .mic:hover {
+    transform: scale(1.05);
+    border-color: var(--gold);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7), 
+                inset 0 0 20px var(--gold-glow),
+                0 0 20px color-mix(in srgb, var(--state-color, var(--c-ready)) 35%, transparent);
+  }
+
+  .mic:hover .mic-spokes {
+    opacity: 0.3;
+  }
+
+  .mic.state-connecting {
+    box-shadow: 0 0 35px color-mix(in srgb, var(--c-connecting) 60%, transparent), inset 0 0 20px rgba(255, 183, 0, 0.2);
+  }
+  .mic.state-listening {
+    box-shadow: 0 0 40px color-mix(in srgb, var(--c-listening) 60%, transparent), inset 0 0 20px rgba(16, 185, 129, 0.2);
+  }
+  .mic.state-speaking {
+    box-shadow: 0 0 40px color-mix(in srgb, var(--c-speaking) 60%, transparent), inset 0 0 20px rgba(59, 130, 246, 0.2);
+  }
+  .mic.state-ended {
+    box-shadow: 0 0 20px color-mix(in srgb, var(--c-ended) 30%, transparent);
+  }
+
+  .mic svg {
+    width: 32px;
+    height: 32px;
+    opacity: 0.9;
+    z-index: 2;
+    filter: drop-shadow(0 0 8px rgba(255,255,255,0.4));
+    transition: transform 0.3s, opacity 0.3s;
+  }
+
+  .mic:hover svg {
+    transform: scale(1.05);
+  }
+
+  .mic .spinner {
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: var(--c-connecting);
+    border-right-color: rgba(255, 183, 0, 0.2);
+    display: none;
+    z-index: 3;
+  }
+
+  .mic.state-connecting .spinner {
+    display: block;
+    animation: spin 1s linear infinite;
+  }
+  .mic.state-connecting svg { opacity: 0.3; }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Bouncing sound bars (Organ Pipes) when speaking */
+  .bars {
+    display: none;
+    align-items: flex-end;
+    gap: 4px;
+    height: 28px;
+    z-index: 2;
+  }
+
+  .mic.state-speaking .bars { display: flex; }
+  .mic.state-speaking svg { display: none; }
+
+  .bars span {
+    width: 4px;
+    background: linear-gradient(to top, var(--gold), var(--ink));
+    border-radius: 3px;
+    box-shadow: 0 0 8px var(--gold-dim);
+    animation: organbounce 0.8s ease-in-out infinite;
+  }
+
+  .bars span:nth-child(1) { height: 10px; animation-delay: 0s; }
+  .bars span:nth-child(2) { height: 24px; animation-delay: 0.15s; }
+  .bars span:nth-child(3) { height: 16px; animation-delay: 0.3s; }
+  .bars span:nth-child(4) { height: 28px; animation-delay: 0.45s; }
+  .bars span:nth-child(5) { height: 12px; animation-delay: 0.6s; }
+
+  @keyframes organbounce {
+    0%, 100% { transform: scaleY(0.35); }
+    50% { transform: scaleY(1); }
+  }
+
+  .primary-btn {
+    margin-top: 24px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    color: var(--ink);
+    background: linear-gradient(135deg, rgba(223, 177, 91, 0.2), rgba(14, 12, 19, 0.8));
+    border: 1px solid var(--gold-dim);
+    padding: 12px 32px;
+    border-radius: 999px;
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4), 
+                inset 0 1px 0 rgba(255,255,255,0.1),
+                0 0 0px var(--gold-glow);
+    letter-spacing: 0.5px;
+  }
+
+  .primary-btn:hover {
+    border-color: var(--gold);
+    color: #ffffff;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.5), 
+                0 0 15px var(--gold-glow);
+    transform: translateY(-2px);
+  }
+
+  .primary-btn:active {
+    transform: translateY(0);
+  }
+
+  .langs {
+    margin-top: 20px;
+    display: flex;
+    gap: 12px;
+    font-size: 0.8rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.5px;
+  }
+
+  .langs span {
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+
+  .langs span:hover {
+    color: var(--gold);
+  }
+
+  .langs span:not(:last-child)::after {
+    content: '·';
+    margin-left: 12px;
+    color: var(--gold-dim);
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  /* ---- CARDS & SPEECH BUBBLES ---- */
+  .bubble {
+    margin-top: 28px;
+    width: min(600px, 92vw);
+    border: 1px solid var(--glass-border);
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: 20px;
+    padding: 20px 24px;
+    text-align: left;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5),
+                inset 0 1px 1px rgba(255, 255, 255, 0.05);
+    transition: border-color 0.4s, box-shadow 0.4s;
+  }
+
+  .bubble.glow-state {
+    border-color: color-mix(in srgb, var(--state-color, var(--c-ready)) 35%, transparent);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5),
+                0 0 15px color-mix(in srgb, var(--state-color, var(--c-ready)) 15%, transparent);
+  }
+
+  .bubble .tag {
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    color: var(--gold);
+    font-weight: 700;
+    font-family: 'Cinzel', serif;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .bubble .tag .mode-indicator {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 0.65rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.5px;
+  }
+
+  .bubble .line {
+    margin-top: 10px;
+    font-size: 1.05rem;
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+
+  /* Learning Concept Pills Grid */
+  .concepts-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 20px;
+    max-width: 600px;
+  }
+
+  .concept-chip {
+    padding: 8px 16px;
+    border-radius: 99px;
+    background: rgba(22, 20, 26, 0.4);
+    border: 1px solid var(--glass-border);
+    font-size: 0.8rem;
+    color: var(--ink-dim);
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 500;
+  }
+
+  .concept-chip:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+    background: rgba(223, 177, 91, 0.08);
+    transform: translateY(-1px);
+  }
+
+  .concept-chip.active {
+    border-color: var(--gold);
+    background: rgba(223, 177, 91, 0.15);
+    color: var(--gold);
+    box-shadow: 0 0 10px rgba(223, 177, 91, 0.2);
+  }
+
+  /* ---- CONFIGURATION BAR ---- */
+  .config-bar {
+    margin-top: 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 0.75rem;
+  }
+
+  .mode-select {
+    display: flex;
+    background: rgba(14, 12, 19, 0.7);
+    border: 1px solid var(--glass-border);
+    border-radius: 999px;
+    padding: 3px;
+  }
+
+  .mode-option {
+    padding: 6px 14px;
+    border-radius: 999px;
+    color: var(--ink-faint);
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 500;
+  }
+
+  .mode-option:hover {
+    color: var(--ink);
+  }
+
+  .mode-option.active {
+    background: var(--gold-glow);
+    border: 1px solid rgba(223, 177, 91, 0.3);
+    color: var(--gold);
+    font-weight: 600;
+  }
+
+  /* ---- TRANSCRIPT LOG ---- */
+  .transcript {
+    margin-top: 24px;
+    width: min(600px, 92vw);
+    max-height: 200px;
+    overflow-y: auto;
+    display: none;
+    flex-direction: column;
+    gap: 12px;
+    text-align: left;
+    padding: 16px 20px;
+    border-radius: 16px;
+    border: 1px solid rgba(223, 177, 91, 0.08);
+    background: rgba(8, 7, 10, 0.4);
+    box-shadow: inset 0 2px 8px rgba(0,0,0,0.5);
+    scroll-behavior: smooth;
+  }
+
+  .transcript.visible { display: flex; }
+
+  /* Custom Scrollbar for Transcript */
+  .transcript::-webkit-scrollbar {
+    width: 5px;
+  }
+  .transcript::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .transcript::-webkit-scrollbar-thumb {
+    background: rgba(223, 177, 91, 0.2);
+    border-radius: 4px;
+  }
+  .transcript::-webkit-scrollbar-thumb:hover {
+    background: rgba(223, 177, 91, 0.4);
+  }
+
+  .transcript-entry {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.04);
+    padding-bottom: 8px;
+  }
+
+  .transcript-entry:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .transcript-entry .speaker {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-family: 'Cinzel', serif;
+  }
+
+  .speaker.sydney { color: var(--gold); }
+  .speaker.you { color: #8fa4ff; }
+
+  .transcript-entry .text {
+    font-size: 0.88rem;
+    color: var(--ink-dim);
+    line-height: 1.45;
+  }
+
+  /* ---- MIC PERMISSION ERROR ---- */
+  .mic-error {
+    display: none;
+    margin-top: 24px;
+    width: min(560px, 92vw);
+    border: 1px solid rgba(255, 74, 139, 0.35);
+    background: rgba(45, 12, 22, 0.45);
+    border-radius: 16px;
+    padding: 18px 22px;
+    text-align: left;
+    font-size: 0.9rem;
+    color: var(--ink-dim);
+    line-height: 1.6;
+    box-shadow: 0 10px 30px rgba(255, 74, 139, 0.1);
+  }
+
+  .mic-error.visible { display: block; }
+  .mic-error strong {
+    color: #ff8fa4;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+    font-size: 0.95rem;
+    font-family: 'Cinzel', serif;
+  }
+
+  footer.hint {
+    position: relative;
+    z-index: 5;
+    padding: 20px;
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.5px;
+    margin-top: auto;
+  }
+
+  footer.hint a {
+    color: var(--gold-dim);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  footer.hint a:hover {
+    color: var(--gold);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ring, .status-dot.pulse, .bars span, .mic .spinner { animation: none !important; }
+  }
+</style>
+</head>
+<body>
+<div class="stage" style="--state-color: var(--c-ready);" id="stage">
+  <canvas id="field"></canvas>
+  <div class="vignette"></div>
+
+  <nav>
+    <div class="brand"><span class="mark"></span> SYDNEY</div>
+    <div class="navlinks">
+      <a href="#concepts">Concepts</a>
+      <a href="#how-it-works">How it works</a>
+      <a href="#practice">Practice</a>
+    </div>
+    <div class="navright">
+      <span>AI/ML Sacred Space</span>
+      <div class="pill"><span class="led"></span><span id="pillLabel">Ready</span></div>
+    </div>
+  </nav>
+
+  <main>
+    <h1>ML tabhi seekhi jaati hai, jab wo <em>samjhaayi</em> jaaye.</h1>
+    <p class="sub">Sydney — your Hinglish AI/ML mentor. Let's break down <strong>RAG</strong>, <strong>backprop</strong>, <strong>embeddings</strong>, and <strong>agent loops</strong> with friendly, interactive discussions.</p>
+
+    <!-- Concepts Toggle Grid -->
+    <div class="concepts-grid">
+      <div class="concept-chip active" data-topic="rag">RAG Architecture</div>
+      <div class="concept-chip" data-topic="backprop">Backpropagation Math</div>
+      <div class="concept-chip" data-topic="embeddings">Vector Embeddings</div>
+      <div class="concept-chip" data-topic="agents">AI Agent Loops</div>
+    </div>
+
+    <div class="greet">
+      <div class="hi">Namaste Suyash.</div>
+      <div class="status-line">
+        <span class="status-dot" id="statusDot"></span>
+        <span id="statusText">Aaj kaunsa concept todna hai?</span>
+      </div>
+    </div>
+
+    <div class="orb-wrap" id="orbWrap">
+      <div class="ring"></div>
+      <div class="ring"></div>
+      <div class="ring"></div>
+      <div class="mic" id="micBtn">
+        <div class="mic-spokes"></div>
+        <div class="spinner"></div>
+        <!-- Mic Icon -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path>
+          <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+          <line x1="12" x2="12" y1="19" y2="22"></line>
+        </svg>
+        <!-- Audio Bouncing Bars -->
+        <div class="bars">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+
+    <button class="primary-btn" id="actionBtn">Start Devotion</button>
+
+    <div class="langs">
+      <span>English</span>
+      <span>हिन्दी</span>
+      <span>Hinglish</span>
+    </div>
+
+    <!-- Speech Bubble Card -->
+    <div class="bubble glow-state" id="bubble">
+      <div class="tag">
+        <span>SYDNEY · AI MENTOR</span>
+        <span class="mode-indicator" id="modeTag">Concept Mode · Beginner-friendly</span>
+      </div>
+      <div class="line" id="bubbleLine">"Hi Suyash! Main Sydney hoon. Aaj hum AI/ML ke concepts ko aasan Hinglish me samjhenge. RAG, backpropagation or embeddings — kisse shuru karein?"</div>
+    </div>
+
+    <!-- Configuration Bar -->
+    <div class="config-bar">
+      <span style="color: var(--ink-faint); font-weight: 500;">MENTORSHIP DEPTH:</span>
+      <div class="mode-select">
+        <div class="mode-option active" data-depth="beginner">Beginner</div>
+        <div class="mode-option" data-depth="math">Deep Math</div>
+        <div class="mode-option" data-depth="code">Code Dev</div>
+      </div>
+    </div>
+
+    <div class="mic-error" id="micError">
+      <strong>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block; vertical-align:-3px; margin-right:4px;">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" x2="12" y1="8" y2="12"></line>
+          <line x1="12" x2="12.01" y1="16" y2="16"></line>
+        </svg>
+        Microphone Access Blocked
+      </strong>
+      <span>Sydney needs microphone permission to hear your voice. Please click the permissions icon (lock) in your address bar, toggle "Microphone" to "Allow", and reload this page to start speaking.</span>
+    </div>
+
+    <!-- Interactive Transcript Log -->
+    <div class="transcript" id="transcriptLog">
+      <!-- Transcripts will append here dynamically -->
+    </div>
+  </main>
+
+  <footer class="hint">Tap the medallion to speak · Works best with headphones</footer>
+</div>
+
+<script>
+/* ============================================================
+   GOTHIC CATHEDRAL BACKGROUND SIMULATION
+   Procedurally renders a detailed Gothic Cathedral stained glass rose window,
+   pointed gothic arches, structural ribs, volumetric god-rays shifting with time,
+   and floating dust motes illuminated when crossing light paths.
+   ============================================================ */
+const canvas = document.getElementById('field');
+const ctx = canvas.getContext('2d');
+let w, h;
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// Load background image
+const bgImage = new Image();
+bgImage.src = 'background.png';
+bgImage.onload = () => {
+  if (reduceMotion) render(0);
+};
+
+// Interactive conversation states
+let currentState = 'ready';
+
+// Set up responsive canvas dimensions
+function resize() {
+  w = canvas.width = window.innerWidth;
+  h = canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resize);
+resize();
+
+// --- STATE-DEPENDENT SPEED & GLOW CONTROL ---
+const STATE_MOD = {
+  ready:      { speedMultiplier: 0.4, glowMultiplier: 1.0,  rayAlphaMod: 0.15 },
+  connecting: { speedMultiplier: 1.2, glowMultiplier: 1.4,  rayAlphaMod: 0.35 },
+  listening:  { speedMultiplier: 0.8, glowMultiplier: 1.3,  rayAlphaMod: 0.30 },
+  speaking:   { speedMultiplier: 2.0, glowMultiplier: 1.8,  rayAlphaMod: 0.50 },
+  ended:      { speedMultiplier: 0.1, glowMultiplier: 0.6,  rayAlphaMod: 0.08 }
+};
+
+// --- PROCEDURAL ROSE WINDOW ---
+const roseWindow = {
+  radius: 160,
+  cx: 0,
+  cy: 0,
+  updatePosition() {
+    this.cx = w / 2;
+    this.cy = Math.max(90, Math.min(h * 0.15, 140)); // Responsive placement
+    this.radius = Math.min(w * 0.22, 160);
+    if(this.radius < 90) this.radius = 90;
+  },
+  draw(time, glow) {
+    this.updatePosition();
+    ctx.save();
+    
+    // Ambient back-glow of the stained glass window
+    const windowGlow = ctx.createRadialGradient(this.cx, this.cy, 0, this.cx, this.cy, this.radius * 1.5);
+    windowGlow.addColorStop(0, `rgba(223, 177, 91, ${0.15 * glow})`);
+    windowGlow.addColorStop(0.5, `rgba(255, 74, 139, ${0.08 * glow})`);
+    windowGlow.addColorStop(1, 'rgba(0, 0, 0, 0)');
+    ctx.fillStyle = windowGlow;
+    ctx.beginPath();
+    ctx.arc(this.cx, this.cy, this.radius * 1.5, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Stained glass colors array
+    const paneColors = [
+      '#ff4a7d', // Rose ruby
+      '#dfb15b', // Amber gold
+      '#10b981', // Emerald green
+      '#3b82f6', // Sapphire blue
+      '#8b5cf6', // Amethyst violet
+      '#ff6b35'  // Orange fire
+    ];
+
+    // Draw outer stone frame
+    ctx.shadowBlur = 15;
+    ctx.shadowColor = `rgba(223, 177, 91, ${0.2 * glow})`;
+    ctx.strokeStyle = '#2d251e';
+    ctx.lineWidth = 6;
+    ctx.beginPath();
+    ctx.arc(this.cx, this.cy, this.radius, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+
+    // Draw concentric tracery layers
+    const numSlices = 16;
+    const sliceAngle = (Math.PI * 2) / numSlices;
+
+    // Outer Petal Panes (Stained Glass)
+    for (let i = 0; i < numSlices; i++) {
+      const startAng = i * sliceAngle;
+      const endAng = (i + 1) * sliceAngle;
+      const color = paneColors[i % paneColors.length];
+
+      ctx.fillStyle = color;
+      ctx.globalAlpha = 0.35 + Math.sin(time * 2 + i) * 0.08; // Subtle shimmering glass panes
+      
+      ctx.beginPath();
+      ctx.moveTo(this.cx, this.cy);
+      // Outer gothic peak path
+      const midAng = startAng + sliceAngle / 2;
+      const rOuter = this.radius * 0.95;
+      const rInner = this.radius * 0.45;
+      
+      const p1x = this.cx + Math.cos(startAng) * rInner;
+      const p1y = this.cy + Math.sin(startAng) * rInner;
+      const p2x = this.cx + Math.cos(midAng) * rOuter;
+      const p2y = this.cy + Math.sin(midAng) * rOuter;
+      const p3x = this.cx + Math.cos(endAng) * rInner;
+      const p3y = this.cy + Math.sin(endAng) * rInner;
+
+      ctx.moveTo(p1x, p1y);
+      ctx.quadraticCurveTo(
+        this.cx + Math.cos(startAng + sliceAngle * 0.25) * rOuter * 0.9, 
+        this.cy + Math.sin(startAng + sliceAngle * 0.25) * rOuter * 0.9, 
+        p2x, p2y
+      );
+      ctx.quadraticCurveTo(
+        this.cx + Math.cos(startAng + sliceAngle * 0.75) * rOuter * 0.9, 
+        this.cy + Math.sin(startAng + sliceAngle * 0.75) * rOuter * 0.9, 
+        p3x, p3y
+      );
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    // Inner tracery rings and gold borders
+    ctx.globalAlpha = 1.0;
+    ctx.strokeStyle = '#dfb15b';
+    ctx.lineWidth = 1.5;
+    for (let i = 0; i < numSlices; i++) {
+      const ang = i * sliceAngle;
+      ctx.beginPath();
+      ctx.moveTo(this.cx + Math.cos(ang) * (this.radius * 0.2), this.cy + Math.sin(ang) * (this.radius * 0.2));
+      ctx.lineTo(this.cx + Math.cos(ang) * this.radius, this.cy + Math.sin(ang) * this.radius);
+      ctx.stroke();
+    }
+
+    // Inner Ring
+    ctx.beginPath();
+    ctx.arc(this.cx, this.cy, this.radius * 0.45, 0, Math.PI * 2);
+    ctx.stroke();
+
+    // Central Medallion (Golden Flower)
+    ctx.fillStyle = '#dfb15b';
+    ctx.beginPath();
+    ctx.arc(this.cx, this.cy, this.radius * 0.2, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Inner glowing core of the medallion
+    const coreGlow = ctx.createRadialGradient(this.cx, this.cy, 0, this.cx, this.cy, this.radius * 0.18);
+    coreGlow.addColorStop(0, '#ffffff');
+    coreGlow.addColorStop(0.5, '#ffd000');
+    coreGlow.addColorStop(1, '#ff4a8b');
+    ctx.fillStyle = coreGlow;
+    ctx.beginPath();
+    ctx.arc(this.cx, this.cy, this.radius * 0.18, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.restore();
+  }
+};
+
+// --- VOLUMETRIC GOD RAYS ---
+const rays = [];
+const numRays = 11;
+function initRays() {
+  rays.length = 0;
+  for (let i = 0; i < numRays; i++) {
+    // Distribute rays pointing generally downward/outward
+    const baseAngle = Math.PI / 2 + (i - (numRays - 1) / 2) * 0.16;
+    rays.push({
+      baseAngle: baseAngle,
+      angle: baseAngle,
+      spread: 0.08 + Math.random() * 0.06,
+      length: 1.2 + Math.random() * 0.5, // factor of screen height
+      hue: [340, 45, 160, 210, 280][i % 5], // Ruby, Amber, Emerald, Sapphire, Amethyst
+      phase: Math.random() * Math.PI * 2,
+      speed: 0.12 + Math.random() * 0.15,
+      alpha: 0.3 + Math.random() * 0.4
+    });
+  }
+}
+initRays();
+
+function drawRays(time, mod) {
+  ctx.save();
+  ctx.globalCompositeOperation = 'screen'; // Blends overlapping ray colors beautifully
+
+  rays.forEach(r => {
+    // Dynamic ray angle swaying based on state speeds
+    if (!reduceMotion) {
+      r.angle = r.baseAngle + Math.sin(time * r.speed * mod.speedMultiplier) * 0.035;
+    }
+    
+    const rayLength = h * r.length;
+    const endX1 = roseWindow.cx + Math.cos(r.angle - r.spread) * rayLength;
+    const endY1 = roseWindow.cy + Math.sin(r.angle - r.spread) * rayLength;
+    const endX2 = roseWindow.cx + Math.cos(r.angle + r.spread) * rayLength;
+    const endY2 = roseWindow.cy + Math.sin(r.angle + r.spread) * rayLength;
+
+    // Gradient along the ray fading to black/transparent
+    const rayGrad = ctx.createRadialGradient(
+      roseWindow.cx, roseWindow.cy, roseWindow.radius * 0.5,
+      roseWindow.cx, roseWindow.cy, rayLength
+    );
+    
+    // Shimmering intensity effect
+    const shimmer = 0.75 + Math.sin(time * 3.5 + r.phase) * 0.15;
+    const maxAlpha = r.alpha * mod.rayAlphaMod * mod.glowMultiplier * shimmer;
+
+    rayGrad.addColorStop(0, `hsla(${r.hue}, 95%, 72%, ${maxAlpha})`);
+    rayGrad.addColorStop(0.2, `hsla(${r.hue}, 90%, 65%, ${maxAlpha * 0.65})`);
+    rayGrad.addColorStop(0.6, `hsla(${r.hue}, 85%, 60%, ${maxAlpha * 0.25})`);
+    rayGrad.addColorStop(1, `hsla(${r.hue}, 85%, 55%, 0)`);
+
+    ctx.fillStyle = rayGrad;
+    ctx.beginPath();
+    ctx.moveTo(roseWindow.cx, roseWindow.cy);
+    ctx.lineTo(endX1, endY1);
+    ctx.lineTo(endX2, endY2);
+    ctx.closePath();
+    ctx.fill();
+  });
+
+  ctx.restore();
+}
+
+// --- FLOATING DUST MOTES (PARTICLES) ---
+const particles = [];
+const numParticles = 110;
+
+function initParticles() {
+  particles.length = 0;
+  for (let i = 0; i < numParticles; i++) {
+    particles.push({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      vx: (Math.random() - 0.5) * 0.12,
+      vy: 0.15 + Math.random() * 0.25,
+      baseSize: 0.6 + Math.random() * 1.5,
+      size: 1,
+      phase: Math.random() * Math.PI * 2,
+      twinkleSpeed: 0.4 + Math.random() * 0.8,
+      opacity: 0.2
+    });
+  }
+}
+initParticles();
+
+function updateAndDrawParticles(time, mod) {
+  ctx.save();
+  ctx.globalCompositeOperation = 'lighter';
+
+  particles.forEach(p => {
+    // Drifting motion
+    if (!reduceMotion) {
+      p.y += p.vy * mod.speedMultiplier;
+      p.x += (p.vx + Math.sin(time * 0.5 + p.phase) * 0.08) * mod.speedMultiplier;
+    }
+
+    // Reset boundaries
+    if (p.y > h + 10) {
+      p.y = -10;
+      p.x = Math.random() * w;
+    }
+    if (p.x < -10) p.x = w + 10;
+    if (p.x > w + 10) p.x = -10;
+
+    // Ray Lighting Intersection Math:
+    // Determine if the particle falls inside any volumetric god ray
+    const dx = p.x - roseWindow.cx;
+    const dy = p.y - roseWindow.cy;
+    const angleToParticle = Math.atan2(dy, dx);
+    
+    let illuminated = false;
+    let particleHue = 45; // Default golden glow
+    let lightIntensity = 0.2; // Ambient background lighting
+
+    rays.forEach(r => {
+      let diff = angleToParticle - r.angle;
+      // Normalize angle difference to [-PI, PI]
+      while (diff < -Math.PI) diff += Math.PI * 2;
+      while (diff > Math.PI) diff -= Math.PI * 2;
+
+      // If particle is within the angular spread of this ray
+      if (Math.abs(diff) < r.spread) {
+        const proximityFactor = 1 - (Math.abs(diff) / r.spread); // 1 at center line, 0 at edge
+        illuminated = true;
+        lightIntensity += proximityFactor * 1.8 * r.alpha;
+        particleHue = r.hue; // Particle absorbs the color of the ray it traverses
+      }
+    });
+
+    const twinkle = 0.45 + (Math.sin(time * p.twinkleSpeed + p.phase) + 1) / 2 * 0.55;
+    const finalAlpha = Math.min(1.0, twinkle * lightIntensity * mod.glowMultiplier * (illuminated ? 0.95 : 0.25));
+    const finalSize = p.baseSize * (illuminated ? 1.6 : 1.0);
+
+    // Draw particle glow halo
+    if (illuminated) {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, finalSize * 6, 0, Math.PI * 2);
+      ctx.fillStyle = `hsla(${particleHue}, 90%, 65%, ${finalAlpha * 0.22})`;
+      ctx.fill();
+    }
+
+    // Draw particle core
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, finalSize, 0, Math.PI * 2);
+    ctx.fillStyle = illuminated 
+      ? `hsla(${particleHue}, 95%, 85%, ${finalAlpha})`
+      : `rgba(243, 229, 200, ${finalAlpha * 0.55})`;
+    ctx.fill();
+  });
+
+  ctx.restore();
+}
+
+// --- CATHEDRAL STONE ARCHITECTURE SILHOUETTES ---
+function drawCathedralArchitecture() {
+  ctx.save();
+  
+  // Subtle Gothic Columns (Left/Right)
+  const columnWidth = Math.max(40, w * 0.08);
+  
+  // Left Column
+  const leftColGrad = ctx.createLinearGradient(0, 0, columnWidth, 0);
+  leftColGrad.addColorStop(0, 'rgba(3, 2, 5, 0.92)');
+  leftColGrad.addColorStop(0.7, 'rgba(10, 8, 12, 0.65)');
+  leftColGrad.addColorStop(1, 'rgba(22, 18, 25, 0.0)');
+  ctx.fillStyle = leftColGrad;
+  ctx.fillRect(0, 0, columnWidth, h);
+
+  // Right Column
+  const rightColGrad = ctx.createLinearGradient(w - columnWidth, 0, w, 0);
+  rightColGrad.addColorStop(0, 'rgba(22, 18, 25, 0.0)');
+  rightColGrad.addColorStop(0.3, 'rgba(10, 8, 12, 0.65)');
+  rightColGrad.addColorStop(1, 'rgba(3, 2, 5, 0.92)');
+  ctx.fillStyle = rightColGrad;
+  ctx.fillRect(w - columnWidth, 0, columnWidth, h);
+
+  // Decorative Gothic rib lines on the side columns (architectural texture)
+  ctx.strokeStyle = 'rgba(223, 177, 91, 0.05)';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(columnWidth * 0.3, 0); ctx.lineTo(columnWidth * 0.3, h);
+  ctx.moveTo(columnWidth * 0.6, 0); ctx.lineTo(columnWidth * 0.6, h);
+  ctx.moveTo(w - columnWidth * 0.3, 0); ctx.lineTo(w - columnWidth * 0.3, h);
+  ctx.moveTo(w - columnWidth * 0.6, 0); ctx.lineTo(w - columnWidth * 0.6, h);
+  ctx.stroke();
+
+  // Grand Gothic Framed Arch at the top
+  ctx.strokeStyle = 'rgba(15, 12, 8, 0.85)';
+  ctx.lineWidth = 12;
+  ctx.beginPath();
+  // Pointed gothic arch path wrapping the window
+  const arcY = roseWindow.cy + roseWindow.radius * 0.35;
+  ctx.moveTo(columnWidth, h);
+  ctx.quadraticCurveTo(columnWidth * 1.5, arcY, w / 2, roseWindow.cy - roseWindow.radius * 1.3);
+  ctx.quadraticCurveTo(w - columnWidth * 1.5, arcY, w - columnWidth, h);
+  ctx.stroke();
+
+  // Inner finer gold architectural rib
+  ctx.strokeStyle = 'rgba(223, 177, 91, 0.12)';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(columnWidth + 8, h);
+  ctx.quadraticCurveTo(columnWidth * 1.5 + 8, arcY + 4, w / 2, roseWindow.cy - roseWindow.radius * 1.25);
+  ctx.quadraticCurveTo(w - columnWidth * 1.5 - 8, arcY + 4, w - columnWidth - 8, h);
+  ctx.stroke();
+
+  ctx.restore();
+}
+
+// --- MAIN ANIMATION LOOP ---
+let lastTime = 0;
+function render(t) {
+  const dt = lastTime ? (t - lastTime) : 16;
+  lastTime = t;
+  const time = t * 0.001;
+
+  // Draw Background Image or Fallback Stone Darkness
+  if (bgImage.complete && bgImage.naturalWidth !== 0) {
+    const imgRatio = bgImage.naturalWidth / bgImage.naturalHeight;
+    const canvasRatio = w / h;
+    let dx = 0, dy = 0, dw = w, dh = h;
+    if (canvasRatio > imgRatio) {
+      dh = w / imgRatio;
+      dy = (h - dh) / 2;
+    } else {
+      dw = h * imgRatio;
+      dx = (w - dw) / 2;
+    }
+    ctx.drawImage(bgImage, dx, dy, dw, dh);
+    ctx.fillStyle = 'rgba(6, 4, 8, 0.7)'; // Keep text readable while revealing background
+    ctx.fillRect(0, 0, w, h);
+  } else {
+    ctx.fillStyle = '#060408';
+    ctx.fillRect(0, 0, w, h);
+  }
+
+  const mod = STATE_MOD[currentState] || STATE_MOD.ready;
+
+  // 1. Draw Volumetric God Rays
+  drawRays(time, mod);
+
+  // 2. Update and Draw Dust Motes (Intersecting rays are lit up)
+  updateAndDrawParticles(time, mod);
+
+  // 3. Draw Cathedral Gothic Columns and Arches (gives spatial depth)
+  drawCathedralArchitecture();
+
+  // 4. Draw Stained Glass Rose Window (Glows brightly over rays)
+  roseWindow.draw(time, mod.glowMultiplier);
+
+  if (!reduceMotion) {
+    requestAnimationFrame(render);
+  }
+}
+
+// Restart animation parameters when resizing
+window.addEventListener('resize', () => {
+  initParticles();
+  initRays();
+  if (reduceMotion) render(0);
+});
+
+// Run
+requestAnimationFrame(render);
+if (reduceMotion) render(0);
+
+
+/* ============================================================
+   CONVERSATION AND INTERACTIVE STATE MACHINE
+   ============================================================ */
+const stage = document.getElementById('stage');
+const micBtn = document.getElementById('micBtn');
+const orbWrap = document.getElementById('orbWrap');
+const actionBtn = document.getElementById('actionBtn');
+const statusText = document.getElementById('statusText');
+const statusDot = document.getElementById('statusDot');
+const pillLabel = document.getElementById('pillLabel');
+const micError = document.getElementById('micError');
+const bubble = document.getElementById('bubble');
+const bubbleLine = document.getElementById('bubbleLine');
+const modeTag = document.getElementById('modeTag');
+const transcriptLog = document.getElementById('transcriptLog');
+
+const STATUS_COPY = {
+  ready:      { pill:'Ready',       status:'Aaj kaunsa concept todna hai?', dotPulse:false },
+  connecting: { pill:'Connecting',  status:'Sydney se connect ho raha hai — ek second...', dotPulse:true },
+  listening:  { pill:'Listening',   status:'Listening to you...', dotPulse:true },
+  speaking:   { pill:'Speaking',    status:'Sydney is explaining...', dotPulse:true },
+  ended:      { pill:'Session Ended', status:'Session khatam. Phir se shuru karein?', dotPulse:false }
+};
+
+// Conversational scenario resources
+const TOPIC_RESPONSES = {
+  rag: {
+    title: "RAG Architecture",
+    beginner: {
+      sydney: "RAG (Retrieval-Augmented Generation) ka matlab hai: AI model se query karne se pehle, hum apne database (docs) me se reference search karte hain, fir us match ko model ko context me dete hain. Jaise exam me open-book test dena!",
+      you: "Ah! To LLM direct apne memory se nahi, pehle relevant context retrieve karke answer karta hai?"
+    },
+    math: {
+      sydney: "RAG me vector database index retrieval Cosine Similarity metric par chalta hai. Equation: \\( \\text{Similarity} = \\frac{\\mathbf{A} \\cdot \\mathbf{B}}{\\|\\mathbf{A}\\| \\|\\mathbf{B}\\|} \\). Ye query or document embeddings vectors ke bich ka angular cosine calculate karta hai taaki closest vector search ho sake.",
+      you: "Cosine value close to 1 means content standard semantic space me closely related hai!"
+    },
+    code: {
+      sydney: "Python me Simple RAG workflow:\n```python\n# Vector similarity search code\nquery_vector = embedding_model.embed(query)\ndocs = db.search_vector(query_vector, top_k=3)\ncontext = \"\\n\".join(docs)\nprompt = f\"Context: {context}\\nQuery: {query}\"\nresponse = llm.generate(prompt)\n```\nYe complete setup backend flows me text-retrieval pipeline automate karta hai.",
+      you: "Understood! simple retrieval loop to fetch embeddings and prepend them in the context block."
+    }
+  },
+  backprop: {
+    title: "Backpropagation Math",
+    beginner: {
+      sydney: "Backprop algorithm ka main kaam hai: Neural network ki mistakes (loss) ko pechanna or parameters (weights) ko adjust karna. Imagine, aap archery board par arrow shoot kar rahe ho, and wind offset dekhkar agli baar target alignment adjust karte ho.",
+      you: "Yani partial derivatives gradient descent direction me weight updates control karte hain!"
+    },
+    math: {
+      sydney: "Chain rule equation neural weights adjustment me apply hoti hai:\n\\[ \\frac{\\partial L}{\\partial w_{ij}} = \\frac{\\partial L}{\\partial y_j} \\cdot \\frac{\\partial y_j}{\\partial z_j} \\cdot \\frac{\\partial z_j}{\\partial w_{ij}} \\]\nYahan error derivatives forward outputs se traceback hokar final loss shift minimize karte hain.",
+      you: "Matlab direct path matrix differentials se gradient error distribute hota hai backward sweep me."
+    },
+    code: {
+      sydney: "PyTorch me autodiff graph creation automatically backprop optimize karta hai:\n```python\nloss = criterion(output, target)\nloss.backward()  # Ye command automatic backward sweep run karegi\noptimizer.step()  # Weights updates using the computed gradients\n```\nPyTorch backend dynamic computational graph hold karta hai gradient calculation ke liye.",
+      you: "PyTorch keeps track of variables with requires_grad=True to build graph history!"
+    }
+  },
+  embeddings: {
+    title: "Vector Embeddings",
+    beginner: {
+      sydney: "Embeddings matlab text, images ya sounds ko numbers me transform karna. Ye numbers n-dimensional coordinates ki tarah hote hain. Semantic similarities wale words (e.g. 'King' or 'Queen') cluster arrays me pass-pass plot honge.",
+      you: "To isse semantic proximity calculate karna numerical distance calculate karne jaisa ho jata hai!"
+    },
+    math: {
+      sydney: "High dimensional representations mapping to latent space: \\( f: \\mathcal{X} \\rightarrow \\mathbb{R}^d \\). Word semantic attributes ko dense vectors me project kiya jata hai, preserving absolute manifold angles inside multi-dimensional planes.",
+      you: "Matlab dot product projections vectors proximity calculate karte hain without hard token comparisons!"
+    },
+    code: {
+      sydney: "Quick model load using OpenAI / HuggingFace clients:\n```python\nfrom sentence_transformers import SentenceTransformer\nmodel = SentenceTransformer('all-MiniLM-L6-v2')\nembeddings = model.encode([\"AI Mentor\", \"Stained Glass Resonance\"])\nprint(embeddings[0].shape)  # Returns [384] dense dimension\n```",
+      you: "384 float variables to capture lexical context. Simple and efficient!"
+    }
+  },
+  agents: {
+    title: "AI Agent Loops",
+    beginner: {
+      sydney: "AI Agents matlab wo models jo sirf prompts ke simple responses nahi dete, balki loops me loop-in hokar tasks complete karte hain. Pehle **Plan** banate hain, fir shell command execution ya web search jise **Action** execute karte hain, or fir output verify (**Observe**) karte hain.",
+      you: "Ah, ReAct paradigm! Reasoning + Acting loop me execution control continuous chalta hai."
+    },
+    math: {
+      sydney: "State transitions inside agent system modeled as Markov Decision Process (MDP): \\( (S, A, P, R, \\gamma) \\). Current state parsing output action probability distributions mapping to utility evaluations: \\( \\pi(a|s) \\). Iterations continue until threshold convergence metric is reached.",
+      you: "Bellman optimality updates coordinate dynamic agent trajectory optimization parameters!"
+    },
+    code: {
+      sydney: "Conceptual LangChain/LangGraph agent routing loop:\n```python\ndef should_continue(state):\n    if \"stop\" in state.messages[-1].content:\n        return \"end\"\n    return \"continue\"\n\nworkflow.add_conditional_edges(\"agent_node\", should_continue)\n```\nConditional graphs track nodes for iterative decision trees.",
+      you: "So dynamic control structures determine the routing execution tree based on LLM decisions!"
+    }
+  }
+};
+
+let currentTopic = 'rag';
+let currentDepth = 'beginner';
+let mediaStream = null;
+let simulatedTurnIndex = 0;
+let simulatedInterval = null;
+
+function setState(state) {
+  currentState = state;
+  const copy = STATUS_COPY[state];
+  stage.style.setProperty('--state-color', `var(--c-${state})`);
+  micBtn.className = 'mic state-' + state;
+  orbWrap.className = 'orb-wrap ' + (state === 'listening' ? 'active-listening' : state === 'speaking' ? 'active-speaking' : '');
+  pillLabel.textContent = copy.pill;
+  statusText.textContent = copy.status;
+  statusDot.className = 'status-dot' + (copy.dotPulse ? ' pulse' : '');
+
+  // Handle Speech Bubble and Active Class states
+  if (state === 'ready') {
+    actionBtn.textContent = 'Start Devotion';
+    actionBtn.style.display = 'inline-block';
+    bubble.classList.remove('glow-state');
+    micError.classList.remove('visible');
+  } else if (state === 'ended') {
+    actionBtn.textContent = 'Start Again';
+    actionBtn.style.display = 'inline-block';
+    bubble.classList.remove('glow-state');
+  } else {
+    actionBtn.style.display = 'none';
+    bubble.classList.add('glow-state');
+  }
+}
+
+// Append messages dynamically to transcript log
+function appendTranscript(speaker, text) {
+  const entry = document.createElement('div');
+  entry.className = 'transcript-entry';
+  
+  const speakerSpan = document.createElement('span');
+  speakerSpan.className = `speaker ${speaker.toLowerCase()}`;
+  speakerSpan.textContent = speaker.toUpperCase();
+  
+  const textSpan = document.createElement('span');
+  textSpan.className = 'text';
+  textSpan.textContent = text;
+  
+  entry.appendChild(speakerSpan);
+  entry.appendChild(textSpan);
+  
+  transcriptLog.appendChild(entry);
+  transcriptLog.scrollTop = transcriptLog.scrollHeight;
+}
+
+// Request live mic permission and trigger mock LiveKit socket session
+async function requestMicAndConnect() {
+  micError.classList.remove('visible');
+  setState('connecting');
+  
+  try {
+    // Real browser mic prompt
+    mediaStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+  } catch (err) {
+    // Permission denied
+    setState('ready');
+    micError.classList.add('visible');
+    console.error('Mic permission issue:', err.name, err.message);
+    return;
+  }
+
+  // Simulate server socket room connection
+  setTimeout(() => {
+    if (currentState !== 'connecting') return;
+    
+    // Clear old transcript log
+    transcriptLog.innerHTML = '';
+    transcriptLog.classList.add('visible');
+    
+    setState('listening');
+    
+    // Trigger topic start dialogue
+    const topicData = TOPIC_RESPONSES[currentTopic];
+    bubbleLine.textContent = `"${topicData[currentDepth].sydney}"`;
+    appendTranscript("Sydney", topicData[currentDepth].sydney);
+    
+    simulatedTurnIndex = 0;
+    startMockTurns();
+  }, 1400);
+}
+
+function startMockTurns() {
+  if (simulatedInterval) clearInterval(simulatedInterval);
+  
+  simulatedInterval = setInterval(() => {
+    if (currentState === 'ended') {
+      clearInterval(simulatedInterval);
+      return;
+    }
+
+    const topicData = TOPIC_RESPONSES[currentTopic][currentDepth];
+
+    if (currentState === 'listening') {
+      // User speaks
+      setState('speaking');
+      appendTranscript("You", topicData.you);
+      
+      // Update UI bubble line to what you said
+      bubbleLine.style.opacity = 0.5;
+      setTimeout(() => {
+        bubbleLine.textContent = `"${topicData.you}"`;
+        bubbleLine.style.opacity = 1;
+      }, 200);
+
+    } else if (currentState === 'speaking') {
+      // Sydney answers back
+      setState('listening');
+      appendTranscript("Sydney", topicData.sydney);
+      
+      // Update UI bubble line to what Sydney said
+      bubbleLine.style.opacity = 0.5;
+      setTimeout(() => {
+        bubbleLine.textContent = `"${topicData.sydney}"`;
+        bubbleLine.style.opacity = 1;
+      }, 200);
+    }
+  }, 5000);
+}
+
+function endCall() {
+  if (mediaStream) {
+    mediaStream.getTracks().forEach(t => t.stop());
+    mediaStream = null;
+  }
+  if (simulatedInterval) {
+    clearInterval(simulatedInterval);
+    simulatedInterval = null;
+  }
+  setState('ended');
+}
+
+// Click events
+micBtn.addEventListener('click', () => {
+  if (currentState === 'ready' || currentState === 'ended') {
+    requestMicAndConnect();
+  } else {
+    endCall();
+  }
+});
+
+actionBtn.addEventListener('click', () => {
+  if (currentState === 'ready' || currentState === 'ended') {
+    requestMicAndConnect();
+  }
+});
+
+// Depth Options Toggle
+document.querySelectorAll('.mode-option').forEach(el => {
+  el.addEventListener('click', (e) => {
+    document.querySelectorAll('.mode-option').forEach(item => item.classList.remove('active'));
+    e.target.classList.add('active');
+    currentDepth = e.target.dataset.depth;
+    
+    // Update Mode indicator text
+    const depthLabels = {
+      beginner: "Concept Mode · Beginner-friendly",
+      math: "Deep-Dive Math · Intermediate",
+      code: "Code Walkthrough · Advanced"
+    };
+    modeTag.textContent = depthLabels[currentDepth];
+
+    // If active conversation, update content dynamically
+    if (currentState === 'listening' || currentState === 'speaking') {
+      const topicData = TOPIC_RESPONSES[currentTopic][currentDepth];
+      bubbleLine.textContent = `"${topicData.sydney}"`;
+      appendTranscript("Sydney", `[Switched depth: ${currentDepth.toUpperCase()}] — ${topicData.sydney}`);
+    }
+  });
+});
+
+// Concept Chips Toggle
+document.querySelectorAll('.concept-chip').forEach(el => {
+  el.addEventListener('click', (e) => {
+    document.querySelectorAll('.concept-chip').forEach(item => item.classList.remove('active'));
+    e.target.classList.add('active');
+    currentTopic = e.target.dataset.topic;
+
+    // If active conversation, update content dynamically
+    if (currentState === 'listening' || currentState === 'speaking') {
+      const topicData = TOPIC_RESPONSES[currentTopic][currentDepth];
+      bubbleLine.textContent = `"${topicData.sydney}"`;
+      appendTranscript("Sydney", `[Changed Topic: ${TOPIC_RESPONSES[currentTopic].title}] — ${topicData.sydney}`);
+    } else {
+      // If idle, update the preview text
+      const previewText = {
+        rag: "Hi Suyash! Main Sydney hoon. Aaj hum RAG architecture, vector databases, aur embeddings ke semantic flows samjhenge. Shuru karein?",
+        backprop: "Hey! Let's conquer the math behind Backpropagation. Matrix chain rules aur gradient calculations ko aasan banate hain.",
+        embeddings: "Embeddings are just mathematical projections of semantic tokens. Let's see how concepts become high-dimensional coordinates.",
+        agents: "Loops and logic: Let's investigate AI Agentic frameworks, execution states, and MDP controls."
+      };
+      bubbleLine.textContent = `"${previewText[currentTopic]}"`;
+    }
+  });
+});
+
+// Initial Setup
+setState('ready');
+</script>
+</body>
+</html>

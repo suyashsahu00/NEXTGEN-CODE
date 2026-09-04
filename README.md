@@ -1,4 +1,4 @@
-[Jump to Latest](#18-03-2026)
+[Jump to Latest](#13-07-2026)
 
 # [13-09-2025](./13-09-2025/)
 
@@ -175,3 +175,16 @@ Full Web Page Architecture - Building a complete, responsive site layout:
   <img src="./01DEV/18-03-2026/screenshot.png" alt="Website Layout" width="600">
 </details>
 
+# [13-07-2026](./13-07-2026/)
+
+Prompt Engineering for Web Developers — Core strategies, AI capabilities & limits, and effective prompt design:
+
+- **Roadmap & Modules:** covered strategies for prompt engineering, AI-assisted coding, and AI for job searching.
+- **AI Capabilities & Boundaries:** analyzed humans vs. AI, system complexity, and shortcomings like hallucinations.
+- **Effective Prompting Framework:** practiced key principles — specificity, technical precision, context, examples, and iterative refinement.
+
+<details>
+  <summary><b>📷 Click to view Prompt Engineering Visuals</b></summary>
+  <br>
+  <img src="./13-07-2026/image/README/1783934828104.png" alt="Effective Prompting" width="600">
+</details>
