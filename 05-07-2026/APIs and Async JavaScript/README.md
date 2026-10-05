@@ -35,7 +35,7 @@ An **API (Application Programming Interface)** is a software intermediary that a
 
 ### 📝 Quiz & Recap
 
-_(Original file: [quiz.md](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/What%20is%20an%20API/quiz.md))_
+_(Original file: [quiz.md](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Intro%20to%20APIs/What%20is%20an%20API/quiz.md>))_
 
 > [!NOTE]
 > **What does API stand for?**
@@ -86,7 +86,7 @@ The **Client-Server model** describes how computers interact over a network:
 
 ### 📝 Quiz & Recap
 
-_(Original file: [quiz.md](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Clients%20&%20Servers/quiz.md))_
+_(Original file: [quiz.md](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Intro%20to%20APIs/Clients%20&%20Servers/quiz.md>))_
 
 > [!NOTE]
 > **What are some examples of "clients" you've used today?**
@@ -141,7 +141,7 @@ In the web communication flow, a **Request** is initiated by the client to obtai
 
 ### 📝 Quiz & Recap
 
-_(Original file: [quiz.md](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Requests%20&%20Responses/quiz.md))_
+_(Original file: [quiz.md](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Intro%20to%20APIs/Requests%20&%20Responses/quiz.md>))_
 
 > [!NOTE]
 > **What are 3 things your computer (client) might request from a server?**
@@ -184,9 +184,9 @@ Key technical implementation details:
 
 You can explore the source files for BoredBot below:
 
-- [index.html](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/BoredBot%20Intro/index.html) - Structural markup containing the bot trigger button and placeholder text.
-- [index.js](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/BoredBot%20Intro/index.js) - JavaScript logic handling event listeners, API fetch promises, and DOM updates.
-- [index.css](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/BoredBot%20Intro/index.css) - Styling sheet containing the visual themes (including the `.fun` body class theme).
+- [index.html](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Intro%20to%20APIs/BoredBot%20Intro/index.html>) - Structural markup containing the bot trigger button and placeholder text.
+- [index.js](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Intro%20to%20APIs/BoredBot%20Intro/index.js>) - JavaScript logic handling event listeners, API fetch promises, and DOM updates.
+- [index.css](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Intro%20to%20APIs/BoredBot%20Intro/index.css>) - Styling sheet containing the visual themes (including the `.fun` body class theme).
 
 ```javascript
 // BoredBot index.js snippet
@@ -247,8 +247,8 @@ Key syntax rules of JSON compared to standard JS Objects:
 
 You can review the sample JSON files below:
 
-- [person.json](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/JSON%20Review/person.json) - Simple single object representation.
-- [people.json](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/JSON%20Review/people.json) - Array containing multiple JSON objects.
+- [person.json](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Intro%20to%20APIs/JSON%20Review/person.json>) - Simple single object representation.
+- [people.json](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Intro%20to%20APIs/JSON%20Review/people.json>) - Array containing multiple JSON objects.
 
 ### 🔗 Chapter 5 Resources
 
@@ -289,8 +289,8 @@ Key technical steps:
 
 You can explore the source files for this practice below:
 
-- [index.html](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/First%20fetch/index.html) - Basic markup structure.
-- [index.js](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/First%20fetch/index.js) - The JavaScript file containing the fetch request logic.
+- [index.html](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Intro%20to%20APIs/First%20fetch/index.html>) - Basic markup structure.
+- [index.js](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Intro%20to%20APIs/First%20fetch/index.js>) - The JavaScript file containing the fetch request logic.
 
 ```javascript
 // First Fetch snippet
@@ -317,8 +317,8 @@ When we use `fetch()`, JavaScript doesn't stop and wait for the API response. In
 
 You can explore the source files for this practice below:
 
-- [index.html](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/.thenO%20and%20Asynchronous%20JavaScript/index.html) - Basic markup structure.
-- [index.js](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/.thenO%20and%20Asynchronous%20JavaScript/index.js) - JavaScript file demonstrating the non-blocking, asynchronous behavior of `fetch` compared to standard synchronous code like `console.log()` and `for` loops.
+- [index.html](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Intro%20to%20APIs/.thenO%20and%20Asynchronous%20JavaScript/index.html>) - Basic markup structure.
+- [index.js](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Intro%20to%20APIs/.thenO%20and%20Asynchronous%20JavaScript/index.js>) - JavaScript file demonstrating the non-blocking, asynchronous behavior of `fetch` compared to standard synchronous code like `console.log()` and `for` loops.
 
 ```javascript
 // Asynchronous behavior demonstration
@@ -353,8 +353,8 @@ Key technical steps:
 
 You can explore the source files for this practice below:
 
-- [index.html](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Dog%20API%20Fetch%20and%20DOM%20Practice/index.html) - Markup containing the empty `#image-container` div.
-- [index.js](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Dog%20API%20Fetch%20and%20DOM%20Practice/index.js) - JavaScript logic fetching the image and appending it to the DOM.
+- [index.html](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Intro%20to%20APIs/Dog%20API%20Fetch%20and%20DOM%20Practice/index.html>) - Markup containing the empty `#image-container` div.
+- [index.js](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Intro%20to%20APIs/Dog%20API%20Fetch%20and%20DOM%20Practice/index.js>) - JavaScript logic fetching the image and appending it to the DOM.
 
 ```javascript
 // Fetch and DOM Manipulation
@@ -390,8 +390,8 @@ Key technical steps:
 
 You can explore the source files for this practice below:
 
-- [index.html](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Fetch%20idea%20from%20Bored%20API/index.html) - Markup containing the empty `#activity-name` heading.
-- [index.js](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Fetch%20idea%20from%20Bored%20API/index.js) - JavaScript logic fetching the activity and injecting the text into the DOM.
+- [index.html](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Intro%20to%20APIs/Fetch%20idea%20from%20Bored%20API/index.html>) - Markup containing the empty `#activity-name` heading.
+- [index.js](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Intro%20to%20APIs/Fetch%20idea%20from%20Bored%20API/index.js>) - JavaScript logic fetching the activity and injecting the text into the DOM.
 
 ```javascript
 // Fetch activity from Bored API
@@ -425,8 +425,8 @@ Key technical steps:
 
 You can explore the source files for this practice below:
 
-- [index.html](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/BoredBot%20-%20HTML/index.html) - The HTML skeleton containing the title, placeholder, and button.
-- [index.js](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/BoredBot%20-%20HTML/index.js) - The JavaScript file (currently mostly containing comments and commented-out fetch logic).
+- [index.html](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Intro%20to%20APIs/BoredBot%20-%20HTML/index.html>) - The HTML skeleton containing the title, placeholder, and button.
+- [index.js](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Intro%20to%20APIs/BoredBot%20-%20HTML/index.js>) - The JavaScript file (currently mostly containing comments and commented-out fetch logic).
 
 ```html
 <!-- HTML Skeleton Snippet -->
@@ -456,8 +456,8 @@ Key styling implementations:
 
 You can explore the source files for this practice below:
 
-- [index.html](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/BoredBot%20-%20CSS/index.html) - The HTML structure.
-- [index.css](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/BoredBot%20-%20CSS/index.css) - The CSS stylesheet that brings the app to life.
+- [index.html](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Intro%20to%20APIs/BoredBot%20-%20CSS/index.html>) - The HTML structure.
+- [index.css](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Intro%20to%20APIs/BoredBot%20-%20CSS/index.css>) - The CSS stylesheet that brings the app to life.
 
 ```css
 /* Button Styling Snippet */
@@ -500,8 +500,8 @@ Key technical steps:
 
 You can explore the source files for this practice below:
 
-- [index.html](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/BoredBot%20-%20JavaScript/index.html) - The HTML structure.
-- [index.js](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/BoredBot%20-%20JavaScript/index.js) - The JavaScript logic bringing interactivity to the application.
+- [index.html](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Intro%20to%20APIs/BoredBot%20-%20JavaScript/index.html>) - The HTML structure.
+- [index.js](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Intro%20to%20APIs/BoredBot%20-%20JavaScript/index.js>) - The JavaScript logic bringing interactivity to the application.
 
 ```javascript
 // BoredBot JavaScript Interactivity Snippet
@@ -535,9 +535,9 @@ Key technical steps:
 
 You can explore the source files for this practice below:
 
-- [index.html](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/BoredBot%20-%20Extra%20Styling/index.html) - The HTML structure.
-- [index.css](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/BoredBot%20-%20Extra%20Styling/index.css) - The CSS stylesheet including the `.fun` body class for dynamic background styling.
-- [index.js](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/BoredBot%20-%20Extra%20Styling/index.js) - The JavaScript logic managing event listeners and DOM class manipulation.
+- [index.html](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Intro%20to%20APIs/BoredBot%20-%20Extra%20Styling/index.html>) - The HTML structure.
+- [index.css](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Intro%20to%20APIs/BoredBot%20-%20Extra%20Styling/index.css>) - The CSS stylesheet including the `.fun` body class for dynamic background styling.
+- [index.js](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Intro%20to%20APIs/BoredBot%20-%20Extra%20Styling/index.js>) - The JavaScript logic managing event listeners and DOM class manipulation.
 
 ```javascript
 // BoredBot Dynamic Styling Snippet
@@ -571,8 +571,8 @@ Key technical steps:
 
 You can explore the source files for this practice below:
 
-- [index.html](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/BoredBot%20-%20Improve%20A1%20ly/index.html) - The HTML structure updated with semantic elements and ARIA attributes.
-- [index.js](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/BoredBot%20-%20Improve%20A1%20ly/index.js) - The core application logic.
+- [index.html](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Intro%20to%20APIs/BoredBot%20-%20Improve%20A1%20ly/index.html>) - The HTML structure updated with semantic elements and ARIA attributes.
+- [index.js](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Intro%20to%20APIs/BoredBot%20-%20Improve%20A1%20ly/index.js>) - The core application logic.
 
 ```html
 <!-- Accessibility Improvements Snippet -->
@@ -584,8 +584,101 @@ You can explore the source files for this practice below:
 ```
 
 <details>
-<summary>Click to view BoredBot Final Result</summary>
+  <summary><b>📷 Expand to View BoredBot Final Result</b></summary>
+  <br>
 
-![1783596614970](image/README/1783596614970.png)
+![BoredBot Final Result](image/Readme/1783596614970.png)
 
 </details>
+
+---
+
+## 📡 Chapter 15: HTTP Requests
+
+### Core Concept
+
+**HTTP (Hypertext Transfer Protocol)** is the foundational communication protocol of the World Wide Web. It determines an agreed-upon, standard format for transferring hypertext, documents, media, and structured data between **clients** (such as browsers and mobile devices) and **servers**.
+
+- **The Request / Response Cycle:**
+  - **Request:** Sent when a client initiates a request asking for a specific resource or action from a server.
+  - **Response:** Sent when a server returns a response (indicating success or failure) back to the client with appropriate headers, status codes, and body payload.
+- **What is a Protocol?** A protocol is simply an agreed-upon, standardized convention for performing an action so different systems can communicate reliably. In the URL `https://apis.scrimba.com/jsonplaceholder/posts`, the `https` portion declares the protocol used.
+- **Key Components of an HTTP Request:**
+  1. **Path (URL / Endpoint):** The address targeting the exact resource on the network.
+  2. **Method (HTTP Verb):** The action to be taken on the server:
+     - `GET`: Retrieve existing data or resources (the default method used by `fetch()`).
+     - `POST`: Send new data to the server to create a new resource.
+     - `PUT`: Replace or update an entire existing resource.
+     - `DELETE`: Remove a specified resource from the server.
+     - *Others:* `PATCH` (apply partial modifications), `OPTIONS` (check server communication capabilities), etc.
+  3. **Body:** The payload data included in the request (commonly serialized as JSON in `POST` or `PUT` calls).
+  4. **Headers:** Key-value metadata passed along with the request providing context (e.g., `Content-Type: application/json`, auth tokens, accepted encodings).
+
+### 💡 Visualizations
+
+<details>
+  <summary><b>📷 Expand to View HTTP Requests & Protocol Diagrams</b></summary>
+  <br>
+
+### 1. Request / Response Cycle
+
+![Request/Response Cycle](image/Readme/1791188136071.png)
+
+### 2. What is a Protocol & HTTP?
+
+![What is a Protocol & HTTP](image/Readme/1791188541600.png)
+
+### 3. Components of a Request
+
+![Components of a Request](image/Readme/1791188644261.png)
+
+</details>
+
+### 📝 Quiz & Recap
+
+_(Original file: [quiz.md](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/HTTP%20Requests/quiz.md>))_
+
+> [!NOTE]
+> **What does HTTP stand for?**
+>
+> - **Answer:** **Hypertext Transfer Protocol**
+
+> [!TIP]
+> **How would you describe what a protocol is to a complete newbie?**
+>
+> - **Answer:** An agreed-upon, standard way of doing something.
+
+> [!IMPORTANT]
+> **Which part of this URL describes the protocol?**
+> `https://apis.scrimba.com/jsonplaceholder/posts`
+>
+> - **Answer:** `https` (Hypertext Transfer Protocol Secure).
+
+> [!NOTE]
+> **Which request method (GET, POST, PUT, DELETE) is used when requesting data from the JSON Placeholder API?**
+>
+> - **Answer:** **GET** — by default, `fetch()` issues a `GET` request when retrieving resources from an API endpoint.
+
+### 💻 Code Implementation
+
+You can explore the source files for this practice below:
+
+- [index.html](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/HTTP%20Requests/index.html>) - Structural markup loading the script.
+- [index.js](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/HTTP%20Requests/index.js>) - JavaScript logic initiating a fetch request to the JSONPlaceholder API.
+- [index.css](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/HTTP%20Requests/index.css>) - Background styling for the preview container.
+- [quiz.md](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/HTTP%20Requests/quiz.md>) - Knowledge check on protocols and HTTP methods.
+
+```javascript
+// Sending a GET request to JSON Placeholder API
+fetch("https://apis.scrimba.com/jsonplaceholder/posts")
+  .then((response) => response.json())
+  .then((data) => console.log(data));
+```
+
+### 🔗 Chapter 15 Resources
+
+- 📄 **JSONPlaceholder Documentation:** [JSONPlaceholder Guide](https://jsonplaceholder.typicode.com/) — Free fake online REST API for testing and prototyping.
+- 📄 **MDN Web Docs:** [An Overview of HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview) — Core concepts, messages, and architecture of HTTP.
+- 📄 **MDN Web Docs:** [HTTP Request Methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods) — Complete reference for GET, POST, PUT, DELETE, and more.
+- 📄 **API Endpoint:** [JSONPlaceholder Posts (Scrimba Proxy)](https://apis.scrimba.com/jsonplaceholder/posts)
+
