@@ -604,7 +604,10 @@ You can explore the source files for this practice below:
   - **Response:** Sent when a server returns a response (indicating success or failure) back to the client with appropriate headers, status codes, and body payload.
 - **What is a Protocol?** A protocol is simply an agreed-upon, standardized convention for performing an action so different systems can communicate reliably. In the URL `https://apis.scrimba.com/jsonplaceholder/posts`, the `https` portion declares the protocol used.
 - **Key Components of an HTTP Request:**
-  1. **Path (URL / Endpoint):** The address targeting the exact resource on the network.
+  1. **Path (URL / Endpoint):** The address where your desired resource "lives".
+     - **Base URL:** The domain and root API service address (e.g., `https://apis.scrimba.com/jsonplaceholder`).
+     - **Endpoint:** The specific resource path being targeted (e.g., `/posts`).
+     - **Full URL:** Combining the Base URL and endpoint gives the complete target address: `https://apis.scrimba.com/jsonplaceholder/posts`.
   2. **Method (HTTP Verb):** The action to be taken on the server:
      - `GET`: Retrieve existing data or resources (the default method used by `fetch()`).
      - `POST`: Send new data to the server to create a new resource.
@@ -613,6 +616,7 @@ You can explore the source files for this practice below:
      - *Others:* `PATCH` (apply partial modifications), `OPTIONS` (check server communication capabilities), etc.
   3. **Body:** The payload data included in the request (commonly serialized as JSON in `POST` or `PUT` calls).
   4. **Headers:** Key-value metadata passed along with the request providing context (e.g., `Content-Type: application/json`, auth tokens, accepted encodings).
+- **Inspecting JSON in the Browser:** When navigating directly to an API endpoint URL in the browser, the raw JSON payload is returned. Using browser extensions like **JSON Formatter** enhances the developer experience with parsed tree views, syntax highlighting, and collapsible nodes.
 
 ### 💡 Visualizations
 
@@ -631,6 +635,14 @@ You can explore the source files for this practice below:
 ### 3. Components of a Request
 
 ![Components of a Request](image/Readme/1791188644261.png)
+
+### 4. Path (URL): Base URL vs. Endpoint
+
+![Path (URL) & BaseURL vs Endpoint](image/Readme/1791189857783.png)
+
+### 5. Inspecting JSON in the Browser
+
+![Inspecting JSON in Browser](image/Readme/1791189861815.png)
 
 </details>
 
@@ -681,4 +693,4 @@ fetch("https://apis.scrimba.com/jsonplaceholder/posts")
 - 📄 **MDN Web Docs:** [An Overview of HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview) — Core concepts, messages, and architecture of HTTP.
 - 📄 **MDN Web Docs:** [HTTP Request Methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods) — Complete reference for GET, POST, PUT, DELETE, and more.
 - 📄 **API Endpoint:** [JSONPlaceholder Posts (Scrimba Proxy)](https://apis.scrimba.com/jsonplaceholder/posts)
-
+- 🧩 **Chrome Extension:** [JSON Formatter](https://chromewebstore.google.com/detail/json-formatter/bcjindcccaagfpapjjmafapmmgkkhgoa) — Popular browser extension to format and explore JSON responses directly in Google Chrome.
