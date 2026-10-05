@@ -694,7 +694,10 @@ When making API requests, properly structuring the target address is essential f
   - **Base URL:** The fixed root address of the API service that remains constant across different calls (e.g., `https://apis.scrimba.com/jsonplaceholder` or `https://blahblahblah.com/api/v2`).
   - **Endpoint:** The dynamic path suffix that points to the specific resource, entity, or collection you want to access (e.g., `/posts`, `/users`, `/products`, or `/products/123`).
   - **Full Request URL:** Combining the Base URL and the Endpoint forms the complete destination address:
-    $$\text{Full URL} = \text{Base URL} + \text{Endpoint}$$
+    $$
+    \text{Full URL} = \text{Base URL} + \text{Endpoint}
+    $$
+
     *Example:* `https://apis.scrimba.com/jsonplaceholder` + `/posts` $\rightarrow$ `https://apis.scrimba.com/jsonplaceholder/posts`
 - **Inspecting JSON in the Browser:**
   - Pasting an API endpoint URL directly into your browser triggers a `GET` request, and the server returns raw JSON text.
@@ -728,11 +731,13 @@ _(Original file: [quiz.md](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTG
 
 > [!TIP]
 > **Given the following example URLs:**
+>
 > - `https://blahblahblah.com/api/v2/users`
 > - `https://blahblahblah.com/api/v2/products`
 > - `https://blahblahblah.com/api/v2/products/123`
 >
 > **Which part is the Base URL?**
+>
 > - **Answer:** `https://blahblahblah.com/api/v2`
 
 > [!IMPORTANT]
@@ -764,4 +769,70 @@ fetch(`${baseURL}${endpoint}`)
 - 🧩 **Chrome Extension:** [JSON Formatter](https://chromewebstore.google.com/detail/json-formatter/bcjindcccaagfpapjjmafapmmgkkhgoa) — Popular browser extension to format and explore JSON responses directly in Google Chrome.
 - 📄 **MDN Web Docs:** [What is a URL?](https://developer.mozilla.org/en-US/docs/Learn/Common_questions/Web_mechanics/What_is_a_URL) — Understanding URL syntax, hosts, and paths.
 - 📄 **JSONPlaceholder:** [Available Endpoints Guide](https://jsonplaceholder.typicode.com/) — Reference for `/posts`, `/comments`, `/albums`, `/photos`, `/todos`, and `/users`.
+---
+
+## 📤 Chapter 17: Requests — Methods
+
+### Core Concept
+
+HTTP methods (also referred to as **HTTP Verbs**) indicate the specific action that the client wants to perform on a given resource. Understanding and utilizing the correct method is fundamental to RESTful API design.
+
+- **The Primary HTTP Methods:**
+  - **`GET` (Retrieve Data):** Used to request and retrieve data from a server without causing any side effects or changing server state (safe and idempotent). This is the default method executed when calling `fetch()` without additional options.
+  - **`POST` (Add New Data):** Used to submit data to the server to create a new resource (e.g., submitting form data, uploading a file, publishing a new post).
+  - **`PUT` (Update Existing Data):** Used to update or replace an existing resource completely on the server (e.g., modifying profile details, updating an item status).
+  - **`DELETE` (Remove Data):** Used to remove or delete an existing resource from the server.
+  - **Other Methods:** `PATCH` (applying partial modifications to a resource), `OPTIONS` (describing communication options for the target resource).
+- **Explicit Method Configuration in `fetch()`:**
+  - While `fetch(url)` performs a `GET` request by default, the method can be explicitly defined by passing an options configuration object as the second parameter:
+    ```javascript
+    fetch(url, { method: "GET" })
+    ```
+
+### 💡 Visualizations
+
+<details>
+  <summary><b>📷 Expand to View HTTP Request Methods Diagram</b></summary>
+  <br>
+
+### 1. HTTP Methods Overview
+
+![HTTP Methods Overview](image/Readme/1791192042621.png)
+
+</details>
+
+### 📝 Quiz & Recap
+
+_(Original file: [quiz.md](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/Requests%20-%20Methods/quiz.md>))_
+
+> [!NOTE]
+> **Real-world scenarios for each of the four main HTTP methods:**
+>
+> - **`GET` (Retrieve):** Checking the current weather forecast on your phone.
+> - **`POST` (Create):** Creating and uploading a new screencast video or submitting a registration form.
+> - **`PUT` (Update):** Marking tasks on a shared todo list as "completed".
+> - **`DELETE` (Remove):** Deleting an accidental or obsolete chat message on Slack or Discord.
+
+### 💻 Code Implementation
+
+You can explore the source files for this practice below:
+
+- [index.html](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/Requests%20-%20Methods/index.html>) - Simple HTML wrapper.
+- [index.js](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/Requests%20-%20Methods/index.js>) - Explicitly setting `{ method: "GET" }` in the fetch options object.
+- [quiz.md](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/Requests%20-%20Methods/quiz.md>) - Knowledge check on HTTP method real-world usage.
+
+```javascript
+// Explicitly setting the request method to GET in fetch
+fetch("https://apis.scrimba.com/jsonplaceholder/todos", {
+  method: "GET",
+})
+  .then((res) => res.json())
+  .then((data) => console.log(data));
+```
+
+### 🔗 Chapter 17 Resources
+
+- 📄 **MDN Web Docs:** [HTTP Request Methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods) — In-depth guide to HTTP request verbs, safety, and idempotence.
+- 📄 **MDN Web Docs:** [Fetch API Options & Init](https://developer.mozilla.org/en-US/docs/Web/API/fetch#options) — Complete specification of `fetch()` parameters and request headers.
+- 📄 **API Endpoint:** [JSONPlaceholder Todos Endpoint (Scrimba Proxy)](https://apis.scrimba.com/jsonplaceholder/todos)
 
