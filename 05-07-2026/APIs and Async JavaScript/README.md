@@ -604,10 +604,7 @@ You can explore the source files for this practice below:
   - **Response:** Sent when a server returns a response (indicating success or failure) back to the client with appropriate headers, status codes, and body payload.
 - **What is a Protocol?** A protocol is simply an agreed-upon, standardized convention for performing an action so different systems can communicate reliably. In the URL `https://apis.scrimba.com/jsonplaceholder/posts`, the `https` portion declares the protocol used.
 - **Key Components of an HTTP Request:**
-  1. **Path (URL / Endpoint):** The address where your desired resource "lives".
-     - **Base URL:** The domain and root API service address (e.g., `https://apis.scrimba.com/jsonplaceholder`).
-     - **Endpoint:** The specific resource path being targeted (e.g., `/posts`).
-     - **Full URL:** Combining the Base URL and endpoint gives the complete target address: `https://apis.scrimba.com/jsonplaceholder/posts`.
+  1. **Path (URL / Endpoint):** The address targeting the exact resource on the network.
   2. **Method (HTTP Verb):** The action to be taken on the server:
      - `GET`: Retrieve existing data or resources (the default method used by `fetch()`).
      - `POST`: Send new data to the server to create a new resource.
@@ -616,7 +613,6 @@ You can explore the source files for this practice below:
      - *Others:* `PATCH` (apply partial modifications), `OPTIONS` (check server communication capabilities), etc.
   3. **Body:** The payload data included in the request (commonly serialized as JSON in `POST` or `PUT` calls).
   4. **Headers:** Key-value metadata passed along with the request providing context (e.g., `Content-Type: application/json`, auth tokens, accepted encodings).
-- **Inspecting JSON in the Browser:** When navigating directly to an API endpoint URL in the browser, the raw JSON payload is returned. Using browser extensions like **JSON Formatter** enhances the developer experience with parsed tree views, syntax highlighting, and collapsible nodes.
 
 ### 💡 Visualizations
 
@@ -635,14 +631,6 @@ You can explore the source files for this practice below:
 ### 3. Components of a Request
 
 ![Components of a Request](image/Readme/1791188644261.png)
-
-### 4. Path (URL): Base URL vs. Endpoint
-
-![Path (URL) & BaseURL vs Endpoint](image/Readme/1791189857783.png)
-
-### 5. Inspecting JSON in the Browser
-
-![Inspecting JSON in Browser](image/Readme/1791189861815.png)
 
 </details>
 
@@ -693,4 +681,87 @@ fetch("https://apis.scrimba.com/jsonplaceholder/posts")
 - 📄 **MDN Web Docs:** [An Overview of HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview) — Core concepts, messages, and architecture of HTTP.
 - 📄 **MDN Web Docs:** [HTTP Request Methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods) — Complete reference for GET, POST, PUT, DELETE, and more.
 - 📄 **API Endpoint:** [JSONPlaceholder Posts (Scrimba Proxy)](https://apis.scrimba.com/jsonplaceholder/posts)
+
+---
+
+## 🎯 Chapter 16: Requests — URLs and Endpoints
+
+### Core Concept
+
+When making API requests, properly structuring the target address is essential for retrieving or manipulating the correct resources. Every web request targets an address made up of a **Base URL** and a specific **Endpoint**.
+
+- **Base URL vs. Endpoint:**
+  - **Base URL:** The fixed root address of the API service that remains constant across different calls (e.g., `https://apis.scrimba.com/jsonplaceholder` or `https://blahblahblah.com/api/v2`).
+  - **Endpoint:** The dynamic path suffix that points to the specific resource, entity, or collection you want to access (e.g., `/posts`, `/users`, `/products`, or `/products/123`).
+  - **Full Request URL:** Combining the Base URL and the Endpoint forms the complete destination address:
+    $$\text{Full URL} = \text{Base URL} + \text{Endpoint}$$
+    *Example:* `https://apis.scrimba.com/jsonplaceholder` + `/posts` $\rightarrow$ `https://apis.scrimba.com/jsonplaceholder/posts`
+- **Inspecting JSON in the Browser:**
+  - Pasting an API endpoint URL directly into your browser triggers a `GET` request, and the server returns raw JSON text.
+  - Browser extensions like **JSON Formatter** make inspecting this response effortless by formatting the raw text into a color-coded, collapsible tree structure.
+
+### 💡 Visualizations
+
+<details>
+  <summary><b>📷 Expand to View URLs & Endpoints Diagrams</b></summary>
+  <br>
+
+### 1. Path (URL): Base URL vs. Endpoint
+
+![Path (URL) & BaseURL vs Endpoint](image/Readme/1791190400604.png)
+
+### 2. Inspecting JSON in the Browser
+
+![Inspecting JSON in Browser](image/Readme/1791190406198.png)
+
+</details>
+
+### 📝 Quiz & Recap
+
+_(Original file: [quiz.md](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/Requests%20-%20URLs%20and%20Endpoints/quiz.md>))_
+
+> [!NOTE]
+> **What is the difference between a Base URL and an Endpoint?**
+>
+> - **Base URL:** The part of the URL that won't change, no matter which resource we want to get from the API.
+> - **Endpoint:** Specifies exactly which resource we want to get from the API.
+
+> [!TIP]
+> **Given the following example URLs:**
+> - `https://blahblahblah.com/api/v2/users`
+> - `https://blahblahblah.com/api/v2/products`
+> - `https://blahblahblah.com/api/v2/products/123`
+>
+> **Which part is the Base URL?**
+> - **Answer:** `https://blahblahblah.com/api/v2`
+
+> [!IMPORTANT]
+> **From the example URLs above, what are the available endpoints?**
+>
+> - **Answer:** `/users`, `/products`, `/products/<some-id-of-a-product-here>` (e.g., `/products/123`).
+
+### 💻 Code Implementation
+
+You can explore the source files for this practice below:
+
+- [quiz.md](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/Requests%20-%20URLs%20and%20Endpoints/quiz.md>) - Knowledge check on Base URLs and Endpoints.
+- [README.md](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/Requests%20-%20URLs%20and%20Endpoints/README.md>) - Setup guide and documentation.
+- [package.json](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/Requests%20-%20URLs%20and%20Endpoints/package.json>) - Project scripts and configuration.
+
+```javascript
+// Base URL and Endpoint separation pattern
+const baseURL = "https://apis.scrimba.com/jsonplaceholder";
+const endpoint = "/posts";
+
+// Resulting request URL: https://apis.scrimba.com/jsonplaceholder/posts
+fetch(`${baseURL}${endpoint}`)
+  .then((response) => response.json())
+  .then((data) => console.log(data));
+```
+
+### 🔗 Chapter 16 Resources
+
 - 🧩 **Chrome Extension:** [JSON Formatter](https://chromewebstore.google.com/detail/json-formatter/bcjindcccaagfpapjjmafapmmgkkhgoa) — Popular browser extension to format and explore JSON responses directly in Google Chrome.
+- 📄 **MDN Web Docs:** [What is a URL?](https://developer.mozilla.org/en-US/docs/Learn/Common_questions/Web_mechanics/What_is_a_URL) — Understanding URL syntax, hosts, and paths.
+- 📄 **JSONPlaceholder:** [Available Endpoints Guide](https://jsonplaceholder.typicode.com/) — Reference for `/posts`, `/comments`, `/albums`, `/photos`, `/todos`, and `/users`.
+
