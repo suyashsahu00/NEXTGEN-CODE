@@ -836,3 +836,54 @@ fetch("https://apis.scrimba.com/jsonplaceholder/todos", {
 - 📄 **MDN Web Docs:** [Fetch API Options & Init](https://developer.mozilla.org/en-US/docs/Web/API/fetch#options) — Complete specification of `fetch()` parameters and request headers.
 - 📄 **API Endpoint:** [JSONPlaceholder Todos Endpoint (Scrimba Proxy)](https://apis.scrimba.com/jsonplaceholder/todos)
 
+---
+
+## 📝 Chapter 18: BlogSpace — GET First 5 Blog Posts
+
+### Core Concept
+
+In this chapter, we kick off the **BlogSpace** project — an interactive blogging web application that communicates with a REST API to fetch, create, and manage blog posts.
+
+- **Client-Side Data Truncation (`.slice()`):**
+  - Often, API endpoints like `/posts` return large collections (e.g., 100 post objects).
+  - To prevent performance bottlenecks or overwhelming the user interface, we can extract a specific subset using JavaScript's native array method: `data.slice(0, 5)`.
+  - `.slice(start, end)` returns a shallow copy of a portion of the array from index `start` up to (but not including) index `end`.
+- **Inspecting Blog Post Schema:**
+  - Each item returned by the JSONPlaceholder `/posts` endpoint adheres to a standardized schema:
+    - `userId` (number): ID of the user author.
+    - `id` (number): Unique identifier for the specific post.
+    - `title` (string): Title headline of the article.
+    - `body` (string): Main textual body content.
+
+### 📝 Key Takeaway
+
+> [!TIP]
+> **Why use `.slice(0, 5)` on API results?**
+>
+> When APIs do not support URL query parameters for server-side pagination (such as `?_limit=5`), using `data.slice(0, 5)` allows the frontend client to extract only the needed initial records, keeping state management clean and DOM rendering performant.
+
+### 💻 Code Implementation
+
+You can explore the source files for this practice below:
+
+- [index.html](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/BlogSpace%20-%20GET%20first%205%20blog%20posts/index.html>) - Baseline HTML template linking the script.
+- [index.js](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/BlogSpace%20-%20GET%20first%205%20blog%20posts/index.js>) - Logic initiating a GET request and truncating the results array to 5 items.
+- [package.json](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/BlogSpace%20-%20GET%20first%205%20blog%20posts/package.json>) - Project metadata and dev server configuration.
+
+```javascript
+// GET a list of blog posts and limit to the first 5 entries
+fetch("https://apis.scrimba.com/jsonplaceholder/posts")
+  .then((res) => res.json())
+  .then((data) => {
+    const postsArr = data.slice(0, 5);
+    console.log(postsArr);
+  });
+```
+
+### 🔗 Chapter 18 Resources
+
+- 📄 **MDN Web Docs:** [Array.prototype.slice()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice) — Syntax, parameters, and examples for extracting array segments.
+- 📄 **API Endpoint:** [JSONPlaceholder Posts Endpoint (Scrimba Proxy)](https://apis.scrimba.com/jsonplaceholder/posts) — Mock REST endpoint serving blog post records.
+- 📄 **JSONPlaceholder:** [Posts Resource Guide](https://jsonplaceholder.typicode.com/) — Reference for blog post object schema and relations.
+
+
