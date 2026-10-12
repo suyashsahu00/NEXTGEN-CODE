@@ -1221,3 +1221,83 @@ button:hover {
 - 📄 **MDN Web Docs:** [CSS align-self](https://developer.mozilla.org/en-US/docs/Web/CSS/align-self) — Overriding default cross-axis alignment for individual flex items.
 - 📄 **MDN Web Docs:** [Styling HTML Forms](https://developer.mozilla.org/en-US/docs/Learn/Forms/Styling_web_forms) — Best practices for cross-browser input styling and font inheritance.
 
+---
+
+## ⚡ Chapter 23: BlogSpace — Form Submit Event Listener
+
+### Core Concept
+
+In this chapter, we connect user interaction to client-side data handling by attaching an event listener to the submission form, suppressing native browser navigation, and capturing user input into a structured JavaScript payload object.
+
+- **Attaching the `"submit"` Event Listener:**
+  - Attaching the listener directly to the `<form>` container (`form.addEventListener("submit", ...)`) rather than to the submit button's `"click"` event.
+  - This ensures our application responds consistently whether the user activates the button by clicking or by pressing <kbd>Enter</kbd> while typing in an input field.
+- **Suppressing Default Page Reloads (`e.preventDefault()`):**
+  - By default, standard HTML forms perform an HTTP submission and reload the page.
+  - Invoking `event.preventDefault()` halts this behavior, allowing asynchronous JavaScript (AJAX / `fetch`) to process and deliver the data seamlessly without losing application state.
+- **Extracting Values & Constructing the Payload Object:**
+  - Querying input elements and retrieving their `.value` properties (`document.getElementById("post-title").value` and `document.getElementById("post-body").value`).
+  - Packaging the values into a concise key-value object (`{ title, body }`) that matches the schema required by the REST API endpoint.
+
+### 💡 Visualizations & Architecture
+
+<details>
+  <summary><b>📷 Expand to View Submit Event Handling Flow Diagram</b></summary>
+  <br>
+
+```mermaid
+flowchart TD
+    User["User Submits Form (Button Click or Enter Key)"] --> SubmitEvent["Form Fires 'submit' Event"]
+    SubmitEvent --> PreventDefault["e.preventDefault() Cancels Page Reload"]
+    PreventDefault --> ExtractValues["Extract .value from #post-title & #post-body"]
+    ExtractValues --> BuildPayload["Construct JavaScript Object: { title, body }"]
+    BuildPayload --> OutputLog["console.log(data) / Ready for HTTP POST Payload"]
+```
+
+</details>
+
+### 📝 Quiz & Recap
+
+> [!NOTE]
+> **Why is it best practice to listen for `"submit"` on the `<form>` instead of `"click"` on the `<button>`?**
+>
+> - **Answer:** The `"submit"` event fires regardless of how the form is submitted — whether by clicking the submit button, tapping on mobile, or pressing <kbd>Enter</kbd> inside a text input. Listening to `"click"` on the button misses keyboard submissions.
+
+> [!TIP]
+> **What critical role does `event.preventDefault()` play in Single-Page Applications (SPAs)?**
+>
+> - **Answer:** It prevents the browser from refreshing the page or attempting a synchronous full-page HTTP POST. This keeps the current DOM and application state intact so data can be processed asynchronously in the background.
+
+> [!IMPORTANT]
+> **How do you access text entered by a user into an `<input>` or `<textarea>`?**
+>
+> - **Answer:** Access the `.value` property of the DOM element (e.g., `inputElement.value`). Unlike static text containers that use `.textContent` or `.innerHTML`, form fields store user-typed data exclusively in `.value`.
+
+### 💻 Code Implementation
+
+You can explore the source files for this practice below:
+
+- [index.html](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/BlogSpace%20-%20Form%20submit%20event%20listener/index.html>) - HTML template containing the blog post form with inputs and submit button.
+- [index.css](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/BlogSpace%20-%20Form%20submit%20event%20listener/index.css>) - Styles defining grid layout, background color, and button appearance.
+- [index.js](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/BlogSpace%20-%20Form%20submit%20event%20listener/index.js>) - Form submit event listener preventing reload and logging the post payload.
+- [package.json](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/BlogSpace%20-%20Form%20submit%20event%20listener/package.json>) - Project configuration and dev dependencies.
+
+```javascript
+// Listen for form submit event, prevent refresh, and extract post payload
+document.querySelector("form").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const postTitle = document.getElementById("post-title").value;
+    const postBody = document.getElementById("post-body").value;
+    const data = {
+        title: postTitle,
+        body: postBody
+    };
+    console.log(data);
+});
+```
+
+### 🔗 Chapter 23 Resources
+
+- 📄 **MDN Web Docs:** [HTMLFormElement: submit event](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/submit_event) — Event details, form submission triggers, and bubbling.
+- 📄 **MDN Web Docs:** [Event: preventDefault() method](https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault) — Halting default browser event actions.
+- 📄 **MDN Web Docs:** [HTMLInputElement: value property](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement#value) — Reading live user-entered input values.
