@@ -999,6 +999,102 @@ nav > h3 {
 - 📄 **MDN Web Docs:** [CSS Positioning - Fixed](https://developer.mozilla.org/en-US/docs/Web/CSS/position#fixed) — Mechanics of viewport-relative positioning.
 - 📄 **MDN Web Docs:** [CSS Flexbox Layout](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_flexible_box_layout/Basic_concepts_of_flexbox) — Alignment and distribution within the navigation bar.
 
+---
 
+## 📝 Chapter 21: BlogSpace — New Post Form
 
+### Core Concept
 
+In this chapter, we extend **BlogSpace** by constructing an interactive submission form for creating new blog posts. This forms the frontend foundation necessary to capture user input and dispatch data to our REST API using the HTTP `POST` method.
+
+- **Semantic HTML Form Structure:**
+  - Wrapping controls within a `<form>` container to group related data-entry elements.
+  - Linking `<label>` elements to input controls via the `for` attribute matching the input's `id` attribute (`for="post-title"` -> `id="post-title"`, `for="post-body"` -> `id="post-body"`). This guarantees proper accessibility for assistive technologies and allows clicking the label to focus the control.
+- **Appropriate Form Controls:**
+  - `<input type="text">`: Optimal for single-line text data such as article titles.
+  - `<textarea>`: Tailored for multiline text data such as the article body.
+  - `<button>`: Inside a `<form>`, any button defaults to `type="submit"`, enabling submission triggers.
+- **Layout and Spacing with Fixed Navigation:**
+  - With the fixed navbar positioned at the top (`position: fixed`), page elements require a top offset to remain visible.
+  - The padding offset is transferred from `#blog-list` directly to `form` (`padding: 60px 10px 10px;`), positioning the inputs cleanly below the navbar while letting `#blog-list` sit naturally underneath with `padding: 10px;`.
+
+### 💡 Visualizations & Architecture
+
+<details>
+  <summary><b>📷 Expand to View Form Structure & Flow Diagram</b></summary>
+  <br>
+
+```mermaid
+flowchart TD
+    subgraph Viewport ["Browser Viewport"]
+        Nav["Fixed Navbar: &lt;nav&gt; (position: fixed)"]
+        subgraph FormBlock ["Submission Form: &lt;form&gt; (padding: 60px 10px 10px)"]
+            TitleGroup["Title Field: &lt;label for='post-title'&gt; + &lt;input id='post-title'&gt;"]
+            BodyGroup["Body Field: &lt;label for='post-body'&gt; + &lt;textarea id='post-body'&gt;"]
+            SubmitAction["Action Button: &lt;button&gt;Post&lt;/button&gt;"]
+        end
+        BlogContainer["Blog Articles Feed: &lt;div id='blog-list'&gt;"]
+    end
+
+    Nav -. Offset Clearance .-> FormBlock
+    TitleGroup --> SubmitAction
+    BodyGroup --> SubmitAction
+    SubmitAction -. Prepares POST Request .-> BlogContainer
+```
+
+</details>
+
+### 📝 Quiz & Recap
+
+> [!NOTE]
+> **Why is explicitly pairing `<label for="...">` with `<input id="...">` crucial for web development?**
+>
+> - **Answer:** It binds the label to the input programmatically. This allows screen readers to announce the label when the field receives focus, and improves user experience by focusing or activating the input when the label is clicked.
+
+> [!TIP]
+> **When should you choose `<textarea>` instead of `<input type="text">`?**
+>
+> - **Answer:** Use `<input type="text">` for short, single-line text inputs (like names, headlines, or emails). Use `<textarea>` whenever users need to type multi-line paragraphs or expandable content (like message bodies, comments, or blog posts).
+
+> [!IMPORTANT]
+> **What is the default behavior of a `<button>` located inside a `<form>`?**
+>
+> - **Answer:** Unless an explicit `type="button"` attribute is provided, any button placed inside a form defaults to `type="submit"`. When clicked, it attempts to submit the form and triggers a browser page reload unless intercepted in JavaScript using `event.preventDefault()`.
+
+### 💻 Code Implementation
+
+You can explore the source files for this practice below:
+
+- [index.html](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/BlogSpace%20-%20New%20post%20form/index.html>) - Semantic form markup containing labels, single-line text input, textarea, and submission button.
+- [index.css](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/BlogSpace%20-%20New%20post%20form/index.css>) - Styles providing padding offset for the form beneath the fixed navbar.
+- [index.js](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/BlogSpace%20-%20New%20post%20form/index.js>) - Script fetching and rendering the initial 5 blog posts into `#blog-list`.
+- [package.json](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/BlogSpace%20-%20New%20post%20form/package.json>) - Project metadata and dev server configuration.
+
+```html
+<!-- HTML Form for creating a new blog post -->
+<form>
+    <label for="post-title">Title:</label>
+    <input id="post-title" type="text" />
+    <label for="post-body">Body:</label>
+    <textarea id="post-body"></textarea>
+    <button>Post</button>
+</form>
+```
+
+```css
+/* Layout offset adjustment to clear fixed navbar */
+form {
+    padding: 60px 10px 10px;
+}
+
+#blog-list {
+    padding: 10px;
+}
+```
+
+### 🔗 Chapter 21 Resources
+
+- 📄 **MDN Web Docs:** [Your First HTML Form](https://developer.mozilla.org/en-US/docs/Learn/Forms/Your_first_form) — Guide to creating accessible, functional HTML forms.
+- 📄 **MDN Web Docs:** [The `<label>` element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label) — Proper usage of labels, the `for` attribute, and accessibility benefits.
+- 📄 **MDN Web Docs:** [The `<textarea>` element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea) — Multiline plain-text editing control.
+- 📄 **MDN Web Docs:** [The `<button>` element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button) — Types, defaults, and form interaction behaviors.
