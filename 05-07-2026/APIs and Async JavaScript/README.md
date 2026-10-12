@@ -1098,3 +1098,126 @@ form {
 - 📄 **MDN Web Docs:** [The `<label>` element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label) — Proper usage of labels, the `for` attribute, and accessibility benefits.
 - 📄 **MDN Web Docs:** [The `<textarea>` element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea) — Multiline plain-text editing control.
 - 📄 **MDN Web Docs:** [The `<button>` element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button) — Types, defaults, and form interaction behaviors.
+
+---
+
+## 🎨 Chapter 22: BlogSpace — Add Style to Form
+
+### Core Concept
+
+In this chapter, we transform the raw HTML form from the previous lesson into an intuitive, visually polished interface using **CSS Flexbox**.
+
+- **Vertical Flex Flow (`display: flex; flex-direction: column;`):**
+  - Stacks each form element (labels, single-line text input, textarea, and submit button) vertically in an orderly, natural sequence.
+  - Eliminates clunky inline wrapping behaviors and ensures labels stay cleanly positioned above their inputs.
+- **Section Contrast & Background Separation:**
+  - Introducing a dedicated background color (`background-color: #f1ede9`) gives the form visual weight and provides clear separation between creation tools and the article feed below.
+- **Typography Inheritance (`font-family: inherit`):**
+  - Browsers often reset form controls (`<input>`, `<textarea>`, `<button>`) to system default fonts. Explicitly declaring `font-family: inherit` ensures the **Karla** typeface is uniformly applied across all form controls.
+- **Action Button Sizing (`align-self: flex-start`):**
+  - By default, children in a column flexbox container stretch to 100% width.
+  - Applying `align-self: flex-start` allows the `<button>` to size to its content while staying cleanly aligned with the left edge of the input fields.
+
+### 💡 Visualizations & Architecture
+
+<details>
+  <summary><b>📷 Expand to View Form Styling & Layout Diagram</b></summary>
+  <br>
+
+```mermaid
+flowchart TD
+    subgraph FormWrapper ["Styled Form (&lt;form&gt;) — flex-direction: column"]
+        Background["Background Tint (#f1ede9) + Top Offset Padding"]
+        subgraph Fields ["Vertical Element Flow"]
+            TitleLabel["&lt;label for='post-title'&gt; (font-weight: 700)"]
+            TitleInput["&lt;input id='post-title'&gt; (padding: 6px, border-radius: 4px)"]
+            BodyLabel["&lt;label for='post-body'&gt; (font-weight: 700)"]
+            BodyTextarea["&lt;textarea id='post-body'&gt; (resize: vertical, min-height: 60px)"]
+            ActionBtn["&lt;button&gt;Post&lt;/button&gt; (align-self: flex-start, hover transition)"]
+        end
+    end
+
+    Background --> Fields
+    TitleLabel --> TitleInput --> BodyLabel --> BodyTextarea --> ActionBtn
+```
+
+</details>
+
+### 📝 Quiz & Recap
+
+> [!NOTE]
+> **Why do `<input>` and `<textarea>` elements not always inherit the page font family automatically?**
+>
+> - **Answer:** Browsers apply user-agent default stylesheets to interactive form controls that override standard document font cascade. Declaring `font-family: inherit` explicitly forces inputs and textareas to inherit the parent font family (`Karla`).
+
+> [!TIP]
+> **How does `display: flex; flex-direction: column;` improve form design over default layout?**
+>
+> - **Answer:** It arranges form elements in a clean vertical stack without requiring `<br>` tags or complex wrapper divs, while providing centralized control over element spacing, stretching, and cross-axis alignment.
+
+> [!IMPORTANT]
+> **Why is `align-self: flex-start` helpful on a button inside a column flexbox container?**
+>
+> - **Answer:** In a column flex container, items default to `stretch` on the cross axis, which causes the submit button to span the full width of the container. `align-self: flex-start` overrides this, confining the button to its natural content width.
+
+### 💻 Code Implementation
+
+You can explore the source files for this practice below:
+
+- [index.html](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/BlogSpace%20-%20Add%20style%20to%20form/index.html>) - Baseline HTML template linking styled form elements.
+- [index.css](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/BlogSpace%20-%20Add%20style%20to%20form/index.css>) - CSS styling applying column flexbox layout, input padding, and button states.
+- [index.js](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/BlogSpace%20-%20Add%20style%20to%20form/index.js>) - Logic fetching initial posts and populating the feed.
+- [package.json](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/BlogSpace%20-%20Add%20style%20to%20form/package.json>) - Project configuration and Vite scripts.
+
+```css
+/* Vertical flexbox layout and styled form controls */
+form {
+    padding: 60px 10px 10px;
+    background-color: #f1ede9;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 4px;
+    font-weight: 700;
+}
+
+input, textarea {
+    margin-bottom: 12px;
+    padding: 6px 8px;
+    font-family: inherit;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 60px;
+}
+
+button {
+    align-self: flex-start;
+    padding: 8px 16px;
+    background-color: #2b283a;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    font-family: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+button:hover {
+    background-color: #000000;
+}
+```
+
+### 🔗 Chapter 22 Resources
+
+- 📄 **MDN Web Docs:** [CSS Flexbox: flex-direction](https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction) — Establishing column versus row layout directions.
+- 📄 **MDN Web Docs:** [CSS align-self](https://developer.mozilla.org/en-US/docs/Web/CSS/align-self) — Overriding default cross-axis alignment for individual flex items.
+- 📄 **MDN Web Docs:** [Styling HTML Forms](https://developer.mozilla.org/en-US/docs/Learn/Forms/Styling_web_forms) — Best practices for cross-browser input styling and font inheritance.
+
