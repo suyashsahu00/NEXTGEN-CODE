@@ -1401,3 +1401,109 @@ fetch("https://apis.scrimba.com/jsonplaceholder/todos", {
 - 📄 **MDN Web Docs:** [Using the Fetch API - Uploading JSON Data](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#uploading_json_data) — Step-by-step guide to sending JSON payloads.
 - 📄 **API Endpoint:** [JSONPlaceholder Todos Endpoint (Scrimba Proxy)](https://apis.scrimba.com/jsonplaceholder/todos) — Mock REST endpoint for todo records.
 
+---
+
+## 📋 Chapter 25: Requests — Headers
+
+### Core Concept
+
+When making HTTP requests, **Headers** provide critical metadata about the request itself. While the **body** contains the actual payload, headers inform the server about authentication tokens, client software details, and the formatting of the data being transmitted.
+
+- **Role of HTTP Request Headers:**
+  - Headers are key-value metadata pairs included in the request package (e.g., authorization, language preferences, user-agent, caching instructions).
+  - One of the most important request headers in modern REST communication is **`Content-Type`**.
+- **The `Content-Type` Header:**
+  - When sending a payload with `POST` or `PUT`, the server must know what format the raw body text represents (e.g., JSON, URL-encoded form data, XML, or plain text).
+  - By default, browsers may send `text/plain` or leave the content type ambiguous.
+  - Setting `"Content-Type": "application/json"` explicitly informs the server's incoming body parser middleware (such as `express.json()`) that the payload is JSON-formatted and should be deserialized into a native object.
+- **Configuring Headers in `fetch()`:**
+  - Headers are declared as a nested object under the `headers` property within the second argument options object of `fetch()`:
+    ```javascript
+    fetch(url, {
+        method: "POST",
+        body: JSON.stringify(payload),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    ```
+- **Bidirectional Header Communication:**
+  - Headers exist in both directions: clients send **Request Headers** to clarify intent and content format, and servers return **Response Headers** specifying response content type, caching policies, and server timestamps.
+
+### 💡 Visualizations & Architecture
+
+<details>
+  <summary><b>📷 Expand to View Request Headers Visualizations & Flow Diagram</b></summary>
+  <br>
+
+### 1. Request Headers Concept Slide
+
+![Request Headers Overview](image/Readme/1791967379854.png)
+
+### 2. Header Content Negotiation Flow
+
+```mermaid
+flowchart TD
+    Client["Browser Client: fetch() Request"] --> Config["Request Options: method, body, headers"]
+    Config --> HeaderSpec["headers: { 'Content-Type': 'application/json' }"]
+    Config --> BodySpec["body: JSON.stringify(payload)"]
+    HeaderSpec --> HTTPPacket["HTTP POST Request Packet Sent to Server"]
+    BodySpec --> HTTPPacket
+    HTTPPacket --> ServerParser["Server Request Parser Middleware"]
+    ServerParser --> Check{"Content-Type Header Check"}
+    Check -- "application/json" --> Deserialized["Parses JSON body into native server object"]
+    Check -- "text/plain or missing" --> Unparsed["Raw text unparsed; server rejects or cannot read body"]
+    Deserialized --> Handler["Route Handler Processes Record & Sends Response"]
+```
+
+</details>
+
+### 📝 Quiz & Recap
+
+> [!NOTE]
+> **What are HTTP headers and what purpose do they serve?**
+>
+> - **Answer:** Headers represent metadata sent alongside an HTTP request or response. They communicate essential contextual details such as data formatting (`Content-Type`), client authorization (`Authorization`), accepted response types (`Accept`), and client device information (`User-Agent`).
+
+> [!TIP]
+> **Why is `"Content-Type": "application/json"` required when sending serialized JSON payloads?**
+>
+> - **Answer:** Without this header, the server cannot know how to interpret the raw string of characters in the request body. Declaring `"Content-Type": "application/json"` instructs the server's body-parsing middleware to deserialize the text stream into a structured object rather than treating it as plain text.
+
+> [!IMPORTANT]
+> **Where do you specify headers within a `fetch()` call?**
+>
+> - **Answer:** Inside the configuration options object passed as the second argument to `fetch()`, under the `headers` key (e.g., `{ method: "POST", body: ..., headers: { "Content-Type": "application/json" } }`).
+
+### 💻 Code Implementation
+
+You can explore the source files for this practice below:
+
+- [index.html](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/Requests%20-%20Headers/index.html>) - Baseline HTML template linking the script bundle.
+- [index.js](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/Requests%20-%20Headers/index.js>) - Logic executing a POST request with stringified body and explicit Content-Type JSON header.
+- [package.json](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/Requests%20-%20Headers/package.json>) - Project metadata and build scripts.
+- [webpack.config.js](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/Requests%20-%20Headers/webpack.config.js>) - Module bundler configuration.
+
+```javascript
+// Send a POST request with a stringified body and explicit JSON Content-Type header
+fetch("https://apis.scrimba.com/jsonplaceholder/todos", {
+    method: "POST",
+    body: JSON.stringify({
+        title: "Buy Milk",
+        completed: false
+    }),
+    headers: {
+        "Content-Type": "application/json"
+    }
+})
+    .then(res => res.json())
+    .then(data => console.log(data));
+```
+
+### 🔗 Chapter 25 Resources
+
+- 📄 **MDN Web Docs:** [HTTP Headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers) — Overview of request, response, representation, and payload headers.
+- 📄 **MDN Web Docs:** [Content-Type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) — Media type indicator for original resource formatting.
+- 📄 **MDN Web Docs:** [Using Fetch - Supplying Request Options](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#supplying_request_options) — Specifying headers, methods, and credentials in `fetch()`.
+- 📄 **API Endpoint:** [JSONPlaceholder Todos Endpoint (Scrimba Proxy)](https://apis.scrimba.com/jsonplaceholder/todos) — Mock REST endpoint for todo records.
+

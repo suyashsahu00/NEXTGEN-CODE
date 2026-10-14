@@ -33,3 +33,7 @@ When formatting or updating ANY README files or creating READMEs for new or futu
 8. **Commit Confirmation & Clean Commit Messages:**
    - Never commit changes automatically without explicit user confirmation.
    - Before running `git commit`, always ask the user for confirmation and propose a clear, descriptive conventional commit message (e.g., `docs(api): add chapter 24 request body with sanitized mermaid diagram`).
+
+9. **Automatic Notes Documentation for New Folders:**
+   - Whenever a new lesson, practice, or exercise folder is added or modified within a module, immediately document it as the next chronological chapter in the module's main notes `README.md` (e.g. `05-07-2026/APIs and Async JavaScript/README.md`).
+   - Include the core concept, collapsible visual slide/architecture diagram, quiz recap callouts, and code snippet linking to the new folder's source files.

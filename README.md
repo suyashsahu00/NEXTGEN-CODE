@@ -449,14 +449,17 @@ fetch("https://apis.scrimba.com/jsonplaceholder/todos", {
     body: JSON.stringify({
         title: "Buy Milk",
         completed: false
-    })
+    }),
+    headers: {
+        "Content-Type": "application/json"
+    }
 })
     .then(res => res.json())
     .then(data => console.log(data));
 ```
 
 > [!NOTE]
-> Check out the complete 24-chapter module documentation in [05-07-2026/APIs and Async JavaScript/README.md](./05-07-2026/APIs%20and%20Async%20JavaScript/README.md).
+> Check out the complete 25-chapter module documentation in [05-07-2026/APIs and Async JavaScript/README.md](./05-07-2026/APIs%20and%20Async%20JavaScript/README.md).
 
 [⬆ Back to Index](#-date-directory--quick-access-index)
 
