@@ -440,7 +440,7 @@ Connecting frontend applications to third-party web services using modern Asynch
 - **`fetch()` API & Promises:** Handling asynchronous network requests with `.then()` chains and `async`/`await`.
 - **BoredBot Web App:** Practical API integration fetching and rendering real-time activity suggestions.
 - **REST APIs & URLs:** Endpoints, resources, HTTP request methods (`GET`, `POST`, `PUT`, `DELETE`), and base URLs.
-- **BlogSpace Project:** Building a full blog application with dynamic DOM rendering, CSS flex forms, `submit` event listeners, and `POST` requests with serialized JSON bodies (`JSON.stringify()`), and dispatching new posts.
+- **BlogSpace Project:** Building a full blog application with dynamic DOM rendering, CSS flex forms, `submit` event listeners, and `POST` requests with serialized JSON bodies (`JSON.stringify()`), and dynamically prepending newly created posts to the live feed.
 
 ```javascript
 // POST request with serialized JSON body to create a new resource
@@ -459,7 +459,7 @@ fetch("https://apis.scrimba.com/jsonplaceholder/todos", {
 ```
 
 > [!NOTE]
-> Check out the complete 26-chapter module documentation in [05-07-2026/APIs and Async JavaScript/README.md](./05-07-2026/APIs%20and%20Async%20JavaScript/README.md).
+> Check out the complete 27-chapter module documentation in [05-07-2026/APIs and Async JavaScript/README.md](./05-07-2026/APIs%20and%20Async%20JavaScript/README.md).
 
 [⬆ Back to Index](#-date-directory--quick-access-index)
 

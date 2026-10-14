@@ -1613,3 +1613,86 @@ document.getElementById("new-post").addEventListener("submit", function(e) {
 - 📄 **JSONPlaceholder:** [Creating a Resource Guide](https://jsonplaceholder.typicode.com/guide/) — Documentation for testing POST endpoints.
 - 📄 **API Endpoint:** [JSONPlaceholder Posts Endpoint (Scrimba Proxy)](https://apis.scrimba.com/jsonplaceholder/posts) — Mock REST endpoint for blog posts.
 
+---
+
+## 📰 Chapter 27: BlogSpace — Add New Post to List of Posts
+
+### Core Concept
+
+Once an HTTP `POST` request successfully resolves, the application must update the user interface to reflect the newly created post. Rather than triggering an unnecessary second `GET` request or reloading the entire web page, modern frontend applications extract the response payload returned by the server and dynamically prepend the new entry to the live DOM feed.
+
+- **Dynamic Feed Prepending (`newPostHtml + existingHtml`):**
+  - Standard string concatenation via `+=` appends new content to the *bottom* of an element (`existingHtml + newPostHtml`).
+  - For chronological feeds, reverse concatenation (`newPostHtml + blogList.innerHTML`) places the new HTML string before the existing children, prepending the latest post directly to the top of `#blog-list`.
+- **Immediate Visual Feedback (Zero-Roundtrip Rendering):**
+  - When the server responds with status `201 Created` or returns the parsed post record (`{ id, title, body }`), the client directly renders that object.
+  - This avoids a second network round-trip to re-fetch the entire database collection, keeping performance optimal and rendering instant.
+- **Form State Reset & Clean Lifecycle:**
+  - After injecting the post, the submit handler completes the full lifecycle: user input &rarr; default prevention &rarr; POST payload serialization &rarr; server response parsing &rarr; live DOM update.
+
+### 💡 Visualizations & Architecture
+
+<details>
+  <summary><b>📷 Expand to View Dynamic Prepend Flow Diagram</b></summary>
+  <br>
+
+```mermaid
+flowchart TD
+    ServerResp["Server Returns 201 Created with Saved Post Object"] --> ParseJSON["Parse Response via res.json()"]
+    ParseJSON --> TemplateString["Construct HTML Card Template with data.title & data.body"]
+    TemplateString --> PrependDOM["Prepend to Container: newPostHtml + blogList.innerHTML"]
+    PrependDOM --> RenderView["Immediate UI Update: New Article Renders at Top of Feed"]
+```
+
+</details>
+
+### 📝 Quiz & Recap
+
+> [!NOTE]
+> **Why is prepending (`newPostHtml + existingHtml`) preferred for a blog feed over appending?**
+>
+> - **Answer:** In blog feeds, news portals, and social media platforms, users expect newly published content to appear at the very top of the feed where it is immediately visible without scrolling down.
+
+> [!TIP]
+> **What is the benefit of rendering the post directly from the `POST` response instead of making another `GET` request?**
+>
+> - **Answer:** Rendering the object returned directly by the server eliminates an extra network round-trip, saves server resources and bandwidth, and provides instant, flicker-free visual feedback to the user.
+
+> [!IMPORTANT]
+> **How does `newPostHtml + document.getElementById("blog-list").innerHTML` place content at the beginning?**
+>
+> - **Answer:** In JavaScript string concatenation, the value placed on the left side of the `+` operator comes first in the resulting string. Placing `newPostHtml` before the existing `.innerHTML` ensures the new markup is evaluated and rendered at the top of the container.
+
+### 💻 Code Implementation
+
+You can explore the source files for this practice below:
+
+- [index.html](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/BlogSpace%20-%20Add%20new%20post%20to%20list%20of%20posts/index.html>) - Baseline HTML template linking the styled form and post container.
+- [index.css](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/BlogSpace%20-%20Add%20new%20post%20to%20list%20of%20posts/index.css>) - CSS layout styles.
+- [index.js](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/BlogSpace%20-%20Add%20new%20post%20to%20list%20of%20posts/index.js>) - Logic parsing the `POST` response and prepending the new post markup into the DOM.
+- [package.json](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/BlogSpace%20-%20Add%20new%20post%20to%20list%20of%20posts/package.json>) - Project metadata and dependencies.
+- [vite.config.js](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/BlogSpace%20-%20Add%20new%20post%20to%20list%20of%20posts/vite.config.js>) - Vite configuration.
+
+```javascript
+// Prepend newly created post to the top of the blog list upon successful POST response
+fetch("https://apis.scrimba.com/jsonplaceholder/posts", options)
+    .then(res => res.json())
+    .then(data => {
+        const newPostHtml = `
+            <h3>${data.title}</h3>
+            <p>${data.body}</p>
+            <hr />
+        `;
+        document.getElementById("blog-list").innerHTML = 
+            newPostHtml + document.getElementById("blog-list").innerHTML;
+    });
+```
+
+### 🔗 Chapter 27 Resources
+
+- 📄 **MDN Web Docs:** [Element.innerHTML](https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML) — Reading and setting HTML markup of DOM elements.
+- 📄 **MDN Web Docs:** [Element.insertAdjacentHTML()](https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentHTML) — Alternative high-performance method for inserting HTML at specific positions (`afterbegin`).
+- 📄 **MDN Web Docs:** [Using Fetch - Handling Responses](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#response_objects) — Processing JSON payloads returned from server.
+- 📄 **API Endpoint:** [JSONPlaceholder Posts Endpoint (Scrimba Proxy)](https://apis.scrimba.com/jsonplaceholder/posts) — Mock REST endpoint for blog posts.
+
+
