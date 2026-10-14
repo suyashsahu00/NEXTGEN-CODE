@@ -55,7 +55,7 @@ Browse any date folder below to see what concept, project, or architecture was t
 | **17-03-2026** | Refined Layout Containers | Parent-child nesting, scroll zones, content flow | [📂 `01DEV/17-03-2026`](./01DEV/17-03-2026/) | [📖 Chapter 24](#17-03-2026) |
 | **18-03-2026** | Full Responsive Web Architecture | Navbar with Hamburger menu, content grid, footer | [📂 `01DEV/18-03-2026`](./01DEV/18-03-2026/) | [📖 Chapter 25](#18-03-2026) |
 | **25-03-2026** | Accessible Web Development (A11y) | WAI-ARIA, skip links, contrast, semantic elements | [📂 `25-03-2026`](./25-03-2026/) | [📖 Chapter 26](#25-03-2026) |
-| **05-07-2026** | APIs & Asynchronous JavaScript | REST APIs, `fetch()`, async/await, BoredBot app | [📂 `05-07-2026`](./05-07-2026/) | [📖 Chapter 27](#05-07-2026) |
+| **05-07-2026** | APIs & Asynchronous JavaScript | REST APIs, `fetch()`, JSON body & methods, BlogSpace app | [📂 `05-07-2026`](./05-07-2026/) | [📖 Chapter 27](#05-07-2026) |
 | **13-07-2026** | Prompt Engineering for Developers | Prompt strategies, AI capabilities/limits, LLM workflows | [📂 `13-07-2026`](./13-07-2026/) | [📖 Chapter 28](#13-07-2026) |
 | **04-09-2026** | Mobile Web App & Firebase Cloud | Mobile web apps, Firebase SDK, real-time sync | [📂 `04-09-2026`](./04-09-2026/) | [📖 Chapter 29](#04-09-2026) |
 
@@ -434,14 +434,29 @@ Mastering digital accessibility to build web experiences compliant with WCAG gui
 <a id="05-07-2026"></a>
 ## 📖 Chapter 27: [05-07-2026](./05-07-2026/) — APIs & Asynchronous JavaScript
 
-Connecting frontend applications to third-party web services using modern Asynchronous JavaScript:
+Connecting frontend applications to third-party web services using modern Asynchronous JavaScript and REST architecture:
 
 - **Client-Server Flow:** Understanding HTTP request/response lifecycles, headers, and status codes.
 - **`fetch()` API & Promises:** Handling asynchronous network requests with `.then()` chains and `async`/`await`.
-- **BoredBot Web App:** Practical API integration fetching and rendering real-time activities.
+- **BoredBot Web App:** Practical API integration fetching and rendering real-time activity suggestions.
+- **REST APIs & URLs:** Endpoints, resources, HTTP request methods (`GET`, `POST`, `PUT`, `DELETE`), and base URLs.
+- **BlogSpace Project:** Building a full blog application with dynamic DOM rendering, CSS flex forms, `submit` event listeners, and `POST` requests with serialized JSON bodies (`JSON.stringify()`).
+
+```javascript
+// POST request with serialized JSON body to create a new resource
+fetch("https://apis.scrimba.com/jsonplaceholder/todos", {
+    method: "POST",
+    body: JSON.stringify({
+        title: "Buy Milk",
+        completed: false
+    })
+})
+    .then(res => res.json())
+    .then(data => console.log(data));
+```
 
 > [!NOTE]
-> Check out the complete module documentation in [05-07-2026/APIs and Async JavaScript/README.md](./05-07-2026/APIs%20and%20Async%20JavaScript/README.md).
+> Check out the complete 24-chapter module documentation in [05-07-2026/APIs and Async JavaScript/README.md](./05-07-2026/APIs%20and%20Async%20JavaScript/README.md).
 
 [⬆ Back to Index](#-date-directory--quick-access-index)
 

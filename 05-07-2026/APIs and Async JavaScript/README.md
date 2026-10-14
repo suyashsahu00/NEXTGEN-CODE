@@ -694,6 +694,7 @@ When making API requests, properly structuring the target address is essential f
   - **Base URL:** The fixed root address of the API service that remains constant across different calls (e.g., `https://apis.scrimba.com/jsonplaceholder` or `https://blahblahblah.com/api/v2`).
   - **Endpoint:** The dynamic path suffix that points to the specific resource, entity, or collection you want to access (e.g., `/posts`, `/users`, `/products`, or `/products/123`).
   - **Full Request URL:** Combining the Base URL and the Endpoint forms the complete destination address:
+
     $$
     \text{Full URL} = \text{Base URL} + \text{Endpoint}
     $$
@@ -769,6 +770,7 @@ fetch(`${baseURL}${endpoint}`)
 - 🧩 **Chrome Extension:** [JSON Formatter](https://chromewebstore.google.com/detail/json-formatter/bcjindcccaagfpapjjmafapmmgkkhgoa) — Popular browser extension to format and explore JSON responses directly in Google Chrome.
 - 📄 **MDN Web Docs:** [What is a URL?](https://developer.mozilla.org/en-US/docs/Learn/Common_questions/Web_mechanics/What_is_a_URL) — Understanding URL syntax, hosts, and paths.
 - 📄 **JSONPlaceholder:** [Available Endpoints Guide](https://jsonplaceholder.typicode.com/) — Reference for `/posts`, `/comments`, `/albums`, `/photos`, `/todos`, and `/users`.
+
 ---
 
 ## 📤 Chapter 17: Requests — Methods
@@ -833,7 +835,7 @@ fetch("https://apis.scrimba.com/jsonplaceholder/todos", {
 ### 🔗 Chapter 17 Resources
 
 - 📄 **MDN Web Docs:** [HTTP Request Methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods) — In-depth guide to HTTP request verbs, safety, and idempotence.
-- 📄 **MDN Web Docs:** [Fetch API Options & Init](https://developer.mozilla.org/en-US/docs/Web/API/fetch#options) — Complete specification of `fetch()` parameters and request headers.
+- 📄 **MDN Web Docs:** [Fetch API Options &amp; Init](https://developer.mozilla.org/en-US/docs/Web/API/fetch#options) — Complete specification of `fetch()` parameters and request headers.
 - 📄 **API Endpoint:** [JSONPlaceholder Todos Endpoint (Scrimba Proxy)](https://apis.scrimba.com/jsonplaceholder/todos)
 
 ---
@@ -1027,13 +1029,13 @@ In this chapter, we extend **BlogSpace** by constructing an interactive submissi
 ```mermaid
 flowchart TD
     subgraph Viewport ["Browser Viewport"]
-        Nav["Fixed Navbar: &lt;nav&gt; (position: fixed)"]
-        subgraph FormBlock ["Submission Form: &lt;form&gt; (padding: 60px 10px 10px)"]
-            TitleGroup["Title Field: &lt;label for='post-title'&gt; + &lt;input id='post-title'&gt;"]
-            BodyGroup["Body Field: &lt;label for='post-body'&gt; + &lt;textarea id='post-body'&gt;"]
-            SubmitAction["Action Button: &lt;button&gt;Post&lt;/button&gt;"]
+        Nav["Fixed Navbar: <nav> (position: fixed)"]
+        subgraph FormBlock ["Submission Form: <form> (padding: 60px 10px 10px)"]
+            TitleGroup["Title Field: <label for='post-title'> + <input id='post-title'>"]
+            BodyGroup["Body Field: <label for='post-body'> + <textarea id='post-body'>"]
+            SubmitAction["Action Button: <button>Post</button>"]
         end
-        BlogContainer["Blog Articles Feed: &lt;div id='blog-list'&gt;"]
+        BlogContainer["Blog Articles Feed: <div id='blog-list'>"]
     end
 
     Nav -. Offset Clearance .-> FormBlock
@@ -1126,14 +1128,14 @@ In this chapter, we transform the raw HTML form from the previous lesson into an
 
 ```mermaid
 flowchart TD
-    subgraph FormWrapper ["Styled Form (&lt;form&gt;) — flex-direction: column"]
+    subgraph FormWrapper ["Styled Form (<form>) — flex-direction: column"]
         Background["Background Tint (#f1ede9) + Top Offset Padding"]
         subgraph Fields ["Vertical Element Flow"]
-            TitleLabel["&lt;label for='post-title'&gt; (font-weight: 700)"]
-            TitleInput["&lt;input id='post-title'&gt; (padding: 6px, border-radius: 4px)"]
-            BodyLabel["&lt;label for='post-body'&gt; (font-weight: 700)"]
-            BodyTextarea["&lt;textarea id='post-body'&gt; (resize: vertical, min-height: 60px)"]
-            ActionBtn["&lt;button&gt;Post&lt;/button&gt; (align-self: flex-start, hover transition)"]
+            TitleLabel["<label for='post-title'> (font-weight: 700)"]
+            TitleInput["<input id='post-title'> (padding: 6px, border-radius: 4px)"]
+            BodyLabel["<label for='post-body'> (font-weight: 700)"]
+            BodyTextarea["<textarea id='post-body'> (resize: vertical, min-height: 60px)"]
+            ActionBtn["<button>Post</button> (align-self: flex-start, hover transition)"]
         end
     end
 
@@ -1301,3 +1303,101 @@ document.querySelector("form").addEventListener("submit", function(e) {
 - 📄 **MDN Web Docs:** [HTMLFormElement: submit event](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/submit_event) — Event details, form submission triggers, and bubbling.
 - 📄 **MDN Web Docs:** [Event: preventDefault() method](https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault) — Halting default browser event actions.
 - 📄 **MDN Web Docs:** [HTMLInputElement: value property](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement#value) — Reading live user-entered input values.
+
+---
+
+## 📦 Chapter 24: Requests — Body
+
+### Core Concept
+
+When sending data from the client to a server, the **Request Body** carries the actual data payload. Understanding how to structure, serialize, and deliver this payload is fundamental when communicating with REST APIs.
+
+- **Purpose of the Request Body:**
+  - The body contains the payload of information you want the server to receive, process, or store.
+  - While `GET` requests retrieve data and typically do not carry a body, mutating HTTP methods such as `POST` (create), `PUT` (replace), and `PATCH` (partial update) rely on the request body to transfer information.
+- **Serializing Payloads with `JSON.stringify()`:**
+  - HTTP transmits raw strings or byte streams across the network, not live JavaScript runtime objects.
+  - If a JavaScript object `{ title: "Buy Milk", completed: false }` is passed directly without serialization, JavaScript converts it to the literal string `"[object Object]"`, resulting in server errors or corrupted records.
+  - Using `JSON.stringify(...)` converts the JavaScript object into a standardized, RFC-compliant JSON string that any server-side language can parse and deserialize.
+- **Configuring the `fetch()` Options Object:**
+  - The second argument to `fetch()` accepts a configuration options object containing the HTTP `method` and the stringified `body`:
+    ```javascript
+    fetch(url, {
+        method: "POST",
+        body: JSON.stringify(payload)
+    })
+    ```
+- **Parsing the Server Response:**
+  - After receiving the payload, the REST API returns a response confirming the creation of the record, often including a newly minted unique identifier (`id`).
+  - Chaining `.then(res => res.json())` and `.then(data => console.log(data))` parses the server's JSON response and allows inspecting the confirmed record in the console.
+
+### 💡 Visualizations & Architecture
+
+<details>
+  <summary><b>📷 Expand to View Request Body Visualizations & Flow Diagram</b></summary>
+  <br>
+
+### 1. Request Body Concept Slide
+
+![Request Body Overview](image/Readme/1791965790364.png)
+
+### 2. Request Body Transmission & Serialization Flow
+
+```mermaid
+flowchart TD
+    JSObj["JavaScript Object: { title: 'Buy Milk', completed: false }"] --> Serialize["Serialize with JSON.stringify()"]
+    Serialize --> JSONString["JSON String Payload: { 'title': 'Buy Milk', 'completed': false }"]
+    JSONString --> FetchReq["fetch() with method: 'POST' & body: JSONString"]
+    FetchReq --> HTTPWire["HTTP POST Request Sent Across Network"]
+    HTTPWire --> Server["REST API Server (Parses Body & Generates Unique ID)"]
+    Server --> Response["Server Response: 201 Created (Confirmed Todo Resource)"]
+```
+
+</details>
+
+### 📝 Quiz & Recap
+
+> [!NOTE]
+> **What is the request `body` in HTTP, and when is it typically used?**
+>
+> - **Answer:** The `body` is the actual payload of data transmitted from the client to the server. It is primarily used with HTTP methods intended to send or mutate data, such as `POST` (create), `PUT` (replace), and `PATCH` (partial update). It is generally omitted in `GET` and `DELETE` requests.
+
+> [!TIP]
+> **Why must JavaScript objects be converted with `JSON.stringify()` before passing them into `body`?**
+>
+> - **Answer:** HTTP transmits data across networks as text strings or binary streams, not as live runtime JavaScript memory objects. If you pass a plain object directly without serializing it, JavaScript converts it to the string `"[object Object]"`, corrupting the data. `JSON.stringify()` converts the object into a standardized JSON string that the server can parse.
+
+> [!IMPORTANT]
+> **What does a REST API endpoint like JSONPlaceholder return when receiving a POST request?**
+>
+> - **Answer:** The server processes the transmitted JSON body, generates a new unique identifier (such as `id: 201`), and returns the created resource object back to the client in the response payload, confirming that the new item was accepted.
+
+### 💻 Code Implementation
+
+You can explore the source files for this practice below:
+
+- [index.html](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/Requests%20-%20Body/index.html>) - Baseline HTML template linking the script bundle.
+- [index.js](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/Requests%20-%20Body/index.js>) - Logic executing a POST request with a stringified JSON body and parsing the response.
+- [package.json](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/Requests%20-%20Body/package.json>) - Project metadata and Webpack build dependencies.
+- [webpack.config.js](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/Requests%20-%20Body/webpack.config.js>) - Module bundler configuration.
+
+```javascript
+// Send a POST request with a stringified JSON payload to add a new todo item
+fetch("https://apis.scrimba.com/jsonplaceholder/todos", {
+    method: "POST",
+    body: JSON.stringify({
+        title: "Buy Milk",
+        completed: false
+    })
+})
+    .then(res => res.json())
+    .then(data => console.log(data));
+```
+
+### 🔗 Chapter 24 Resources
+
+- 📄 **MDN Web Docs:** [Fetch API - Request: body](https://developer.mozilla.org/en-US/docs/Web/API/Request/body) — How request bodies are structured and transferred in `fetch()`.
+- 📄 **MDN Web Docs:** [JSON.stringify()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) — Syntax, parameters, and serialization mechanics for converting objects to JSON.
+- 📄 **MDN Web Docs:** [Using the Fetch API - Uploading JSON Data](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#uploading_json_data) — Step-by-step guide to sending JSON payloads.
+- 📄 **API Endpoint:** [JSONPlaceholder Todos Endpoint (Scrimba Proxy)](https://apis.scrimba.com/jsonplaceholder/todos) — Mock REST endpoint for todo records.
+

@@ -21,3 +21,15 @@ When formatting or updating ANY README files or creating READMEs for new or futu
 
 5. **Pre-push Formatting:**
    - Always verify and format the README file before staging, committing, and pushing changes to GitHub.
+
+6. **Root README Synchronization:**
+   - When creating or updating chapters in date-specific or module-level README files (e.g., `05-07-2026/APIs and Async JavaScript/README.md`), always verify and synchronize the repository root [README.md](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/README.md).
+   - Ensure both the **Date Directory & Quick Access Index** table row and the corresponding **Chapter summary & representative code snippet** reflect the latest topics, technologies, and projects completed.
+
+7. **Mermaid Diagram Validation:**
+   - Always verify and test Mermaid diagram syntax before committing.
+   - Avoid HTML tags (such as `<code>`, `<br>`) and escaped quotes (`\"`) inside node labels, as they break Markdown Mermaid parsers. Use clean single quotes or plain text enclosed in double-quoted brackets (e.g. `node["Label: 'text'"]`).
+
+8. **Commit Confirmation & Clean Commit Messages:**
+   - Never commit changes automatically without explicit user confirmation.
+   - Before running `git commit`, always ask the user for confirmation and propose a clear, descriptive conventional commit message (e.g., `docs(api): add chapter 24 request body with sanitized mermaid diagram`).
