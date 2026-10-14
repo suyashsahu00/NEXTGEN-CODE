@@ -1507,3 +1507,109 @@ fetch("https://apis.scrimba.com/jsonplaceholder/todos", {
 - 📄 **MDN Web Docs:** [Using Fetch - Supplying Request Options](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#supplying_request_options) — Specifying headers, methods, and credentials in `fetch()`.
 - 📄 **API Endpoint:** [JSONPlaceholder Todos Endpoint (Scrimba Proxy)](https://apis.scrimba.com/jsonplaceholder/todos) — Mock REST endpoint for todo records.
 
+---
+
+## 🚀 Chapter 26: BlogSpace — Send New Post to Server
+
+### Core Concept
+
+In this chapter, we synthesize everything learned about HTML forms, DOM event handling, and HTTP request anatomy (methods, serialized JSON bodies, and request headers) into the **BlogSpace** project. We enable users to compose a title and body, submit the form, and dispatch an HTTP `POST` request to create a new post resource on the remote server.
+
+- **Intercepting the Form Submission:**
+  - Listening to the `"submit"` event directly on the form container (`#new-post`) ensures submissions via both button clicks and keyboard <kbd>Enter</kbd> are captured.
+  - Calling `e.preventDefault()` halts default browser navigation, allowing JavaScript to handle transmission seamlessly in the background.
+- **Reading Values & Constructing the Payload:**
+  - Dynamic user input is read using `.value` from `document.getElementById("post-title")` and `document.getElementById("post-body")`.
+  - The values are packaged into a JavaScript object:
+    ```javascript
+    const data = {
+        title: postTitle,
+        body: postBody
+    };
+    ```
+- **Dispatching the HTTP `POST` Request:**
+  - Calling `fetch("https://apis.scrimba.com/jsonplaceholder/posts", ...)` with full request configuration:
+    - **`method: "POST"`**: Signals the server that a new resource is being created.
+    - **`body: JSON.stringify(data)`**: Serializes the JavaScript object into a JSON string stream.
+    - **`headers: { "Content-Type": "application/json" }`**: Instructs the server middleware to parse the body as JSON.
+- **Handling the Response:**
+  - Chaining `.then(res => res.json())` parses the server's confirmation payload.
+  - Mock REST APIs (like JSONPlaceholder) confirm the creation by returning the created post object with an assigned identifier (`id: 101`).
+
+### 💡 Visualizations & Architecture
+
+<details>
+  <summary><b>📷 Expand to View New Post Submission Flow Diagram</b></summary>
+  <br>
+
+```mermaid
+flowchart TD
+    User["User fills form and clicks 'Post'"] --> FormSubmit["Form 'submit' event fires on #new-post"]
+    FormSubmit --> Prevent["e.preventDefault() intercepts page reload"]
+    Prevent --> Extract["Extract values from #post-title and #post-body"]
+    Extract --> DataObj["Construct data object: { title, body }"]
+    DataObj --> FetchCall["fetch('https://apis.scrimba.com/jsonplaceholder/posts', options)"]
+    FetchCall --> Network["HTTP POST with JSON.stringify(data) & Content-Type: application/json"]
+    Network --> ServerMock["Server generates unique id: 101 and returns post"]
+    ServerMock --> ConsoleLog["console.log(post) confirms record creation"]
+```
+
+</details>
+
+### 📝 Quiz & Recap
+
+> [!NOTE]
+> **How does sending a new blog post connect all previous REST concepts together?**
+>
+> - **Answer:** It connects form event handling (`e.preventDefault()`), DOM value extraction, payload serialization (`JSON.stringify()`), HTTP method specification (`POST`), and content metadata headers (`"Content-Type": "application/json"`) into a unified client-server communication cycle.
+
+> [!TIP]
+> **What role does `"Content-Type": "application/json"` play in this form submission?**
+>
+> - **Answer:** It informs the server's body-parsing middleware that the payload payload is structured as JSON so the server can deserialize it into an object with `.title` and `.body` properties. Without it, the server would treat the payload as plain text and fail to parse it.
+
+> [!IMPORTANT]
+> **Why does JSONPlaceholder return an object with `id: 101` when posting a new article?**
+>
+> - **Answer:** JSONPlaceholder contains 100 default posts. When you submit a valid `POST` request to `/posts`, it simulates creating a new record by auto-incrementing the ID to `101` and returning the submitted data back to the client.
+
+### 💻 Code Implementation
+
+You can explore the source files for this practice below:
+
+- [index.html](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/BlogSpace%20-%20Send%20new%20post%20to%20server/index.html>) - Markup with `#new-post` form and `#blog-list` container.
+- [index.css](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/BlogSpace%20-%20Send%20new%20post%20to%20server/index.css>) - Styles defining the fixed navigation bar and form layout.
+- [index.js](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/BlogSpace%20-%20Send%20new%20post%20to%20server/index.js>) - Form submit listener executing the `fetch()` POST request with serialized body and headers.
+- [package.json](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/BlogSpace%20-%20Send%20new%20post%20to%20server/package.json>) - Project metadata and dependencies.
+- [vite.config.js](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/BlogSpace%20-%20Send%20new%20post%20to%20server/vite.config.js>) - Vite configuration.
+
+```javascript
+// Intercept form submission and send new post to server via HTTP POST
+document.getElementById("new-post").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const postTitle = document.getElementById("post-title").value;
+    const postBody = document.getElementById("post-body").value;
+    const data = {
+        title: postTitle,
+        body: postBody
+    };
+
+    fetch("https://apis.scrimba.com/jsonplaceholder/posts", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+        .then(res => res.json())
+        .then(post => console.log(post));
+});
+```
+
+### 🔗 Chapter 26 Resources
+
+- 📄 **MDN Web Docs:** [Using Fetch - Uploading JSON Data](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#uploading_json_data) — Sending JSON in request bodies with Fetch.
+- 📄 **MDN Web Docs:** [HTMLFormElement: submit event](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/submit_event) — Intercepting form submissions.
+- 📄 **JSONPlaceholder:** [Creating a Resource Guide](https://jsonplaceholder.typicode.com/guide/) — Documentation for testing POST endpoints.
+- 📄 **API Endpoint:** [JSONPlaceholder Posts Endpoint (Scrimba Proxy)](https://apis.scrimba.com/jsonplaceholder/posts) — Mock REST endpoint for blog posts.
+
