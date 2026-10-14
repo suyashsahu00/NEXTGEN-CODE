@@ -1838,5 +1838,101 @@ document.getElementById("new-post").addEventListener("submit", function(e) {
 - 📄 **MDN Web Docs:** [State Management Basics](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Manipulating_documents) — Managing DOM changes via centralized state.
 - 📄 **API Endpoint:** [JSONPlaceholder Posts Endpoint (Scrimba Proxy)](https://apis.scrimba.com/jsonplaceholder/posts) — Mock REST endpoint for blog posts.
 
+---
+
+## 🧹 Chapter 29: BlogSpace — Reset Form
+
+### Core Concept
+
+Completing the user submission lifecycle requires returning the application interface to an intuitive, ready state. In this chapter, we optimize DOM access by caching input elements and clear the form controls upon a successful server response so users can compose subsequent posts seamlessly.
+
+- **DOM Element Reference Caching:**
+  - Instead of repeatedly executing `document.getElementById("post-title")` and `document.getElementById("post-body")` every time a submission occurs, we cache the references once at the module level:
+    ```javascript
+    const titleInput = document.getElementById("post-title");
+    const bodyInput = document.getElementById("post-body");
+    ```
+  - This improves performance and eliminates redundant DOM lookups.
+- **Form Clearing Post-Submission (`.value = ""`):**
+  - Once the `POST` request resolves successfully and the DOM has updated via `renderPosts()`, resetting the input controls clears the form:
+    ```javascript
+    titleInput.value = "";
+    bodyInput.value = "";
+    ```
+  - Alternatively, invoking `form.reset()` on the parent `<form>` element resets all encapsulated controls.
+- **Asynchronous User Feedback & UX Safeguards:**
+  - Clearing the form inputs is placed inside the `.then(post => { ... })` callback rather than synchronously outside the fetch call.
+  - If a network error or server rejection occurs, the user's drafted title and body remain intact in the fields, avoiding accidental data loss.
+
+### 💡 Visualizations & Architecture
+
+<details>
+  <summary><b>📷 Expand to View Form Reset Lifecycle Diagram</b></summary>
+  <br>
+
+```mermaid
+flowchart TD
+    Submit["User Submits New Post"] --> Extract["Read titleInput.value & bodyInput.value"]
+    Extract --> PostNetwork["POST Request sent to Server"]
+    PostNetwork --> ResponseOK["Server returns 201 Created with saved post"]
+    ResponseOK --> StateUpdate["postsArray.unshift(post)"]
+    StateUpdate --> ReRender["renderPosts() updates feed DOM"]
+    ReRender --> ClearInputs["Reset Inputs: titleInput.value = '' & bodyInput.value = ''"]
+    ClearInputs --> Ready["Form restored to clean state ready for next entry"]
+```
+
+</details>
+
+### 📝 Quiz & Recap
+
+> [!NOTE]
+> **Why is caching DOM element references at the top of the file recommended?**
+>
+> - **Answer:** Querying the DOM via `document.getElementById()` requires traversing the DOM tree. Caching the element references in variables once at the top of the script avoids repeated tree lookups on every submission, improving code cleanliness and runtime efficiency.
+
+> [!TIP]
+> **What is the difference between setting `.value = ""` on individual inputs versus calling `form.reset()`?**
+>
+> - **Answer:** Manually assigning `.value = ""` allows clearing specific target controls while preserving others (e.g. keeping a category or author field). Calling `document.getElementById("form-id").reset()` resets all fields within the form back to their default values in a single method call.
+
+> [!IMPORTANT]
+> **Why should form inputs only be cleared inside the `.then()` resolution block rather than right after the `fetch()` call?**
+>
+> - **Answer:** Network requests are asynchronous and may fail due to loss of internet connection, server downtime, or invalid credentials. If inputs are cleared before the server confirms success, the user loses their typed draft and cannot retry without retyping everything.
+
+### 💻 Code Implementation
+
+You can explore the source files for this practice below:
+
+- [index.html](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/BlogSpace%20-%20Reset%20form/index.html>) - Baseline HTML template linking styled form and blog feed.
+- [index.css](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/BlogSpace%20-%20Reset%20form/index.css>) - CSS layout styles.
+- [index.js](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/BlogSpace%20-%20Reset%20form/index.js>) - Script caching DOM nodes and clearing fields upon successful post creation.
+- [package.json](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/BlogSpace%20-%20Reset%20form/package.json>) - Project dependencies and scripts.
+- [vite.config.js](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/BlogSpace%20-%20Reset%20form/vite.config.js>) - Vite configuration.
+
+```javascript
+// Cached DOM references
+const titleInput = document.getElementById("post-title");
+const bodyInput = document.getElementById("post-body");
+
+// Clear form inputs after updating state and re-rendering
+fetch("https://apis.scrimba.com/jsonplaceholder/posts", options)
+    .then(res => res.json())
+    .then(post => {
+        postsArray.unshift(post);
+        renderPosts();
+        titleInput.value = "";
+        bodyInput.value = "";
+    });
+```
+
+### 🔗 Chapter 29 Resources
+
+- 📄 **MDN Web Docs:** [HTMLInputElement: value](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement#value) — Reading and setting input field values.
+- 📄 **MDN Web Docs:** [HTMLFormElement: reset()](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/reset) — Resetting form controls.
+- 📄 **MDN Web Docs:** [Document: getElementById()](https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById) — DOM element retrieval and caching.
+- 📄 **API Endpoint:** [JSONPlaceholder Posts Endpoint (Scrimba Proxy)](https://apis.scrimba.com/jsonplaceholder/posts) — Mock REST endpoint for blog posts.
+
+
 
 
