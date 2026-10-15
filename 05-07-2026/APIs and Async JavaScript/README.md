@@ -2313,3 +2313,108 @@ fetch(`${baseApi}/reviews`)
 - 📄 **MDN Web Docs:** [How to Design a RESTful Web API](https://developer.mozilla.org/en-US/docs/Glossary/REST) — Deep dive into REST resource hierarchies and identification.
 - 📄 **RFC 6570:** [URI Template Reference](https://datatracker.ietf.org/doc/html/rfc6570) — Standard specification for URI variables and path parameters.
 
+---
+
+## 🔍 Chapter 33: URL Parameters - JSONPlaceholder Nested Resources
+
+Building upon the theory of nested resources, this practice applies parent-child URL routing to the industry-standard **JSONPlaceholder API** (`https://apis.scrimba.com/jsonplaceholder/`). We examine how real-world REST backends structure dependent data and how clients fetch scoped sub-collections (such as all comments belonging to a specific blog post) using dynamic path parameters.
+
+### 🔑 Core Concepts
+
+1. **Practical Nested Endpoint Resolution:**
+   - In a blogging API, comments cannot exist without an associated post. The relationship is strictly hierarchical.
+   - Endpoint: `/posts/:postId/comments`
+   - Real Request: `GET https://apis.scrimba.com/jsonplaceholder/posts/2/comments`
+   - Result: Returns an array of comment objects exclusively tied to post ID `2`.
+2. **Path Nesting vs. Query Parameters:**
+   - **Path Nesting (`/posts/2/comments`):** Directly expresses identity and ownership through URL semantics. The child resource collection is treated as an attribute of the parent.
+   - **Query Parameters (`/comments?postId=2`):** Treats `/comments` as a global table and filters records matching criteria.
+   - Both approaches are supported by JSONPlaceholder, but nested path parameters provide cleaner, self-documenting hierarchical API design.
+3. **JSONPlaceholder Standard Nested Routes:**
+   - `/posts/:id/comments` &rarr; Comments for a specific post.
+   - `/albums/:id/photos` &rarr; Photos inside a specific album.
+   - `/users/:id/albums` &rarr; Albums created by a specific user.
+   - `/users/:id/todos` &rarr; Todo items assigned to a specific user.
+   - `/users/:id/posts` &rarr; Blog posts authored by a specific user.
+
+### 💡 Visualizations & Request Lifecycle
+
+<details>
+  <summary><b>📷 Expand to View JSONPlaceholder Nested Request Architecture</b></summary>
+  <br>
+
+```mermaid
+flowchart LR
+    Client["Client Browser ('fetch()')"] --> Req["HTTP GET '/jsonplaceholder/posts/2/comments'"]
+    Req --> API["JSONPlaceholder Server"]
+    API --> Filter["Resolve Parent: Post ID = 2"]
+    Filter --> Extract["Extract Child Collection: Comments"]
+    Extract --> Res["JSON Response Array: '[ { postId: 2, id: 6, ... } ]'"]
+    Res --> Client
+
+    style Client fill:#1e1e2e,stroke:#89b4fa,stroke-width:2px,color:#cdd6f4
+    style Req fill:#181825,stroke:#f9e2af,stroke-width:2px,color:#cdd6f4
+    style API fill:#181825,stroke:#a6e3a1,stroke-width:2px,color:#cdd6f4
+    style Filter fill:#11111b,stroke:#fab387,stroke-width:2px,color:#cdd6f4
+    style Extract fill:#11111b,stroke:#89dceb,stroke-width:2px,color:#cdd6f4
+    style Res fill:#1e1e2e,stroke:#a6e3a1,stroke-width:2px,color:#cdd6f4
+```
+
+</details>
+
+### 📝 Challenge & Recap
+
+> [!IMPORTANT]
+> **Hierarchical Ownership in URLs:**  
+> When accessing `/posts/2/comments`, the server handles the relational join behind the scenes, guaranteeing that every item in the returned array belongs exclusively to post `2`. No client-side array filtering (`Array.prototype.filter()`) is necessary.
+
+> [!TIP]
+> **API Documentation Exploration:**  
+> Always check the API provider's "Relations" or "Listing nested resources" section. If a nested route is not explicitly documented, test whether query parameter filtering (e.g., `?postId=2`) is the alternative pattern.
+
+> [!NOTE]
+> **Dynamic Interpolation in JavaScript:**  
+> In modern client code, avoid hardcoding IDs into string literals. Use ES6 template literals (`` `/posts/${postId}/comments` ``) to create reusable query functions.
+
+### 💻 Code Implementation
+
+Practice files for this chapter are available in [URL Parameters - JSON Placeholder API](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/URL%20Parameters%20-%20JSON%20Placeholder%20API) ([index.js](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/URL%20Parameters%20-%20JSON%20Placeholder%20API/index.js)):
+
+```javascript
+/**
+ * Challenge: GET all the comments from the blog post with ID of 2 and log to the console
+ * 
+ * BaseURL: https://apis.scrimba.com/jsonplaceholder/
+ * Endpoint: /posts/2/comments
+ */
+
+// Basic Fetch Implementation
+fetch("https://apis.scrimba.com/jsonplaceholder/posts/2/comments")
+    .then(res => res.json())
+    .then(data => console.log("Comments for post 2:", data));
+
+// Reusable Dynamic Parameter Function
+function getPostComments(postId) {
+    const baseUrl = "https://apis.scrimba.com/jsonplaceholder";
+    return fetch(`${baseUrl}/posts/${postId}/comments`)
+        .then(res => {
+            if (!res.ok) {
+                throw new Error(`HTTP error! Status: ${res.status}`);
+            }
+            return res.json();
+        });
+}
+
+// Example usage: Fetch comments for post ID 5
+getPostComments(5)
+    .then(comments => console.log("Comments for post 5:", comments))
+    .catch(err => console.error("Fetch failed:", err));
+```
+
+### 🔗 Chapter 33 Resources
+
+- 📄 **JSONPlaceholder Guide:** [Listing Nested Resources Guide](https://jsonplaceholder.typicode.com/guide/) — Documentation of official relation routes for posts, comments, albums, and users.
+- 📄 **MDN Web Docs:** [Using the Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) — Fetching data asynchronously with promises and response parsing.
+- 📄 **REST API Tutorial:** [RESTful URL Path Design](https://restfulapi.net/resource-naming/) — Industry standards for modeling collections and sub-resources in URIs.
+
+
