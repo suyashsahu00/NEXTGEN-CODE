@@ -1727,7 +1727,9 @@ As web applications grow in complexity, scattering DOM manipulation logic across
   - Calling `renderPosts()` immediately re-evaluates the array and updates the DOM, cleanly displaying the newest post at the top without ad-hoc string concatenation.
 - **Transition to State-Driven Architecture:**
   - This pattern decouples data flow from presentation:
-    $$\text{Network Request} \longrightarrow \text{State Mutation} \longrightarrow \text{Declarative Render}$$
+    $$
+    \text{Network Request} \longrightarrow \text{State Mutation} \longrightarrow \text{Declarative Render}
+    $$
   - Understanding this flow provides a direct conceptual bridge to modern reactive UI libraries like React and Vue.
 
 ### 💡 Visualizations & Architecture
@@ -1933,6 +1935,156 @@ fetch("https://apis.scrimba.com/jsonplaceholder/posts", options)
 - 📄 **MDN Web Docs:** [Document: getElementById()](https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById) — DOM element retrieval and caching.
 - 📄 **API Endpoint:** [JSONPlaceholder Posts Endpoint (Scrimba Proxy)](https://apis.scrimba.com/jsonplaceholder/posts) — Mock REST endpoint for blog posts.
 
+---
 
+## 🌐 Chapter 30: REST (Representational State Transfer)
 
+### Core Concept
 
+**REST (REpresentational State Transfer)** is an architectural design pattern and set of guiding constraints that provide a standardized convention for communication between clients and servers over the internet.
+
+- **What Does REST Mean?**
+  - **Representational:** Data is requested and transferred in a standardized representation (most commonly **JSON**).
+  - **State:** The current data snapshot of a resource stored in the system (e.g. database records).
+  - **Transfer:** Moving representations of that state across the network between the client and server.
+- **Key Principles of REST Architecture:**
+  1. **Client & Server Separation:**
+     - The server's primary responsibility is storing, managing, and delivering raw data payloads via HTTP endpoints.
+     - The server does not dictate how that data is visually presented.
+     - Heterogeneous clients (laptops, mobile phones, smartwatches, smart TVs) make HTTP requests to the same unified REST API, receive JSON, and render their own platform-specific interfaces.
+  2. **Statelessness:**
+     - Every incoming request from a client must contain all necessary context, credentials, and parameters needed for the server to process it.
+     - The server does not retain client session state between requests, maximizing scalability and resilience.
+  3. **Accessing Resources via Standardized Endpoints (Nouns vs. Verbs):**
+     - **Nouns (Endpoints):** URLs specify the **resource** or collection being accessed (e.g., `/bikes`, `/posts`, `/users`).
+     - **Verbs (HTTP Methods):** The HTTP method indicates the **action** performed on that resource:
+       - `GET /bikes` &rarr; Retrieve all bicycle items.
+       - `POST /bikes` &rarr; Create a new bicycle item.
+       - `GET /bikes/123` &rarr; Retrieve the specific bicycle with ID `123`.
+       - `PUT /bikes/123` &rarr; Replace or update bicycle `123`.
+       - `DELETE /bikes/123` &rarr; Remove bicycle `123`.
+
+### 💡 Visualizations & Architecture
+
+<details>
+  <summary><b>📷 Expand to View REST Architectural Visualizations & Flow Diagram</b></summary>
+  <br>
+
+### 1. What is REST?
+
+![What is REST](image/Readme/1791989803754.png)
+
+![REST Design Pattern](image/Readme/1791989824117.png)
+
+### 2. Client & Server Separation Across Devices
+
+![Client Server Separation 1](image/Readme/1792077000133.png)
+
+![Client Server Separation 2](image/Readme/1792077024861.png)
+
+![Client Server Separation 3](image/Readme/1792077074009.png)
+
+![Unified Multi-Device REST Clients](image/Readme/1792077107454.png)
+
+### 3. Core Principles of REST
+
+![Principles of REST](image/Readme/1792077909068.png)
+
+![Principles of REST: Resources](image/Readme/1792077954673.png)
+
+### 4. Interacting with Resources (Nouns vs. Verbs)
+
+![Interacting with Resources](image/Readme/1792078374589.png)
+
+### 5. Architectural REST Communication Diagram
+
+```mermaid
+flowchart TD
+    subgraph Clients ["Heterogeneous Clients"]
+        Browser["Web Browser (Desktop / Laptop)"]
+        Mobile["Mobile App (iOS / Android)"]
+        Wearable["Smartwatch / IoT Device"]
+    end
+
+    subgraph RESTAPI ["Standardized REST API (JSON Data)"]
+        Endpoints["Resource Endpoints (Nouns): /bikes, /posts, /todos"]
+        Verbs["HTTP Methods (Verbs): GET, POST, PUT, DELETE"]
+    end
+
+    subgraph ServerBackend ["Backend Infrastructure"]
+        Server["Node / Express API Server"]
+        DB[("Database")]
+    end
+
+    Browser -->|HTTP Request with JSON| Endpoints
+    Mobile -->|HTTP Request with JSON| Endpoints
+    Wearable -->|HTTP Request with JSON| Endpoints
+
+    Endpoints --> Server
+    Server <--> DB
+    Server -->|Stateless JSON Response| Clients
+```
+
+</details>
+
+### 📝 Quiz & Recap
+
+_(Original file: [quiz.md](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/REST/quiz.md>))_
+
+> [!NOTE]
+> **How would you describe what REST is to your non-technical friend?**
+>
+> - **Answer:** A standardized way to have your computer, like your laptop or phone, get or send information to another computer (like a server) across the internet.
+
+> [!TIP]
+> **What does a RESTful API usually return in response to incoming requests?**
+>
+> - **Answer:** **JSON data** (JavaScript Object Notation). Because JSON is universally supported, any client application can parse it and render a native user interface.
+
+> [!IMPORTANT]
+> **What kind of client devices can make use of a RESTful API?**
+>
+> - **Answer:** **ALL OF THEM.** Desktop web browsers, mobile phones, tablets, smartwatches, voice assistants, and IoT appliances can all consume the same RESTful API endpoints.
+
+### 💻 Code Implementation
+
+You can explore the source files for this practice below:
+
+- [quiz.md](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/REST/quiz.md>) - Knowledge check on REST principles, JSON data formats, and client device versatility.
+- [README.md](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/REST/README.md>) - Getting started instructions for running the lesson sandbox.
+- [package.json](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/REST/package.json>) - Project dependencies and scripts.
+- [vite.config.js](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/REST/vite.config.js>) - Vite configuration.
+
+```javascript
+// RESTful API Endpoint Pattern: Nouns (Resources) paired with Verbs (HTTP Methods)
+const baseUrl = "https://example.com/api";
+
+// 1. GET /bikes - Retrieve list of all bicycle resources
+fetch(`${baseUrl}/bikes`)
+    .then(res => res.json())
+    .then(bikes => console.log(bikes));
+
+// 2. POST /bikes - Create a new bicycle resource
+fetch(`${baseUrl}/bikes`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ model: "Mountain Pro", price: 499 })
+})
+    .then(res => res.json())
+    .then(newBike => console.log(newBike));
+
+// 3. GET /bikes/123 - Retrieve specific bike resource by ID
+fetch(`${baseUrl}/bikes/123`)
+    .then(res => res.json())
+    .then(bike => console.log(bike));
+
+// 4. DELETE /bikes/123 - Delete specific bike resource
+fetch(`${baseUrl}/bikes/123`, { method: "DELETE" })
+    .then(res => console.log("Resource deleted:", res.status));
+```
+
+### 🔗 Chapter 30 Resources
+
+- 📄 **MDN Web Docs:** [REST Glossary](https://developer.mozilla.org/en-US/docs/Glossary/REST) — Formal definition of Representational State Transfer.
+- 📄 **MDN Web Docs:** [HTTP Request Methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods) — Verbs used to indicate desired actions on resources.
+- 📄 **REST API Tutorial:** [What is REST?](https://restfulapi.net/) — Constraints, principles, and architectural best practices.
