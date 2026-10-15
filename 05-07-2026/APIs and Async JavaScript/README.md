@@ -2088,3 +2088,131 @@ fetch(`${baseUrl}/bikes/123`, { method: "DELETE" })
 - 📄 **MDN Web Docs:** [REST Glossary](https://developer.mozilla.org/en-US/docs/Glossary/REST) — Formal definition of Representational State Transfer.
 - 📄 **MDN Web Docs:** [HTTP Request Methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods) — Verbs used to indicate desired actions on resources.
 - 📄 **REST API Tutorial:** [What is REST?](https://restfulapi.net/) — Constraints, principles, and architectural best practices.
+
+---
+
+## 📐 Chapter 31: REST API Design
+
+### Core Concept
+
+Building on the foundation of Representational State Transfer, **REST API Design** focuses on structuring endpoints intuitively using standard conventions. By adhering to uniform patterns, developers create APIs that are self-documenting, predictable, and easy to consume across any client platform.
+
+- **Stateless Server Architecture:**
+  - A RESTful server is **stateless**: it does not preserve client session history between requests.
+  - Once a response is returned, the server "forgets" the interaction.
+  - Every incoming request must carry all required authentication headers, resource parameters, and payload data necessary for the server to fulfill the request.
+- **The "Nouns + Verbs" Design Convention (Mike's Bikes Model):**
+  - Rather than defining custom URL paths for every action (e.g. `/getBikes`, `/createBike`, `/deleteBike?id=56`), REST uses clean **plural nouns** for endpoints and standardized **HTTP methods** as actions:
+    | Action / Requirement | HTTP Method (Verb) | URL Endpoint (Noun) | Description |
+    |:---|:---:|:---|:---|
+    | **Retrieve All** | `GET` | `/bikes` | Fetches collection of all available bicycle records |
+    | **Retrieve By ID** | `GET` | `/bikes/42` | Fetches specific details for bike with ID `42` |
+    | **Update Record** | `PUT` | `/bikes/21` | Updates price or attributes of bike with ID `21` |
+    | **Create Record** | `POST` | `/bikes` | Submits new bicycle item to be created in database |
+    | **Delete Record** | `DELETE` | `/bikes/56` | Removes bicycle item with ID `56` from database |
+- **Benefits of RESTful API Design:**
+  - **Predictability:** Developers familiar with REST can deduce how to interact with new endpoints without consulting extensive documentation.
+  - **Scalability:** Stateless requests can be routed to any available backend server or container without sharing session state.
+  - **Clean Separation:** Frontend interfaces focus strictly on user experience, while backend services manage business rules and persistence.
+
+### 💡 Visualizations & Architecture
+
+<details>
+  <summary><b>📷 Expand to View REST API Routing Matrix Diagram</b></summary>
+  <br>
+
+```mermaid
+flowchart TD
+    subgraph Endpoints ["REST Resource Routing Table (/bikes)"]
+        E1["GET /bikes --> Returns all bike records"]
+        E2["GET /bikes/42 --> Returns bike with id 42"]
+        E3["POST /bikes --> Creates a new bike resource"]
+        E4["PUT /bikes/21 --> Updates bike with id 21"]
+        E5["DELETE /bikes/56 --> Deletes bike with id 56"]
+    end
+
+    ClientReq["Incoming HTTP Request"] --> MethodCheck{"HTTP Method Verb?"}
+    MethodCheck -- "GET (collection)" --> E1
+    MethodCheck -- "GET (specific id)" --> E2
+    MethodCheck -- "POST (new data)" --> E3
+    MethodCheck -- "PUT (modify id)" --> E4
+    MethodCheck -- "DELETE (remove id)" --> E5
+```
+
+</details>
+
+### 📝 Quiz & Recap
+
+_(Original file: [quiz.md](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/REST%20API%20Design/quiz.md>))_
+
+> [!NOTE]
+> **What does it mean for a server to be "Stateless"?**
+>
+> - **Answer:** It forgets the interaction immediately after the response is sent. The server does not store past interaction history or client session state across separate requests.
+
+> [!TIP]
+> **Why are URL endpoints formatted as plural nouns (`/bikes`) rather than verbs (`/getBikes` or `/updateBikes`)?**
+>
+> - **Answer:** The HTTP method already acts as the verb specifying the action. Using plural nouns for endpoints keeps the URL space clean and focused on resources, ensuring that the same URL path supports multiple actions (`GET`, `POST`, `PUT`, `DELETE`).
+
+> [!IMPORTANT]
+> **In the Mike's Bikes API example, what HTTP method and endpoint achieve each operation?**
+>
+> - **Retrieve list of all bikes:** `GET /bikes`
+> - **Retrieve detailed info for bike #42:** `GET /bikes/42`
+> - **Update price of bike #21:** `PUT /bikes/21`
+> - **Add a new bike to inventory:** `POST /bikes`
+> - **Remove bike #56 from list:** `DELETE /bikes/56`
+
+### 💻 Code Implementation
+
+You can explore the source files for this practice below:
+
+- [quiz.md](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/REST%20API%20Design/quiz.md>) - Knowledge check on statelessness and the Mike's Bikes CRUD endpoint mapping.
+- [README.md](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/REST%20API%20Design/README.md>) - Sandbox execution guide.
+- [package.json](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/REST%20API%20Design/package.json>) - Project metadata and scripts.
+- [vite.config.js](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/REST%20API%20Design/vite.config.js>) - Vite configuration.
+
+```javascript
+// Complete Mike's Bikes RESTful CRUD API Implementation
+const baseApi = "https://mikesbikes.com/api";
+
+// 1. GET /bikes - Retrieve all bikes
+fetch(`${baseApi}/bikes`)
+    .then(res => res.json())
+    .then(bikes => console.log("All bikes:", bikes));
+
+// 2. GET /bikes/42 - Retrieve specific bike by ID
+fetch(`${baseApi}/bikes/42`)
+    .then(res => res.json())
+    .then(bike => console.log("Bike 42:", bike));
+
+// 3. PUT /bikes/21 - Update price for bike 21
+fetch(`${baseApi}/bikes/21`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ price: 299 })
+})
+    .then(res => res.json())
+    .then(updated => console.log("Updated bike 21:", updated));
+
+// 4. POST /bikes - Add a new bike
+fetch(`${baseApi}/bikes`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ model: "Trailblazer 500", price: 449 })
+})
+    .then(res => res.json())
+    .then(created => console.log("Created bike:", created));
+
+// 5. DELETE /bikes/56 - Remove bike 56
+fetch(`${baseApi}/bikes/56`, { method: "DELETE" })
+    .then(res => console.log("Deleted bike 56, status:", res.status));
+```
+
+### 🔗 Chapter 31 Resources
+
+- 📄 **MDN Web Docs:** [HTTP Request Methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods) — In-depth reference for GET, POST, PUT, DELETE, and PATCH.
+- 📄 **MDN Web Docs:** [Understanding RESTful Architecture](https://developer.mozilla.org/en-US/docs/Glossary/REST) — Core tenets of REST systems.
+- 📄 **REST API Guidelines:** [Zalando RESTful API Guidelines](https://opensource.zalando.com/restful-api-guidelines/) — Industry standards for resource naming, plural nouns, and idempotent actions.
+
