@@ -2542,3 +2542,114 @@ fetch(`${baseUrl}/bikes?${params.toString()}`)
 - 📄 **RFC 3986:** [Uniform Resource Identifier (URI): Generic Syntax](https://datatracker.ietf.org/doc/html/rfc3986#section-3.4) — The authoritative RFC specification for URI query components.
 - 📄 **REST API Tutorial:** [REST Query Parameters & Filtering](https://restfulapi.net/rest-api-design-tutorial-with-example/) — Best practices for implementing query strings for search, pagination, and sorting.
 
+---
+
+## 🌦️ Chapter 35: Query String Practice - OpenWeatherMap API
+
+Applying query strings to real-world weather endpoints allows developers to dynamically search locations and configure data formats, such as converting temperatures from Kelvin to human-readable units.
+
+### 🔑 Core Concepts
+
+1. **Location Targeting with Query Strings:**
+   - **City Search (`?q={cityName}`):** Passes the target city name directly in the query (e.g. `?q=salt lake city` or `?q=London`).
+   - **Geographic Coordinates (`?lat={lat}&lon={lon}`):** Pinpoints precise locations via latitude and longitude.
+2. **Measurement Systems via `units` Parameter:**
+   - By default, OpenWeatherMap returns temperatures in **Standard Kelvin** (e.g., `temp: 299.87`).
+   - Passing `units=metric` converts temperatures to **Celsius (°C)** and wind speeds to meters/sec.
+   - Passing `units=imperial` converts temperatures to **Fahrenheit (°F)** and wind speeds to miles/hour.
+3. **Chaining Multiple Parameters (`&`):**
+   - Query strings combine multiple options with ampersands: `?q=salt lake city&units=metric`.
+4. **Proxy vs. Direct API Authentication:**
+   - **Scrimba Proxy (`apis.scrimba.com`):** Injects authentication server-side, eliminating the need to expose client API keys during practice.
+   - **Direct API (`api.openweathermap.org`):** Requires passing your registered API key via `&appid={YOUR_API_KEY}`.
+
+### 💡 Visualizations
+
+<details>
+  <summary><b>📷 Expand to View Query String Diagram</b></summary>
+  <br>
+
+![Query Strings - A way to filter results](image/Readme/1792083668176.png)
+
+</details>
+
+### 🗺️ Weather Query Parameter Architecture
+
+<details>
+  <summary><b>📷 Expand to View Weather Query Flow Diagram</b></summary>
+  <br>
+
+```mermaid
+flowchart TD
+    subgraph ClientRequest ["Client Fetch Request"]
+        URL["'https://apis.scrimba.com/openweathermap/data/2.5/weather?q=salt lake city&units=metric'"]
+        Base["Base URL: 'https://apis.scrimba.com/openweathermap/data/2.5'"]
+        Endpoint["Endpoint: '/weather'"]
+        QueryInit["Delimiter: '?'"]
+        CityParam["City Filter: 'q=salt lake city'"]
+        Amp["Delimiter: '&'"]
+        UnitParam["Units System: 'units=metric'"]
+    end
+
+    subgraph APIProcessing ["OpenWeather Processing Engine"]
+        GeoLookup["Location Resolution: 'Salt Lake City, US'"]
+        UnitCalc["Unit Formatting: Celsius '°C' (Standard Kelvin converted)"]
+        PayloadGen["JSON Response Generated with Status 200 OK"]
+    end
+
+    URL --> Base
+    URL --> Endpoint
+    URL --> QueryInit
+    QueryInit --> CityParam
+    CityParam --> Amp
+    Amp --> UnitParam
+    UnitParam --> GeoLookup
+    GeoLookup --> UnitCalc
+    UnitCalc --> PayloadGen
+
+    style ClientRequest fill:#1e1e2e,stroke:#89b4fa,stroke-width:2px,color:#cdd6f4
+    style APIProcessing fill:#181825,stroke:#a6e3a1,stroke-width:2px,color:#cdd6f4
+    style URL fill:#11111b,stroke:#fab387,stroke-width:2px,color:#cdd6f4
+    style PayloadGen fill:#11111b,stroke:#a6e3a1,stroke-width:2px,color:#a6e3a1
+```
+
+</details>
+
+### 📝 Challenge & Recap
+
+Practice file: [index.js](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/Query%20String%20Practice%20-%20OpenWeatherMap%20API/index.js)
+
+> [!NOTE]
+> **How do you query weather by city name instead of geographic coordinates?**  
+> Use the `q` query parameter: `?q=London` or `?q=salt lake city`.
+
+> [!TIP]
+> **Why does OpenWeatherMap return temperatures like `299.87` by default?**  
+> OpenWeatherMap defaults to **Kelvin**. Add `&units=metric` for Celsius or `&units=imperial` for Fahrenheit to convert the data.
+
+> [!IMPORTANT]
+> **Why can we omit `appid` when querying Scrimba's proxy?**  
+> Scrimba's proxy URL (`https://apis.scrimba.com/...`) handles API key injection automatically in the backend. When making production calls directly to `api.openweathermap.org`, an `appid` parameter is mandatory.
+
+### 💻 Code Implementation
+
+Explore the project implementation in [Query String Practice - OpenWeatherMap API](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/Query%20String%20Practice%20-%20OpenWeatherMap%20API) ([index.js](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/Query%20String%20Practice%20-%20OpenWeatherMap%20API/index.js)):
+
+```javascript
+// Querying OpenWeatherMap via Scrimba Proxy with city and units parameters
+fetch("https://apis.scrimba.com/openweathermap/data/2.5/weather?q=salt lake city&units=metric")
+    .then(res => res.json())
+    .then(data => {
+        console.log(`Weather in ${data.name}:`);
+        console.log(`Condition: ${data.weather[0].description}`);
+        console.log(`Temperature: ${data.main.temp}°C`);
+    });
+```
+
+### 🔗 Chapter 35 Resources
+
+- 📄 **OpenWeatherMap Documentation:** [Current Weather Data API](https://openweathermap.org/current) — Parameter reference for `q`, `lat`, `lon`, and `units`.
+- 📄 **OpenWeatherMap FAQ:** [Temperature Units FAQ](https://openweathermap.org/faq#error401) — Kelvin, Metric, and Imperial unit specifications.
+- 📄 **MDN Web Docs:** [Query Strings and Fetching](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) — Building dynamic API requests with JavaScript.
+
+
