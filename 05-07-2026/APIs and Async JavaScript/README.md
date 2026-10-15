@@ -1972,6 +1972,11 @@ fetch("https://apis.scrimba.com/jsonplaceholder/posts", options)
 
 ### 1. What is REST?
 
+
+
+
+![1792080441372](image/README/1792080441372.png)
+
 ![What is REST](image/Readme/1791989803754.png)
 
 ![REST Design Pattern](image/Readme/1791989824117.png)
@@ -2102,14 +2107,13 @@ Building on the foundation of Representational State Transfer, **REST API Design
   - Once a response is returned, the server "forgets" the interaction.
   - Every incoming request must carry all required authentication headers, resource parameters, and payload data necessary for the server to fulfill the request.
 - **The "Nouns + Verbs" Design Convention (Mike's Bikes Model):**
-  - Rather than defining custom URL paths for every action (e.g. `/getBikes`, `/createBike`, `/deleteBike?id=56`), REST uses clean **plural nouns** for endpoints and standardized **HTTP methods** as actions:
-    | Action / Requirement | HTTP Method (Verb) | URL Endpoint (Noun) | Description |
-    |:---|:---:|:---|:---|
-    | **Retrieve All** | `GET` | `/bikes` | Fetches collection of all available bicycle records |
-    | **Retrieve By ID** | `GET` | `/bikes/42` | Fetches specific details for bike with ID `42` |
-    | **Update Record** | `PUT` | `/bikes/21` | Updates price or attributes of bike with ID `21` |
-    | **Create Record** | `POST` | `/bikes` | Submits new bicycle item to be created in database |
-    | **Delete Record** | `DELETE` | `/bikes/56` | Removes bicycle item with ID `56` from database |
+  - Rather than defining custom URL paths for every action (e.g. `/getBikes`, `/createBike`, `/deleteBike?id=56`), REST uses clean **plural nouns** for endpoints and standardized **HTTP methods** as actions:| Action / Requirement     | HTTP Method (Verb) | URL Endpoint (Noun) | Description                                         |
+    | :----------------------- | :----------------: | :------------------ | :-------------------------------------------------- |
+    | **Retrieve All**   |      `GET`      | `/bikes`          | Fetches collection of all available bicycle records |
+    | **Retrieve By ID** |      `GET`      | `/bikes/42`       | Fetches specific details for bike with ID `42`    |
+    | **Update Record**  |      `PUT`      | `/bikes/21`       | Updates price or attributes of bike with ID `21`  |
+    | **Create Record**  |      `POST`      | `/bikes`          | Submits new bicycle item to be created in database  |
+    | **Delete Record**  |     `DELETE`     | `/bikes/56`       | Removes bicycle item with ID `56` from database   |
 - **Benefits of RESTful API Design:**
   - **Predictability:** Developers familiar with REST can deduce how to interact with new endpoints without consulting extensive documentation.
   - **Scalability:** Stateless requests can be routed to any available backend server or container without sharing session state.
@@ -2215,4 +2219,97 @@ fetch(`${baseApi}/bikes/56`, { method: "DELETE" })
 - 📄 **MDN Web Docs:** [HTTP Request Methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods) — In-depth reference for GET, POST, PUT, DELETE, and PATCH.
 - 📄 **MDN Web Docs:** [Understanding RESTful Architecture](https://developer.mozilla.org/en-US/docs/Glossary/REST) — Core tenets of REST systems.
 - 📄 **REST API Guidelines:** [Zalando RESTful API Guidelines](https://opensource.zalando.com/restful-api-guidelines/) — Industry standards for resource naming, plural nouns, and idempotent actions.
+
+---
+
+## 🌳 Chapter 32: Nested Resources
+
+In RESTful API design, resources rarely exist in isolation. Entities frequently maintain hierarchical **parent-child relationships** (e.g., a bike has multiple customer reviews, an author has multiple blog posts, a user has multiple orders). **Nested resources** reflect this hierarchy directly in the URL structure by chaining resource paths together.
+
+### 🔑 Core Concepts
+
+1. **Parent-to-Child URL Hierarchy:**
+   - Instead of flattening everything into disconnected top-level endpoints, dependent resources are accessed under their parent identifier:
+     - `/bikes`: Collection of all bikes.
+     - `/bikes/:id`: Single specific bike.
+     - `/bikes/:id/reviews`: Collection of reviews belonging **strictly** to that specific bike.
+     - `/bikes/:id/reviews/:reviewId`: A specific review on that specific bike.
+2. **URL Parameters (`:id`, `:reviewId`):**
+   - Variables placed inside the URL path acting as dynamic placeholders for real values (typically resource IDs or slugs).
+   - In documentation or routing frameworks (like Express or React Router), they are marked with a leading colon (`:id`). At runtime, client requests supply concrete values like `/bikes/123/reviews/5`.
+3. **Scoped vs. Global Endpoints:**
+   - `/bikes/123/reviews` &rarr; Scoped query returning only reviews for bike `123`.
+   - `/reviews` &rarr; Global query returning every review across the entire platform.
+
+<details>
+<summary>📸 Visual Slide: Nested Resources & URL Parameters</summary>
+
+![Nested Resources and URL Parameters](image/Readme/1792080461681.png)
+
+</details>
+
+### 🗺️ Hierarchical Resource Architecture
+
+```mermaid
+graph TD
+    A["API Root: '/api'"] --> B["Collection: '/bikes'"]
+    A --> C["Global Collection: '/reviews'"]
+    B --> D["Parameter: '/bikes/:id' (e.g. '/bikes/123')"]
+    D --> E["Nested Collection: '/bikes/:id/reviews'"]
+    E --> F["Nested Item: '/bikes/:id/reviews/:reviewId' (e.g. '/bikes/123/reviews/5')"]
+
+    style A fill:#1e1e2e,stroke:#89b4fa,stroke-width:2px,color:#cdd6f4
+    style B fill:#181825,stroke:#a6e3a1,stroke-width:2px,color:#cdd6f4
+    style C fill:#181825,stroke:#f38ba8,stroke-width:2px,color:#cdd6f4
+    style D fill:#11111b,stroke:#fab387,stroke-width:2px,color:#cdd6f4
+    style E fill:#181825,stroke:#89dceb,stroke-width:2px,color:#cdd6f4
+    style F fill:#11111b,stroke:#cba6f7,stroke-width:2px,color:#cdd6f4
+```
+
+### 💡 Nested Resources Recap
+
+> [!IMPORTANT]
+> **Scoped vs. Global Querying:**  
+> A nested endpoint like `/bikes/123/reviews` explicitly scopes results to the parent entity (returning only reviews written for bike `123`), whereas a top-level `/reviews` endpoint accesses the entire unconstrained pool of reviews across all bikes in the database.
+
+> [!TIP]
+> **Drilling Down to Individual Nested Items:**  
+> When accessing a specific child item within a parent collection, append its identifier to the nested path: `/bikes/123/reviews/5` fetches review `5` under bike `123`.
+
+> [!NOTE]
+> **URL Parameters Defined:**  
+> A URL Parameter is a dynamic variable inside the endpoint path that acts as a placeholder for a runtime value—frequently replacing the unique ID or identifier of the target resource.
+
+### 💻 Code Implementation & Practice
+
+Practice files for this chapter are available in [Nested Resources](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/Nested%20Resources) ([quiz.md](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/Nested%20Resources/quiz.md)):
+
+```javascript
+// Nested Resources & URL Parameters Demo
+const baseApi = "https://mikesbikes.com/api";
+
+const bikeId = 123;
+const reviewId = 5;
+
+// 1. Fetch all reviews belonging exclusively to bike 123 (Scoped)
+fetch(`${baseApi}/bikes/${bikeId}/reviews`)
+    .then(res => res.json())
+    .then(reviews => console.log(`Reviews for bike ${bikeId}:`, reviews));
+
+// 2. Fetch a specific review (review 5) on bike 123 (Nested Resource by ID)
+fetch(`${baseApi}/bikes/${bikeId}/reviews/${reviewId}`)
+    .then(res => res.json())
+    .then(review => console.log(`Review ${reviewId} for bike ${bikeId}:`, review));
+
+// 3. Contrast: Fetch all reviews across the entire shop (Global)
+fetch(`${baseApi}/reviews`)
+    .then(res => res.json())
+    .then(allReviews => console.log("All platform reviews:", allReviews));
+```
+
+### 🔗 Chapter 32 Resources
+
+- 📄 **REST API Design Best Practices:** [Microsoft REST API Guidelines - Sub-collections](https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#72-sub-collections) — Standard conventions for modeling parent-child resources.
+- 📄 **MDN Web Docs:** [How to Design a RESTful Web API](https://developer.mozilla.org/en-US/docs/Glossary/REST) — Deep dive into REST resource hierarchies and identification.
+- 📄 **RFC 6570:** [URI Template Reference](https://datatracker.ietf.org/doc/html/rfc6570) — Standard specification for URI variables and path parameters.
 
