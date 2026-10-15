@@ -1972,11 +1972,6 @@ fetch("https://apis.scrimba.com/jsonplaceholder/posts", options)
 
 ### 1. What is REST?
 
-
-
-
-![1792080441372](image/README/1792080441372.png)
-
 ![What is REST](image/Readme/1791989803754.png)
 
 ![REST Design Pattern](image/Readme/1791989824117.png)
@@ -2269,20 +2264,20 @@ graph TD
 ### 💡 Nested Resources Recap
 
 > [!IMPORTANT]
-> **Scoped vs. Global Querying:**  
+> **Scoped vs. Global Querying:**
 > A nested endpoint like `/bikes/123/reviews` explicitly scopes results to the parent entity (returning only reviews written for bike `123`), whereas a top-level `/reviews` endpoint accesses the entire unconstrained pool of reviews across all bikes in the database.
 
 > [!TIP]
-> **Drilling Down to Individual Nested Items:**  
+> **Drilling Down to Individual Nested Items:**
 > When accessing a specific child item within a parent collection, append its identifier to the nested path: `/bikes/123/reviews/5` fetches review `5` under bike `123`.
 
 > [!NOTE]
-> **URL Parameters Defined:**  
+> **URL Parameters Defined:**
 > A URL Parameter is a dynamic variable inside the endpoint path that acts as a placeholder for a runtime value—frequently replacing the unique ID or identifier of the target resource.
 
 ### 💻 Code Implementation & Practice
 
-Practice files for this chapter are available in [Nested Resources](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/Nested%20Resources) ([quiz.md](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/Nested%20Resources/quiz.md)):
+Practice files for this chapter are available in [Nested Resources](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/Nested%20Resources>) ([quiz.md](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/Nested%20Resources/quiz.md>)):
 
 ```javascript
 // Nested Resources & URL Parameters Demo
@@ -2365,20 +2360,20 @@ flowchart LR
 ### 📝 Challenge & Recap
 
 > [!IMPORTANT]
-> **Hierarchical Ownership in URLs:**  
+> **Hierarchical Ownership in URLs:**
 > When accessing `/posts/2/comments`, the server handles the relational join behind the scenes, guaranteeing that every item in the returned array belongs exclusively to post `2`. No client-side array filtering (`Array.prototype.filter()`) is necessary.
 
 > [!TIP]
-> **API Documentation Exploration:**  
+> **API Documentation Exploration:**
 > Always check the API provider's "Relations" or "Listing nested resources" section. If a nested route is not explicitly documented, test whether query parameter filtering (e.g., `?postId=2`) is the alternative pattern.
 
 > [!NOTE]
-> **Dynamic Interpolation in JavaScript:**  
+> **Dynamic Interpolation in JavaScript:**
 > In modern client code, avoid hardcoding IDs into string literals. Use ES6 template literals (`` `/posts/${postId}/comments` ``) to create reusable query functions.
 
 ### 💻 Code Implementation
 
-Practice files for this chapter are available in [URL Parameters - JSON Placeholder API](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/URL%20Parameters%20-%20JSON%20Placeholder%20API) ([index.js](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/URL%20Parameters%20-%20JSON%20Placeholder%20API/index.js)):
+Practice files for this chapter are available in [URL Parameters - JSON Placeholder API](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/URL%20Parameters%20-%20JSON%20Placeholder%20API>) ([index.js](<file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/URL%20Parameters%20-%20JSON%20Placeholder%20API/index.js>)):
 
 ```javascript
 /**
@@ -2417,4 +2412,133 @@ getPostComments(5)
 - 📄 **MDN Web Docs:** [Using the Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) — Fetching data asynchronously with promises and response parsing.
 - 📄 **REST API Tutorial:** [RESTful URL Path Design](https://restfulapi.net/resource-naming/) — Industry standards for modeling collections and sub-resources in URIs.
 
+---
+
+## 🔎 Chapter 34: Query Strings - Filtering & Parameterization
+
+While URL parameters identify specific hierarchical entities (like `/bikes/123`), **Query Strings** provide a flexible, standardized mechanism to modify, search, paginate, and filter collections of resources without altering the fundamental endpoint path.
+
+### 🔑 Core Concepts
+
+1. **Query String Syntax & Anatomy:**
+   - Appended to the endpoint after a question mark (`?`).
+   - Formatted as `key=value` pairs.
+   - Multiple filters are chained together using ampersands (`&`).
+   - Example: `/bikeracks?brand=thule&numBikes=4&available=true`
+2. **Path Parameters vs. Query Strings (When to Use Which):**
+   - **Path Parameters (`/bikes/:id`):** Used to identify a *mandatory, unique* resource or express parent-child ownership (`/posts/2/comments`).
+   - **Query Strings (`/bikes?type=mountain`):** Used for *optional* filtering, sorting, pagination, and multi-criteria queries. The resource collection (`/bikes`) remains the same, but the returned subset is constrained.
+3. **Server-Side Parsing & String Type Caveat:**
+   - Server frameworks (such as Express) parse query parameters into a dictionary (e.g., `req.query`).
+   - **Critical Rule:** Every value parsed from a URL query string is received by the backend as a **String**:
+     - `available=true` &rarr; `{ available: "true" }` *(not a boolean)*
+     - `numBikes=4` &rarr; `{ numBikes: "4" }` *(not a number)*
+   - Backend logic must explicitly cast or parse types before conducting strict equality checks or mathematical operations.
+
+<details>
+<summary>📸 Visual Slide: Query Strings - A Way to Filter Results</summary>
+
+![Query Strings - A way to filter results](image/Readme/1792083397837.png)
+
+</details>
+
+### 🗺️ Query String Architecture & Anatomy
+
+<details>
+  <summary><b>📷 Expand to View Query String Anatomy & Parsing Diagram</b></summary>
+  <br>
+
+```mermaid
+flowchart TD
+    subgraph Anatomy ["Anatomy of a Query String URL"]
+        URL["'https://mikesbikes.com/api/bikeracks?brand=thule&numBikes=4&available=true'"]
+        Base["Base URL: 'https://mikesbikes.com/api'"]
+        Path["Resource Endpoint: '/bikeracks'"]
+        Delim["Query Initiator: '?'"]
+        Params["Key-Value Pairs: 'brand=thule' and 'numBikes=4' and 'available=true'"]
+        Sep["Parameter Delimiter: '&'"]
+    end
+
+    subgraph ServerParsing ["Server-Side Query Parsing"]
+        Parsed["Express req.query: '{ brand: 'thule', numBikes: '4', available: 'true' }'"]
+        Caveat["Type Notice: All query parameters arrive on server as strings!"]
+    end
+
+    URL --> Base
+    URL --> Path
+    URL --> Delim
+    Delim --> Params
+    Params --> Sep
+    Params --> Parsed
+    Parsed --> Caveat
+
+    style Anatomy fill:#1e1e2e,stroke:#89b4fa,stroke-width:2px,color:#cdd6f4
+    style ServerParsing fill:#181825,stroke:#a6e3a1,stroke-width:2px,color:#cdd6f4
+    style URL fill:#11111b,stroke:#fab387,stroke-width:2px,color:#cdd6f4
+    style Parsed fill:#11111b,stroke:#89dceb,stroke-width:2px,color:#cdd6f4
+    style Caveat fill:#313244,stroke:#f38ba8,stroke-width:2px,color:#f38ba8
+```
+
+</details>
+
+### 💡 Query Strings Recap & Quiz
+
+Practice questions from [quiz.md](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/Query%20Strings/quiz.md):
+
+> [!NOTE]
+> **Base Collection Endpoint:**  
+> To retrieve the complete inventory of all bike racks sold on the site, use the unadorned collection endpoint:  
+> **`/bikeracks`**
+
+> [!IMPORTANT]
+> **Boolean Filters & String Parsing:**  
+> To fetch only bike racks currently in stock at the physical store:  
+> **`/bikeracks?available=true`**  
+> Remember: The server parses `{ available: "true" }` as a string, requiring coercion before evaluating as a boolean!
+
+> [!TIP]
+> **Multi-Attribute Filtering:**  
+> When combining multiple filter attributes (e.g. brand "Thule" and capacity for 4 bikes), separate each key-value pair with an ampersand (`&`):  
+> **`/bikeracks?brand=thule&numBikes=4`**
+
+### 💻 Code Implementation & Practice
+
+Practice files for this chapter are available in [Query Strings](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/Query%20Strings) ([quiz.md](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/URLs%20and%20REST/Query%20Strings/quiz.md)):
+
+```javascript
+// Query Strings Demonstration: Filtering Resources
+const baseUrl = "https://mikesbikes.com/api";
+
+// 1. Unfiltered: All bike racks
+fetch(`${baseUrl}/bikeracks`)
+    .then(res => res.json())
+    .then(racks => console.log("All bike racks:", racks));
+
+// 2. Single Filter: In-store available bike racks
+fetch(`${baseUrl}/bikeracks?available=true`)
+    .then(res => res.json())
+    .then(inStock => console.log("In-store racks:", inStock));
+
+// 3. Multi-Filter: Thule racks holding 4 bikes
+fetch(`${baseUrl}/bikeracks?brand=thule&numBikes=4`)
+    .then(res => res.json())
+    .then(thule4 => console.log("Thule 4-bike racks:", thule4));
+
+// 4. Modern Best Practice: Building Query Strings with URLSearchParams
+const params = new URLSearchParams({
+    type: "hybrid",
+    brand: "trek",
+    color: "gray"
+});
+
+fetch(`${baseUrl}/bikes?${params.toString()}`)
+    .then(res => res.json())
+    .then(results => console.log("Filtered Trek bikes:", results));
+```
+
+### 🔗 Chapter 34 Resources
+
+- 📄 **MDN Web Docs:** [URLSearchParams API](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams) — Standard interface for defining and working with query string parameters.
+- 📄 **RFC 3986:** [Uniform Resource Identifier (URI): Generic Syntax](https://datatracker.ietf.org/doc/html/rfc3986#section-3.4) — The authoritative RFC specification for URI query components.
+- 📄 **REST API Tutorial:** [REST Query Parameters & Filtering](https://restfulapi.net/rest-api-design-tutorial-with-example/) — Best practices for implementing query strings for search, pagination, and sorting.
 

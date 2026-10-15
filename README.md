@@ -55,7 +55,7 @@ Browse any date folder below to see what concept, project, or architecture was t
 | **17-03-2026** | Refined Layout Containers | Parent-child nesting, scroll zones, content flow | [📂 `01DEV/17-03-2026`](./01DEV/17-03-2026/) | [📖 Chapter 24](#17-03-2026) |
 | **18-03-2026** | Full Responsive Web Architecture | Navbar with Hamburger menu, content grid, footer | [📂 `01DEV/18-03-2026`](./01DEV/18-03-2026/) | [📖 Chapter 25](#18-03-2026) |
 | **25-03-2026** | Accessible Web Development (A11y) | WAI-ARIA, skip links, contrast, semantic elements | [📂 `25-03-2026`](./25-03-2026/) | [📖 Chapter 26](#25-03-2026) |
-| **05-07-2026** | APIs & Asynchronous JavaScript | REST APIs, `fetch()`, JSON body, BlogSpace, REST design & nested resources | [📂 `05-07-2026`](./05-07-2026/) | [📖 Chapter 27](#05-07-2026) |
+| **05-07-2026** | APIs & Asynchronous JavaScript | REST APIs, `fetch()`, BlogSpace app, REST design, nested routes & query strings | [📂 `05-07-2026`](./05-07-2026/) | [📖 Chapter 27](#05-07-2026) |
 | **13-07-2026** | Prompt Engineering for Developers | Prompt strategies, AI capabilities/limits, LLM workflows | [📂 `13-07-2026`](./13-07-2026/) | [📖 Chapter 28](#13-07-2026) |
 | **04-09-2026** | Mobile Web App & Firebase Cloud | Mobile web apps, Firebase SDK, real-time sync | [📂 `04-09-2026`](./04-09-2026/) | [📖 Chapter 29](#04-09-2026) |
 
@@ -440,7 +440,7 @@ Connecting frontend applications to third-party web services using modern Asynch
 - **`fetch()` API & Promises:** Handling asynchronous network requests with `.then()` chains and `async`/`await`.
 - **BoredBot Web App:** Practical API integration fetching and rendering real-time activity suggestions.
 - **REST APIs & URLs:** Endpoints, resources, HTTP request methods (`GET`, `POST`, `PUT`, `DELETE`), and base URLs.
-- **BlogSpace Project:** Building a full blog application with dynamic DOM rendering, CSS flex forms, `submit` event listeners, and `POST` requests with serialized JSON bodies (`JSON.stringify()`), dynamically prepending posts, and architectural refactoring with centralized state (`postsArray`), render functions, cached DOM references, post-submission form resets, core REST architecture principles, REST API design with CRUD conventions, and practical nested resources with dynamic URL parameters (`/posts/2/comments`).
+- **BlogSpace Project:** Building a full blog application with dynamic DOM rendering, CSS flex forms, `submit` event listeners, and `POST` requests with serialized JSON bodies (`JSON.stringify()`), dynamically prepending posts, and architectural refactoring with centralized state (`postsArray`), render functions, cached DOM references, post-submission form resets, core REST architecture principles, REST API design with CRUD conventions, nested resources, and query string filtering (`/bikeracks?brand=thule&numBikes=4`).
 
 ```javascript
 // POST request with serialized JSON body to create a new resource
@@ -459,7 +459,7 @@ fetch("https://apis.scrimba.com/jsonplaceholder/todos", {
 ```
 
 > [!NOTE]
-> Check out the complete 33-chapter module documentation in [05-07-2026/APIs and Async JavaScript/README.md](./05-07-2026/APIs%20and%20Async%20JavaScript/README.md).
+> Check out the complete 34-chapter module documentation in [05-07-2026/APIs and Async JavaScript/README.md](./05-07-2026/APIs%20and%20Async%20JavaScript/README.md).
 
 [⬆ Back to Index](#-date-directory--quick-access-index)
 
