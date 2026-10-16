@@ -2813,4 +2813,157 @@ form.addEventListener("submit", function(e) {
 - 📊 **Google Slides (REST):** [REST Architecture & Design Slides](https://docs.google.com/presentation/d/e/2PACX-1vTEztADtG8OhJ4695LYwtVftNgriQK7zAOsYNru9OfaPA1mQEAlkNd1BqgOdec1aZRC6PxSxOnlrBeH/pub?start=false&loop=false&delayms=3000&slide=id.g7fabbaef24_1_232) — Principles of resources, path parameters, and query strings.
 - 📄 **Zapier API Guide:** [Zapier's Introduction to APIs](https://zapier.com/resources/guides/apis) — The legendary beginner guide that demystifies how the internet and APIs work, perfect for cutting through imposter syndrome.
 - 📄 **REST API Tutorial:** [In-depth REST API Tutorials](https://www.restapitutorial.com/) — Deep-dive covering REST constraints, HTTP status codes, and idempotency.
-- 📄 **RESTful API Net:** [RESTful API Design Standards](https://restfulapi.net/) — Industry-standard architectural guidelines for enterprise RESTful services.
+- 📄 **RESTful API Net:** [RESTful API Design Standards](https://restfulapi.net/) — Industry-standard architectural guidelines for enterprise RESTful services.
+
+---
+
+## 🎨 Chapter 37: Solo Project - Color Scheme Generator
+
+The **Color Scheme Generator** is an interactive, responsive web application that generates harmonious 5-color palettes based on any seed color and harmony mode selected by the user, querying **The Color API** via RESTful query strings and incorporating asynchronous clipboard copying.
+
+### 🔑 Core Concepts
+
+1. **REST Query String Construction with The Color API:**
+   - **Base Endpoint:** `https://www.thecolorapi.com/scheme`
+   - **Parameter Sanitization:** Native HTML5 color inputs return a hex code with a leading hash (e.g. `#2563EB`). The API expects raw hex strings, requiring `color.slice(1)` before building query strings.
+   - **Query Parameters:**
+     - `hex`: The sanitized seed color (e.g. `000000`, `2563EB`).
+     - `mode`: The mathematical color harmony formula (`monochrome`, `monochrome-dark`, `monochrome-light`, `complement`, `analogic-complement`, `triad`).
+     - `count`: The number of colors generated in the palette (e.g. `count=5`).
+   - **Constructed URL:** `https://www.thecolorapi.com/scheme?hex=${color}&mode=${mode}&count=5`
+
+2. **CSS Grid Swatch Layout:**
+   - Palettes are structured using a modern 5-column CSS Grid: `grid-template-columns: repeat(5, minmax(0, 1fr))`.
+   - Each column encapsulates a vertical color swatch block (`.color-swatch`) with dynamic background styling and an uppercase hexadecimal code label (`.color-hex`).
+
+3. **Event Delegation Pattern:**
+   - Rather than binding individual event listeners to each dynamically rendered color swatch, a single `click` event listener is mounted to the parent container (`#color-container`).
+   - Using `e.target.closest(".color-column")?.dataset.hex` guarantees that clicks anywhere within a swatch column reliably retrieve the intended hex code.
+
+4. **Asynchronous Clipboard API & Feedback UX:**
+   - Utilizes the modern browser `navigator.clipboard.writeText(hex)` method to write the color code directly into the user's system clipboard upon clicking.
+   - Triggers a transient "Copied" toast notification that automatically dismisses after 1.5 seconds via `setTimeout()`.
+
+### 🗺️ Application Architecture & Data Flow
+
+<details>
+  <summary><b>📷 Expand to View Color Scheme Generator Flow Diagram</b></summary>
+  <br>
+
+```mermaid
+flowchart TD
+    subgraph UserInterface ["User Input & Controls"]
+        ColorInput["'Seed Color Picker: input type=color'"]
+        ModeSelect["'Scheme Mode: select (Monochrome, Complement, Triad)'"]
+        SubmitBtn["'Trigger: button id=get-scheme'"]
+    end
+
+    subgraph DataFetch ["The Color API Request Cycle"]
+        Sanitize["'Sanitize HEX: color.slice(1)'"]
+        ReqURL["'Endpoint: /scheme?hex=SEED&mode=MODE&count=5'"]
+        API["'The Color API Service'"]
+        ResPayload["'JSON Response: Array of 5 Color Objects'"]
+    end
+
+    subgraph DOMRendering ["Dynamic Palette Rendering"]
+        GridContainer["'CSS Grid: repeat(5, minmax(0, 1fr))'"]
+        Swatches["'Render Color Swatches with data-hex values'"]
+        HexLabels["'Render Uppercase HEX Labels'"]
+    end
+
+    subgraph ClipboardFlow ["Event Delegation & Clipboard UX"]
+        ContainerClick["'Click Event on #color-container'"]
+        ClosestLookup["'e.target.closest(.color-column).dataset.hex'"]
+        CopyAPI["'navigator.clipboard.writeText(hex)'"]
+        Toast["'Toast Message: Copied (1.5s timeout)'"]
+    end
+
+    ColorInput --> Sanitize
+    ModeSelect --> ReqURL
+    SubmitBtn --> Sanitize
+    Sanitize --> ReqURL
+    ReqURL --> API
+    API --> ResPayload
+    ResPayload --> GridContainer
+    GridContainer --> Swatches
+    GridContainer --> HexLabels
+    Swatches --> ContainerClick
+    HexLabels --> ContainerClick
+    ContainerClick --> ClosestLookup
+    ClosestLookup --> CopyAPI
+    CopyAPI --> Toast
+
+    style UserInterface fill:#1e1e2e,stroke:#89b4fa,stroke-width:2px,color:#cdd6f4
+    style DataFetch fill:#181825,stroke:#fab387,stroke-width:2px,color:#cdd6f4
+    style DOMRendering fill:#181825,stroke:#a6e3a1,stroke-width:2px,color:#cdd6f4
+    style ClipboardFlow fill:#181825,stroke:#cba6f7,stroke-width:2px,color:#cdd6f4
+    style Toast fill:#11111b,stroke:#a6e3a1,stroke-width:2px,color:#a6e3a1
+```
+
+</details>
+
+### 📝 Key Takeaways & Review
+
+> [!NOTE]
+> **Why strip the leading `#` character before querying The Color API?**  
+> In URI specifications, the `#` symbol designates a URL fragment identifier (hash anchor). If included unencoded inside a query parameter (`?hex=#ffffff`), the browser interprets everything after `#` as a client-side fragment rather than sending it to the server! Using `.slice(1)` removes the `#` and ensures proper parameter transmission.
+
+> [!TIP]
+> **Event Delegation for Dynamic Content:**  
+> When elements are repeatedly destroyed and re-rendered via `innerHTML`, attaching event listeners directly to individual children leads to memory leaks or lost listeners. Attaching one listener to the persistent parent (`#color-container`) and leveraging `e.target.closest()` ensures robust handling across all re-renders.
+
+> [!IMPORTANT]
+> **Clipboard API Security Constraints:**  
+> `navigator.clipboard.writeText()` is asynchronous and returns a Promise. For security reasons, modern browsers only permit clipboard writes when triggered by a direct, trusted user gesture (such as a click event).
+
+### 💻 Code Implementation
+
+Explore the project implementation in [Solo Project - Color Scheme Generator](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Solo%20Project%20-%20Color%20Scheme%20Generator) ([index.js](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Solo%20Project%20-%20Color%20Scheme%20Generator/index.js), [index.html](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Solo%20Project%20-%20Color%20Scheme%20Generator/index.html), [index.css](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Solo%20Project%20-%20Color%20Scheme%20Generator/index.css)):
+
+```javascript
+// Color Scheme Generator: Fetching palette and handling clipboard interaction
+const btn = document.getElementById("get-scheme");
+
+function getColors() {
+    const color = document.getElementById("seed-color").value.slice(1);
+    const mode = document.getElementById("scheme-mode").value;
+
+    fetch(`https://www.thecolorapi.com/scheme?hex=${color}&mode=${mode}&count=5`)
+        .then(res => res.json())
+        .then(data => {
+            let html = "";
+            data.colors.forEach(color => {
+                html += `
+                    <div class="color-column" data-hex="${color.hex.value}">
+                        <div class="color-swatch" style="background-color: ${color.hex.value}"></div>
+                        <div class="color-hex">${color.hex.value}</div>
+                    </div>
+                `;
+            });
+            document.getElementById("color-container").innerHTML = html;
+        });
+}
+
+// Initial fetch & event listener
+btn.addEventListener("click", getColors);
+getColors();
+
+// Event Delegation for Copy to Clipboard
+document.getElementById("color-container").addEventListener("click", e => {
+    const hex = e.target.closest(".color-column")?.dataset.hex;
+    if (hex) {
+        navigator.clipboard.writeText(hex);
+        const msg = document.getElementById("copy-msg");
+        msg.textContent = "Copied";
+        setTimeout(() => { msg.textContent = ""; }, 1500);
+    }
+});
+```
+
+### 🔗 Chapter 37 Resources
+
+- 📄 **The Color API Documentation:** [The Color API Reference](https://www.thecolorapi.com/docs) — Scheme endpoints, modes, color conversion schemas, and query syntax.
+- 📄 **MDN Web Docs:** [Clipboard API](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard_API) — Interacting with system clipboard asynchronously.
+- 📄 **MDN Web Docs:** [Event Delegation & Closest](https://developer.mozilla.org/en-US/docs/Web/API/Element/closest) — Handling dynamic element events via DOM tree traversal.
+- 📄 **MDN Web Docs:** [CSS Grid Layout Guide](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout) — Responsive multi-column layout architectures.
+
