@@ -3171,4 +3171,118 @@ function determineCardWinner(card1, card2) {
 
 - 📄 **Deck of Cards API Documentation:** [Deck of Cards API Reference](https://deckofcardsapi.com/) — Shuffling, drawing, and card object schemas.
 - 📄 **MDN Web Docs:** [Introducing Asynchronous JavaScript](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Introducing) — Comprehensive guide to synchronous vs asynchronous code.
-- 📄 **MDN Web Docs:** [Concurrency Model and the Event Loop](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Event_loop) — Understanding the call stack, Web APIs, and task queue.
+- 📄 **MDN Web Docs:** [Concurrency Model and the Event Loop](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Event_loop) — Understanding the call stack, Web APIs, and task queue.
+
+
+---
+
+## 🎯 Chapter 39: Callbacks Setup Challenge - Functions as Parameters
+
+To understand asynchronous programming deeply, we must first master **callback functions**—functions passed as arguments to other functions. This challenge sets the groundwork for callbacks through event listeners and initializes the **Deck of Cards API**.
+
+### 🔑 Core Concepts
+
+1. **Functions as First-Class Citizens:**
+   - In JavaScript, functions are values. You can assign them to variables, pass them as arguments to other functions, and return them from functions.
+   - When a function is passed into another function to be executed later, it is known as a **callback function**.
+
+2. **Higher-Order Functions & Event Listeners:**
+   - `element.addEventListener(event, callback)` is a classic higher-order function:
+     - **Parameter 1:** The event type to listen for (`"click"`).
+     - **Parameter 2:** The callback function reference containing the logic to run when the event occurs.
+
+3. **Deferred vs. Immediate Execution:**
+   - When script files load or save, the callback passed to `addEventListener` **does not execute immediately**.
+   - The browser registers the callback in its event registry. The callback is only queued and executed when the specific event (the user click) is triggered.
+   - **Common Pitfall:** Writing `addEventListener("click", handleClick())` with parentheses executes the function immediately on script evaluation! Omitting parentheses (`addEventListener("click", handleClick)`) passes the function reference for deferred execution.
+
+4. **Deck of Cards API Shuffle Endpoint:**
+   - **Endpoint:** `https://apis.scrimba.com/deckofcards/api/deck/new/shuffle/`
+   - **Method:** `GET`
+   - **Response Payload:** Returns a newly initialized 52-card deck with properties:
+     - `success`: Boolean indicating operation status.
+     - `deck_id`: Unique alphanumeric identifier used to draw cards from this specific deck.
+     - `remaining`: Number of cards left in the deck (`52`).
+     - `shuffled`: `true`.
+
+### 🗺️ Callback Registration & Event Flow
+
+<details>
+  <summary><b>📷 Expand to View Callback Lifecycle Diagram</b></summary>
+  <br>
+
+```mermaid
+flowchart TD
+    subgraph ScriptEvaluation ["1. Initial Script Evaluation"]
+        ScriptLoad["'Browser parses index.js'"]
+        DOMQuery["'Select button: getElementById(new-deck)'"]
+        RegisterListener["'addEventListener: Pass click and callback fn'"]
+        WaitNotice["'Crucial: Callback is NOT executed yet!'"]
+    end
+
+    subgraph UserAction ["2. Asynchronous Event Trigger"]
+        ClickEvent["'User clicks New Deck button'"]
+        BrowserEventLoop["'Event Loop picks up event from queue'"]
+        InvokeCallback["'Execute registered callback function'"]
+    end
+
+    subgraph APIRequest ["3. Network Request via Fetch API"]
+        FetchCall["'fetch(https://apis.scrimba.com/deckofcards/api/deck/new/shuffle/)'"]
+        PromiseChain["'Promise resolution: res.json()'"]
+        LogResponse["'Console Output: deck_id, remaining: 52, shuffled: true'"]
+    end
+
+    ScriptLoad --> DOMQuery
+    DOMQuery --> RegisterListener
+    RegisterListener --> WaitNotice
+    ClickEvent --> BrowserEventLoop
+    BrowserEventLoop --> InvokeCallback
+    InvokeCallback --> FetchCall
+    FetchCall --> PromiseChain
+    PromiseChain --> LogResponse
+
+    style ScriptEvaluation fill:#1e1e2e,stroke:#89b4fa,stroke-width:2px,color:#cdd6f4
+    style UserAction fill:#181825,stroke:#fab387,stroke-width:2px,color:#cdd6f4
+    style APIRequest fill:#181825,stroke:#a6e3a1,stroke-width:2px,color:#cdd6f4
+    style WaitNotice fill:#313244,stroke:#f38ba8,stroke-width:1px,color:#f38ba8
+    style LogResponse fill:#11111b,stroke:#a6e3a1,stroke-width:2px,color:#a6e3a1
+```
+
+</details>
+
+### 📝 Key Takeaways & Review
+
+> [!NOTE]
+> **What is a callback function?**  
+> A callback function is any function that is passed as an argument into another function, designed to be called ("called back") at a specific time or when an event occurs.
+
+> [!TIP]
+> **Passing References vs. Calling Functions:**  
+> Always pass the **function reference** (e.g. `handleClick` or an anonymous function `function() {}`) to `addEventListener`. If you add parentheses (`handleClick()`), JavaScript invokes it instantly during script parsing rather than waiting for the user's click!
+
+> [!IMPORTANT]
+> **Why Callbacks Matter for Asynchronous Programming:**  
+> Callbacks are the fundamental mechanism that allows single-threaded JavaScript to handle asynchronous tasks. Both DOM events and network requests (`fetch().then(callback)`) rely on callbacks to handle future results without freezing execution.
+
+### 💻 Code Implementation
+
+Explore the challenge implementation in [Callbacks Setup Challenge](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Async%20JavaScript/Callbacks%20Setup%20Challenge) ([index.js](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Async%20JavaScript/Callbacks%20Setup%20Challenge/index.js), [index.html](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Async%20JavaScript/Callbacks%20Setup%20Challenge/index.html)):
+
+```javascript
+// Adding click event listener with a callback function to request a new shuffled deck
+document.getElementById("new-deck").addEventListener("click", function() {
+    fetch("https://apis.scrimba.com/deckofcards/api/deck/new/shuffle/")
+        .then(res => res.json())
+        .then(data => {
+            console.log("Deck initialized:", data);
+            // Example response: { success: true, deck_id: "3p40paa87x90", remaining: 52, shuffled: true }
+        });
+});
+```
+
+### 🔗 Chapter 39 Resources
+
+- 📄 **Deck of Cards API Documentation:** [Deck of Cards Shuffle API](https://deckofcardsapi.com/) — Reference for `/deck/new/shuffle/` parameters.
+- 📄 **MDN Web Docs:** [Callback Function](https://developer.mozilla.org/en-US/docs/Glossary/Callback_function) — MDN glossary entry on callbacks and higher-order functions.
+- 📄 **MDN Web Docs:** [First-Class Function](https://developer.mozilla.org/en-US/docs/Glossary/First-class_Function) — How JavaScript treats functions as first-class citizens.
+- 📄 **MDN Web Docs:** [EventTarget.addEventListener()](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener) — Syntax and options for attaching event listeners.
