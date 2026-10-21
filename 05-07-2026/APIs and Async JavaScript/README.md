@@ -3285,4 +3285,118 @@ document.getElementById("new-deck").addEventListener("click", function() {
 - 📄 **Deck of Cards API Documentation:** [Deck of Cards Shuffle API](https://deckofcardsapi.com/) — Reference for `/deck/new/shuffle/` parameters.
 - 📄 **MDN Web Docs:** [Callback Function](https://developer.mozilla.org/en-US/docs/Glossary/Callback_function) — MDN glossary entry on callbacks and higher-order functions.
 - 📄 **MDN Web Docs:** [First-Class Function](https://developer.mozilla.org/en-US/docs/Glossary/First-class_Function) — How JavaScript treats functions as first-class citizens.
-- 📄 **MDN Web Docs:** [EventTarget.addEventListener()](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener) — Syntax and options for attaching event listeners.
+- 📄 **MDN Web Docs:** [EventTarget.addEventListener()](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener) — Syntax and options for attaching event listeners.
+
+
+---
+
+## 🎯 Chapter 40: Callback Functions Intro - Functions as First-Class Citizens
+
+To truly grasp how callbacks, promises, and asynchronous event listeners work, we must first understand a fundamental JavaScript design truth: **functions are first-class citizens (first-class objects)**.
+
+### 🔑 Core Concepts
+
+1. **What Does "First-Class Citizen" Mean?**
+   - In JavaScript, functions have all the same rights, privileges, and capabilities as any other data type (numbers, strings, booleans, objects).
+   - Just as you can assign a number to a variable and pass it around:
+     ```javascript
+     let myNum = 42;
+     let myNum2 = myNum; // myNum2 holds 42
+     ```
+   - You can do the exact same thing with a function:
+     ```javascript
+     function myFunction(a, b) {
+         console.log(a + b);
+     }
+     let myFunction2 = myFunction; // Copies the function reference
+     myFunction2(1, 2);            // Executes and logs 3
+     ```
+
+2. **The Crucial Distinction: Reference vs. Invocation**
+   - **Omitting Parentheses (`myFunction`):** References the function definition itself without executing it. This allows passing the function into another variable or as a parameter to an event listener or higher-order function.
+   - **Adding Parentheses (`myFunction()`):** Immediately invokes the function and evaluates to its return value.
+   - **Rule of Thumb:**
+     - Want to pass the function body to run later? &rarr; Use `myFunction`.
+     - Want the calculated result right now? &rarr; Use `myFunction()`.
+
+3. **Function Expressions vs. Function Declarations:**
+   - Both declarations and expressions produce first-class function objects:
+     - **Function Expression:** `let myFunction = function(a, b) { console.log(a + b); };`
+     - **Function Declaration:** `function myFunction(a, b) { console.log(a + b); }`
+   - Regardless of how it was declared, assigning `let myFunction2 = myFunction;` creates a valid alias referencing the identical executable body and parameter list.
+
+### 🗺️ First-Class Functions & Reference Flow
+
+<details>
+  <summary><b>📷 Expand to View Function Reference & First-Class Citizen Diagram</b></summary>
+  <br>
+
+```mermaid
+flowchart TD
+    subgraph Primitives ["Primitive Assignment (Numbers, Strings)"]
+        Num1["'let myNum = 42'"]
+        Num2["'let myNum2 = myNum (Copies value 42)'"]
+        Num1 --> Num2
+    end
+
+    subgraph FunctionsFirstClass ["Functions as First-Class Citizens"]
+        FnDef["'function myFunction(a, b) { return a + b; }'"]
+        RefCopy["'let myFunction2 = myFunction (Copies function reference)'"]
+        InvokeCopy["'myFunction2(1, 2) -> Output: 3'"]
+        FnDef --> RefCopy
+        RefCopy --> InvokeCopy
+    end
+
+    subgraph CriticalDistinction ["Parentheses: Reference vs Invocation"]
+        NoParens["'myFunction (Without Parens): Points to function body / definition'"]
+        WithParens["'myFunction() (With Parens): Runs immediately and returns result'"]
+    end
+
+    style Primitives fill:#1e1e2e,stroke:#89b4fa,stroke-width:2px,color:#cdd6f4
+    style FunctionsFirstClass fill:#181825,stroke:#a6e3a1,stroke-width:2px,color:#cdd6f4
+    style CriticalDistinction fill:#181825,stroke:#fab387,stroke-width:2px,color:#cdd6f4
+    style InvokeCopy fill:#11111b,stroke:#a6e3a1,stroke-width:2px,color:#a6e3a1
+```
+
+</details>
+
+### 📝 Key Takeaways & Review
+
+> [!NOTE]
+> **Why are first-class functions the foundation of callbacks?**  
+> Because functions are values, you can pass an entire function into another function as an argument. The receiving function can store it and call it back whenever an event happens or asynchronous data arrives.
+
+> [!TIP]
+> **The Golden Rule of Parentheses:**  
+> When copying or passing functions as callbacks (e.g. `let fn2 = fn` or `btn.addEventListener("click", fn)`), **never include parentheses**. Parentheses execute the function immediately during script parsing rather than saving the reference for later!
+
+> [!IMPORTANT]
+> **Reusability and Aliasing:**  
+> Copying a function reference (`myFunction2 = myFunction`) retains all parameter definitions, closures, and logic, allowing `myFunction2(1, 2)` to execute with full fidelity.
+
+### 💻 Code Implementation
+
+Explore the practice code in [Callback functions intro](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Async%20JavaScript/Callback%20functions%20intro) ([index.js](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Async%20JavaScript/Callback%20functions%20intro/index.js)):
+
+```javascript
+// 1. Primitive variables: copying values
+let myNum = 42;
+let myNum2 = myNum;
+
+// 2. Functions as first-class citizens: copying function references
+function myFunction(a, b) {
+    console.log(a + b);
+}
+
+// Copying function reference (WITHOUT parentheses)
+let myFunction2 = myFunction;
+
+// Executing copied function reference
+myFunction2(1, 2); // Logs: 3
+```
+
+### 🔗 Chapter 40 Resources
+
+- 📄 **MDN Web Docs:** [First-Class Functions](https://developer.mozilla.org/en-US/docs/Glossary/First-class_Function) — Formal definition of first-class entities in programming languages.
+- 📄 **MDN Web Docs:** [Functions & Function Expressions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/function) — Declaration vs expression syntax and hoisting differences.
+- 📄 **JavaScript.info:** [Function Expressions](https://javascript.info/function-expressions) — In-depth explanation of functions as values and callback usage.
