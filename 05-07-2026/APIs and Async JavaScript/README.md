@@ -3508,4 +3508,154 @@ document.getElementById("new-deck").addEventListener("click", handleClick);
 
 - 📄 **MDN Web Docs:** [EventTarget.addEventListener()](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener) — Passing listener callbacks and options.
 - 📄 **MDN Web Docs:** [Callback Function Guide](https://developer.mozilla.org/en-US/docs/Glossary/Callback_function) — Mechanics of callbacks in JavaScript.
-- 📄 **JavaScript.info:** [Introduction to Browser Events](https://javascript.info/introduction-browser-events) — Handlers, references, and common pitfalls with handler invocation.
+- 📄 **JavaScript.info:** [Introduction to Browser Events](https://javascript.info/introduction-browser-events) — Handlers, references, and common pitfalls with handler invocation.
+
+---
+
+## 🔍 Chapter 42: Callbacks - Revisiting Array.prototype.filter()
+
+Callbacks are not limited to asynchronous timers or network requests; they are also the architectural foundation of synchronous functional JavaScript, such as array higher-order methods (`.filter()`, `.map()`, `.forEach()`).
+
+### 🔑 Core Concepts
+
+1. **How `Array.prototype.filter()` Uses Callbacks:**
+   - The `.filter()` method creates a shallow copy of a portion of a given array, filtered down to just the elements that pass the test implemented by the provided callback function.
+   - For every element in the array, `.filter()` invokes our callback function:
+     ```javascript
+     const peopleWithPets = people.filter(function(person) {
+         return person.hasPet;
+     });
+     ```
+   - **Predicate Evaluation:** If the callback returns a truthy value (`true`), the item is included in the new array. If falsy (`false`), it is excluded.
+
+2. **The 3 Arguments Passed by `.filter()`:**
+   - Whenever `.filter()` executes its callback, it automatically passes up to 3 arguments:
+     1. `element` / `item` (the current object or value being processed)
+     2. `index` (the numerical index of the current element)
+     3. `array` (the full source array being filtered)
+
+3. **Who Determines What Arguments Are Passed?**
+   - **A Critical Insight:** It is **not** the developer who determines what values are passed into the callback parameters!
+   - The **calling function (`.filter`)** determines what arguments are supplied when it executes the callback.
+   - As the author of the callback function, you simply choose what parameter names to assign to those incoming arguments (e.g. `person`).
+
+4. **Refactoring Inline Arrow Callbacks &rarr; Standalone Functions:**
+   - **Inline Anonymous Arrow:**
+     ```javascript
+     const peopleWithPets = people.filter(person => person.hasPet);
+     ```
+   - **Standalone Named Function:**
+     ```javascript
+     function gimmeThePets(person) {
+         return person.hasPet;
+     }
+     const peopleWithPets = people.filter(gimmeThePets);
+     ```
+   - Just like with event listeners, passing `gimmeThePets` as a reference without parentheses enables `.filter()` to invoke it on each iteration.
+
+5. **Boolean Simplification & Implicit Returns:**
+   - Because `person.hasPet` is already a boolean (`true`/`false`), writing `person.hasPet === true` is redundant. Simply returning `person.hasPet` provides clean, idiomatic JavaScript.
+
+### 🗺️ Higher-Order Array Filter & Callback Flow
+
+<details>
+  <summary><b>📷 Expand to View Array.filter Callback Lifecycle Diagram</b></summary>
+  <br>
+
+```mermaid
+flowchart TD
+    subgraph ArrayData ["Source Data: people array"]
+        P1["'{ name: Jack, hasPet: true }'"]
+        P2["'{ name: Jill, hasPet: false }'"]
+        P3["'{ name: Alice, hasPet: true }'"]
+        P4["'{ name: Bob, hasPet: false }'"]
+    end
+
+    subgraph HigherOrderFilter ["Higher-Order Engine: people.filter(gimmeThePets)"]
+        Iterate["'Loop iterates through each item'"]
+        InvokeCallback["'Calls gimmeThePets(person, index, array)'"]
+        CheckBool["'Evaluates return: Boolean check'"]
+        Iterate --> InvokeCallback
+        InvokeCallback --> CheckBool
+    end
+
+    subgraph EvaluationFlow ["Item Evaluation & Inclusion"]
+        EvalTrue["'return true: Include in resulting array'"]
+        EvalFalse["'return false: Exclude item'"]
+        CheckBool -- "true" --> EvalTrue
+        CheckBool -- "false" --> EvalFalse
+    end
+
+    subgraph ResultArray ["Output: peopleWithPets array"]
+        R1["'{ name: Jack, hasPet: true }'"]
+        R2["'{ name: Alice, hasPet: true }'"]
+        EvalTrue --> R1
+        EvalTrue --> R2
+    end
+
+    ArrayData --> Iterate
+
+    style ArrayData fill:#1e1e2e,stroke:#89b4fa,stroke-width:2px,color:#cdd6f4
+    style HigherOrderFilter fill:#181825,stroke:#fab387,stroke-width:2px,color:#cdd6f4
+    style EvaluationFlow fill:#181825,stroke:#cba6f7,stroke-width:1px,color:#cdd6f4
+    style ResultArray fill:#181825,stroke:#a6e3a1,stroke-width:2px,color:#cdd6f4
+    style EvalTrue fill:#11111b,stroke:#a6e3a1,stroke-width:2px,color:#a6e3a1
+    style EvalFalse fill:#11111b,stroke:#f38ba8,stroke-width:1px,color:#f38ba8
+```
+
+</details>
+
+### 📝 Key Takeaways & Review
+
+> [!NOTE]
+> **Callbacks in Synchronous vs. Asynchronous Code:**  
+> A callback is simply a function passed to another function. When passed to `.filter()`, it executes synchronously for every item in the loop. When passed to `addEventListener` or `setTimeout`, it executes asynchronously when the event or timer triggers.
+
+> [!TIP]
+> **Who controls the callback arguments?**  
+> The caller controls the arguments. `.filter` will always supply `(item, index, array)`. You can choose to accept only the first parameter (`person`), but you cannot change what data is passed to it.
+
+> [!IMPORTANT]
+> **No Parentheses When Passing Named Callbacks:**  
+> Always write `people.filter(gimmeThePets)` rather than `people.filter(gimmeThePets())`. Adding parentheses executes the function immediately once with `undefined` as its argument, breaking the iteration!
+
+### 💻 Code Implementation
+
+Explore the practice code in [Callbacks - revisiting array.filter](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Async%20JavaScript/Callbacks%20-%20revisiting%20array.filter) ([index.js](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Async%20JavaScript/Callbacks%20-%20revisiting%20array.filter/index.js), [index.html](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Async%20JavaScript/Callbacks%20-%20revisiting%20array.filter/index.html)):
+
+```javascript
+// Source dataset
+const people = [
+    { name: "Jack", hasPet: true },
+    { name: "Jill", hasPet: false },
+    { name: "Alice", hasPet: true },
+    { name: "Bob", hasPet: false },
+];
+
+// Standalone named callback function
+function gimmeThePets(person) {
+    return person.hasPet;
+}
+
+// Passing callback reference into higher-order .filter() method
+const peopleWithPets = people.filter(gimmeThePets);
+console.log(peopleWithPets);
+// Output: [ { name: "Jack", hasPet: true }, { name: "Alice", hasPet: true } ]
+
+// Bonus Challenge: Filtering adults (18+)
+const peopleWithAges = [
+    { name: "Jack", age: 16 },
+    { name: "Jill", age: 22 },
+    { name: "Alice", age: 19 },
+    { name: "Bob", age: 30 },
+];
+const adults = peopleWithAges.filter(person => person.age >= 18);
+console.log(adults);
+// Output: Jill (22), Alice (19), Bob (30)
+```
+
+### 🔗 Chapter 42 Resources
+
+- 📄 **MDN Web Docs:** [Array.prototype.filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) — Syntax, parameters, and return values.
+- 📄 **MDN Web Docs:** [Callback Function](https://developer.mozilla.org/en-US/docs/Glossary/Callback_function) — Higher-order functions and callback mechanisms.
+- 📄 **JavaScript.info:** [Array Methods](https://javascript.info/array-methods#filter) — Working with filter, map, and array transformations.
