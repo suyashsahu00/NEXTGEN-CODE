@@ -3658,4 +3658,165 @@ console.log(adults);
 
 - 📄 **MDN Web Docs:** [Array.prototype.filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) — Syntax, parameters, and return values.
 - 📄 **MDN Web Docs:** [Callback Function](https://developer.mozilla.org/en-US/docs/Glossary/Callback_function) — Higher-order functions and callback mechanisms.
-- 📄 **JavaScript.info:** [Array Methods](https://javascript.info/array-methods#filter) — Working with filter, map, and array transformations.
+- 📄 **JavaScript.info:** [Array Methods](https://javascript.info/array-methods#filter) — Working with filter, map, and array transformations.
+
+---
+
+## 🔍 Chapter 43: Building a Custom filterArray Function (Higher-Order Callback Mechanics)
+
+Writing custom implementations of built-in methods is one of the most effective ways to master JavaScript mechanics. By building our own `filterArray()` function from scratch, we demystify higher-order functions and understand how callbacks transfer data and control flow behind the scenes.
+
+### 🔑 Core Concepts
+
+1. **What Makes a Function "Higher-Order"?**
+   - A **Higher-Order Function (HoF)** is any function that either:
+     - Accepts one or more functions as arguments (e.g. `callback`), or
+     - Returns a function as its result.
+   - Here, `filterArray(array, callback)` is a higher-order function that takes a source array and a predicate callback function.
+
+2. **The 5 Algorithmic Steps to Build `filterArray`:**
+   - **Step 1: Initialize Accumulator Array:** Create an empty array to collect items that pass the test:
+     ```javascript
+     const resultingArray = [];
+     ```
+   - **Step 2: Iterate Over Elements:** Loop over each element in the input array. We can use a modern `for...of` loop or a classic index-based loop:
+     ```javascript
+     for (let item of array) { ... }
+     ```
+   - **Step 3: Execute the Callback Function:** Inside the loop, execute the callback and pass the current item into it:
+     ```javascript
+     const shouldBeIncluded = callback(item);
+     ```
+   - **Step 4: Evaluate Predicate & Conditionally Push:** If the callback returns `true` (or truthy), push `item` into `resultingArray`. If `false`, do nothing (no `else` branch required):
+     ```javascript
+     if (shouldBeIncluded) {
+         resultingArray.push(item);
+     }
+     ```
+   - **Step 5: Return Resulting Array:** Once the loop has evaluated all items, return `resultingArray`:
+     ```javascript
+     return resultingArray;
+     ```
+
+3. **Demystifying the "Interdimensional" Feel of Callbacks:**
+   - Passing functions as arguments can initially feel abstract or magical. However, it is pure variable substitution:
+     1. In JavaScript, functions are **first-class citizens** (regular objects/values).
+     2. When we write `filterArray(people, myCallback)`, the identifier `callback` holds a direct memory reference to `myCallback`.
+     3. Writing `callback(item)` simply invokes that function with `item` as its argument.
+   - **Inversion of Control:** The higher-order function (`filterArray`) decides **when** to call the function and **what data** to provide. The callback function author decides **what business condition** to evaluate and returns a boolean.
+
+---
+
+### 🗺️ Custom filterArray Architecture & Execution Flow
+
+<details>
+  <summary><b>📷 Expand to View Custom filterArray Execution Pipeline</b></summary>
+  <br>
+
+```mermaid
+flowchart TD
+    subgraph Caller ["Caller Environment"]
+        InputArray["'people array (4 items)'"]
+        CallbackFn["'callback function reference'"]
+    end
+
+    subgraph CustomFilter ["filterArray(array, callback)"]
+        Init["'const resultingArray = []'"]
+        LoopStart["'for (let item of array)'"]
+        ExecCallback["'const shouldBeIncluded = callback(item)'"]
+        EvalCondition{"'shouldBeIncluded === true ?'"}
+        PushItem["'resultingArray.push(item)'"]
+        SkipItem["'Do nothing (omit item)'"]
+        NextIter["'Next iteration'"]
+        ReturnArray["'return resultingArray'"]
+
+        Init --> LoopStart
+        LoopStart --> ExecCallback
+        ExecCallback --> EvalCondition
+        EvalCondition -- "'Yes (true)'" --> PushItem
+        EvalCondition -- "'No (false)'" --> SkipItem
+        PushItem --> NextIter
+        SkipItem --> NextIter
+        NextIter --> LoopStart
+        LoopStart -- "'Loop Complete'" --> ReturnArray
+    end
+
+    InputArray --> CustomFilter
+    CallbackFn --> CustomFilter
+
+    style Caller fill:#1e1e2e,stroke:#89b4fa,stroke-width:2px,color:#cdd6f4
+    style CustomFilter fill:#181825,stroke:#fab387,stroke-width:2px,color:#cdd6f4
+    style Init fill:#11111b,stroke:#a6e3a1,stroke-width:1px,color:#cdd6f4
+    style ExecCallback fill:#11111b,stroke:#f9e2af,stroke-width:2px,color:#cdd6f4
+    style EvalCondition fill:#11111b,stroke:#cba6f7,stroke-width:2px,color:#cdd6f4
+    style PushItem fill:#11111b,stroke:#a6e3a1,stroke-width:2px,color:#a6e3a1
+    style SkipItem fill:#11111b,stroke:#f38ba8,stroke-width:1px,color:#f38ba8
+    style ReturnArray fill:#11111b,stroke:#89b4fa,stroke-width:2px,color:#89b4fa
+```
+
+</details>
+
+---
+
+### 📝 Key Takeaways & Review
+
+> [!NOTE]
+> **Functions as Variables:**  
+> A parameter name like `callback` is just an identifier that references a function. Adding parentheses `callback(...)` executes that function at the exact line of code where it appears in the higher-order function body.
+
+> [!TIP]
+> **Loop Construct Variations:**  
+> - `for (let item of array)` provides cleaner, modern syntax when numerical indices are not required.  
+> - A traditional C-style loop `for (let i = 0; i < array.length; i++)` would allow passing additional arguments like `callback(array[i], i, array)` to replicate native `Array.prototype.filter` 1-to-1.
+
+> [!IMPORTANT]
+> **Decoupling and Reusability:**  
+> `filterArray` contains zero domain-specific logic. It doesn't know what "pets", "ages", or "prices" are. It delegates all conditional evaluation to whatever callback function is supplied at runtime.
+
+---
+
+### 💻 Code Implementation
+
+Explore the practice code in [Callbacks - make own filterArray function](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Async%20JavaScript/Callbacks%20-%20make%20own%20filterArray%20function) ([index.js](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Async%20JavaScript/Callbacks%20-%20make%20own%20filterArray%20function/index.js), [index.html](file:///c:/Users/suyas/Downloads/CODING%281%29/NEXTGEN-CODE/05-07-2026/APIs%20and%20Async%20JavaScript/Async%20JavaScript/Callbacks%20-%20make%20own%20filterArray%20function/index.html)):
+
+```javascript
+const people = [
+    { name: "Jack", hasPet: true },
+    { name: "Jill", hasPet: false },
+    { name: "Alice", hasPet: true },
+    { name: "Bob", hasPet: false },
+];
+
+/**
+ * Custom higher-order filter function
+ * @param {Array} array - The array to filter
+ * @param {Function} callback - Predicate returning true/false
+ * @returns {Array} New filtered array
+ */
+function filterArray(array, callback) {
+    // 1. Initialize new empty array
+    const resultingArray = [];
+
+    // 2. Loop through input array
+    for (let item of array) {
+        // 3. Invoke callback passing current item
+        const shouldBeIncluded = callback(item);
+
+        // 4. If callback returns true, push item
+        if (shouldBeIncluded) {
+            resultingArray.push(item);
+        }
+    }
+
+    // 5. Return accumulated resulting array
+    return resultingArray;
+}
+```
+
+---
+
+### 🔗 Chapter 43 Resources
+
+- 📄 **MDN Web Docs:** [First-class Function](https://developer.mozilla.org/en-US/docs/Glossary/First-class_Function) — How functions act as objects and arguments in JavaScript.
+- 📄 **MDN Web Docs:** [Higher-order functions](https://developer.mozilla.org/en-US/docs/Glossary/Higher-order_function) — Concept and application in functional programming.
+- 📄 **JavaScript.info:** [Function expressions and callbacks](https://javascript.info/function-expressions#callback-functions) — Deep dive into callback mechanics and execution contexts.
